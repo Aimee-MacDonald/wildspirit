@@ -1,6 +1,14 @@
 import React from 'react';
 import './LandingPage.sass';
 
+import HomeSection from '../HomeSection/HomeSection';
+import AboutSection from '../AboutSection/AboutSection';
+import LiveSection from '../LiveSection/LiveSection';
+import ParallaxSection from '../ParallaxSection/ParallaxSection';
+import LearnSection from '../LearnSection/LearnSection';
+import ExploreSection from '../ExploreSection/ExploreSection';
+import ContactSection from '../ContactSection/ContactSection';
+
 export default class LandingPage extends React.Component{
   constructor(props){
     super(props);
@@ -8,7 +16,15 @@ export default class LandingPage extends React.Component{
 
   render(){
     return(
-      <h1>Wild Spirit</h1>
+      <div>
+        <HomeSection />
+        <AboutSection />
+        <LiveSection />
+        <ParallaxSection />
+        <LearnSection />
+        <ExploreSection />
+        <ContactSection />
+      </div>
     );
   }
 }
