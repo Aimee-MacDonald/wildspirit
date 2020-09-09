@@ -1,0 +1,35 @@
+{
+  "name": "wildspirit",
+  "version": "1.0.0",
+  "description": "Wild Spirit Webpage",
+  "main": "server.js",
+  "repository": "https://github.com/Aimee-MacDonald/wildspirit.git",
+  "author": "Aimee MacDonald <aimeelmacdonald@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js --watch",
+    "start": "node src/backend/server"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "autoprefixer": "^9.8.6",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^4.3.0",
+    "cssnano": "^4.1.10",
+    "mini-css-extract-plugin": "^0.11.1",
+    "normalize.css": "^8.0.1",
+    "postcss-loader": "^4.0.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "sass": "^1.26.10",
+    "sass-loader": "^10.0.2",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}
