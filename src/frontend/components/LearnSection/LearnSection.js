@@ -2,9 +2,13 @@ import React from 'react';
 
 import './LearnSection.sass';
 
+import LearnHeader from './LearnHeader/LearnHeader';
+import LearnOptions from './LearnOptions/LearnOptions';
+
 const LearnSection = () => (
   <div id='LearnSection'>
-    <h1>Learn Section</h1>
+    <LearnHeader />
+    <LearnOptions />
   </div>
 );
 
