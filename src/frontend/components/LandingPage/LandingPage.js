@@ -1,5 +1,4 @@
 import React from 'react';
-import './LandingPage.sass';
 
 import HomeSection from '../HomeSection/HomeSection';
 import AboutSection from '../AboutSection/AboutSection';
