@@ -3,9 +3,7 @@ import React from 'react';
 import './HeroImage.sass';
 
 const HeroImage = () => (
-  <div id='HeroImage'>
-    <p>Hero Image</p>
-  </div>
+  <div id='HeroImage'></div>
 );
 
 export default HeroImage;

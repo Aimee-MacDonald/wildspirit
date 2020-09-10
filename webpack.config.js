@@ -32,6 +32,9 @@ module.exports = {
             options: {implementation: require('sass')}
           }
         ]
+      }, {
+        test: /\.jpg$/,
+        loader: 'url-loader'
       }
     ]
   },
