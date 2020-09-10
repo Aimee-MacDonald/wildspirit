@@ -2,9 +2,13 @@ import React from 'react';
 
 import './AboutSection.sass';
 
+import AboutImage from './AboutImage/AboutImage';
+import AboutText from './AboutText/AboutText';
+
 const AboutSection = () => (
   <div id='AboutSection'>
-    <h1>About Section</h1>
+    <AboutImage />
+    <AboutText />
   </div>
 );
 
