@@ -1,8 +1,14 @@
 import React from 'react';
 
+import './ParallaxSection.sass';
+
+import ParallaxImage from './ParallaxImage/ParallaxImage';
+import ParallaxText from './ParallaxText/ParallaxText';
+
 const ParallaxSection = () => (
-  <div>
-    <h1>Parallax Section</h1>
+  <div id='ParallaxSection'>
+    <ParallaxImage />
+    <ParallaxText />
   </div>
 );
 
