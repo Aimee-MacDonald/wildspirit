@@ -1,7 +1,10 @@
 import React from 'react';
 
 const AccommodationOption = props => (
-  <p>{props.title}</p>
+  <div>
+    <p>{props.title}</p>
+    <p>{props.description}</p>
+  </div>
 );
 
 export default AccommodationOption;
