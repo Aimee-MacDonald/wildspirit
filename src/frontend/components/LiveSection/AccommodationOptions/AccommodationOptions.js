@@ -1,9 +1,11 @@
 import React from 'react';
 
+import './AccommodationOptions.sass'
+
 import AccommodationOption from './AccommodationOption/AccommodationOption';
 
 const AccommodationOptions = () => (
-  <div>
+  <div id='AccommodationOptions'>
     <AccommodationOption
       title='DORMS'
       description='Our spacious, bunk-free dormitories sleep up to 8 people in comfortable single beds. Each dorm has en-suite bathroom facilities and a sun deck overlooking the mountains and indigenous forests of the Tsitsikamma National Park.'
