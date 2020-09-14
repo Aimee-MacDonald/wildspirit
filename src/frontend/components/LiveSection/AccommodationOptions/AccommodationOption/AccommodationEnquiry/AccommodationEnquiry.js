@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './AccommodationEnquiry.sass';
+
 import ArrivalField from './ArrivalField/ArrivalField';
 import DepartureField from './DepartureField/DepartureField';
 import EmailField from './EmailField/EmailField';
@@ -10,7 +12,7 @@ import PaxField from './PaxField/PaxField';
 import SendButton from './SendButton/SendButton';
 
 const AccommodationEnquiry = props => (
-  <form>
+  <form className='AccommodationEnquiry'>
     <NameField accommodationType={props.accommodationType} />
     <EmailField accommodationType={props.accommodationType} />
     <PaxField accommodationType={props.accommodationType} />

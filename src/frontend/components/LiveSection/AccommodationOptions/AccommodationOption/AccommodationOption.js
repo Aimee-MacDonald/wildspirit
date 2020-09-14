@@ -6,7 +6,7 @@ import AccommodationPhotos from './AccommodationPhotos/AccommodationPhotos';
 import AccommodationEnquiry from './AccommodationEnquiry/AccommodationEnquiry';
 
 const AccommodationOption = props => (
-  <div id='AccommodationOption'>
+  <div className='AccommodationOption'>
     <p>{props.title}</p>
     <p>{props.description}</p>
     <AccommodationPhotos />
