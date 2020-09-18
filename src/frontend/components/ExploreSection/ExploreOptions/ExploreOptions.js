@@ -13,6 +13,7 @@ const ExploreOptions = () => (
         'Otter trail',
         'Roberg nature reserve'
       ]}
+      open={true}
     />
 
     <ExploreCategory
@@ -23,6 +24,7 @@ const ExploreOptions = () => (
         'Plettenberg bay, Central beach',
         'Plettenberg bay, Roberg beach'
       ]}
+      open={false}
     />
 
     <ExploreCategory
@@ -32,6 +34,7 @@ const ExploreOptions = () => (
         'Keurbooms river canooing',
         'Groot river lagoon canooing'
       ]}
+      open={false}
     />
 
     <ExploreCategory
@@ -42,6 +45,7 @@ const ExploreOptions = () => (
         'Tenikwa wildlife rehabilitation',
         'Elephant sanctuary'
       ]}
+      open={false}
     />
 
     <ExploreCategory
@@ -50,6 +54,7 @@ const ExploreOptions = () => (
         'Skydive Plett',
         'Bloukrans bridge bungy jump'
       ]}
+      open={false}
     />
   </div>
 );
