@@ -12,7 +12,7 @@ import PaxField from './PaxField/PaxField';
 import SendButton from './SendButton/SendButton';
 
 const AccommodationEnquiry = props => (
-  <form className='AccommodationEnquiry'>
+  <form className={'AccommodationEnquiry' + (props.open ? 'Open' : 'Closed')}>
     <NameField accommodationType={props.accommodationType} />
     <EmailField accommodationType={props.accommodationType} />
     <PaxField accommodationType={props.accommodationType} />

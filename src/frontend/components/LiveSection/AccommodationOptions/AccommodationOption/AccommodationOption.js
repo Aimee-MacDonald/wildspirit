@@ -10,7 +10,10 @@ const AccommodationOption = props => (
     <p>{props.title}</p>
     <p>{props.description}</p>
     <AccommodationPhotos />
-    <AccommodationEnquiry accommodationType={props.title} />
+    <AccommodationEnquiry
+      open={false}
+      accommodationType={props.title}
+    />
   </div>
 );
 
