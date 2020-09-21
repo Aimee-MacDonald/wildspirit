@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './AboutImage.sass';
+
 const AboutImage = () => (
-  <div>About Image</div>
+  <div id='AboutImage'></div>
 );
 
 export default AboutImage;
