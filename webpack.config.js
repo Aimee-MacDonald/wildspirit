@@ -35,6 +35,15 @@ module.exports = {
       }, {
         test: /\.jpg$/,
         loader: 'url-loader'
+      }, {
+        test: /\.ttf$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'fonts/'
+          }
+        }]
       }
     ]
   },
