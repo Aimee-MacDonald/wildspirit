@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './Navigation.sass';
+
 const Navigation = () => (
-  <nav>
+  <nav id='Navigation'>
     <ul>
       <li><a href='#'>Live</a></li>
       <li><a href='#'>Learn</a></li>
