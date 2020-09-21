@@ -1,8 +1,9 @@
 import React from 'react';
-import LiveSection from '../LiveSection';
+
+import './LiveSectionHeading.sass';
 
 const LiveSectionHeading = () => (
-  <p>LIVE in the heart of the garden route</p>
+  <p id='LiveSectionHeading'><em>LIVE</em> in the heart of the garden route</p>
 );
 
 export default LiveSectionHeading;
