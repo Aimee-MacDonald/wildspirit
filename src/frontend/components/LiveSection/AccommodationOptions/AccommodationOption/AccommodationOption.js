@@ -9,7 +9,7 @@ const AccommodationOption = props => (
   <div className='AccommodationOption'>
     <p>{props.title}</p>
     <p>{props.description}</p>
-    <AccommodationPhotos />
+    <AccommodationPhotos open={false} />
     <AccommodationEnquiry
       open={false}
       accommodationType={props.title}
