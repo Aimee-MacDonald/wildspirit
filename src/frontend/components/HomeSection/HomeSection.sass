@@ -1,15 +1,21 @@
 #HomeSection
   width: 100vw
   height: 110vh
-  border-radius: 0 0 10% 10%
   position: relative
   display: flex
   flex-flow: nowrap column
   justify-content: space-around
   align-items: center
-  #homeWidgets
+  #homeContent
+    position: absolute
+    z-index: 2
+    margin-top: -5rem
     width: 80%
+    height: 80%
     display: flex
-    flex-flow: nowrap row
-    align-items: center
+    flex-flow: nowrap column
     justify-content: space-between
+    #homeWidgets
+      display: flex
+      align-items: center
+      justify-content: space-between

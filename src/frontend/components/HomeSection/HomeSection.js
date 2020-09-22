@@ -11,11 +11,13 @@ import WeatherWidget from './WeatherWidget/WeatherWidget';
 const HomeSection = () => (
   <div id='HomeSection'>
     <HeroImage />
-    <Navigation />
-    <HeroText />
-    <div id='homeWidgets'>
-      <WeatherWidget />
-      <SocialLinks />
+    <div id='homeContent'>
+      <Navigation />
+      <HeroText />
+      <div id='homeWidgets'>
+        <WeatherWidget />
+        <SocialLinks />
+      </div>
     </div>
   </div>
 );
