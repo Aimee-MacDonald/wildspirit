@@ -1,19 +1,21 @@
 import React from 'react';
 
+import './ContactSection.sass';
+
 import ContactImage from './ContactImage/ContactImage';
-import Inputs from './Inputs/Inputs';
-import MessageBox from './MessageBox/MessageBox';
-import SendButton from './SendButton/SendButton';
+import ContactInputs from './ContactInputs/ContactInputs';
+import ContactMessageBox from './ContactMessageBox/ContactMessageBox';
+import ContactSendButton from './ContactSendButton/ContactSendButton';
 import SocialLinks from './SocialLinks/SocialLinks';
 
 const ContactSection = () => (
-  <div>
+  <form id='ContactSection'>
     <ContactImage />
-    <Inputs />
-    <MessageBox />
-    <SendButton />
+    <ContactInputs />
+    <ContactMessageBox />
+    <ContactSendButton />
     <SocialLinks />
-  </div>
+  </form>
 );
 
 export default ContactSection;
