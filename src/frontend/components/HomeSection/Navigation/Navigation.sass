@@ -2,6 +2,7 @@
   
 #Navigation
   width: 100%
+  margin-top: -5rem
   ul
     width: 100%
     display: flex
@@ -13,3 +14,12 @@
         color: $white
         font-family: 'Montserrat-Regular'
         font-size: 24pt
+
+@media screen and (min-width: 750px)
+  #Navigation
+    width: auto
+    align-self: flex-end
+    margin-right: 5rem
+    ul
+      li
+        margin: 0 1rem
