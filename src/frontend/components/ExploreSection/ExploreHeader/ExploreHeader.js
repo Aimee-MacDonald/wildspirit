@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './ExploreHeader.sass';
+
 const ExploreHeader = () => (
-  <p>EXPLORE activities in our local area</p>
+  <p id='ExploreHeader'><em>EXPLORE</em> activities in our local area</p>
 );
 
 export default ExploreHeader;
