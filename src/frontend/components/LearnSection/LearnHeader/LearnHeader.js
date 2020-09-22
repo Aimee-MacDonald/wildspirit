@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './LearnHeader.sass';
+
 const LearnHeader = () => (
-  <p>LEARN with us</p>
+  <p id='LearnHeader'><em>LEARN</em> with us</p>
 );
 
 export default LearnHeader;
