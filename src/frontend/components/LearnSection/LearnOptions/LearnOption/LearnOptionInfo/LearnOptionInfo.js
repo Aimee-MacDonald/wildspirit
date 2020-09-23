@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './LearnOptionInfo.sass';
+
 const LearnOptionInfo = props => (
-  <div>
+  <div className='LearnOptionInfo'>
     <p>{props.title}</p>
     <p>{props.subtitle}</p>
     <p>{props.description}</p>

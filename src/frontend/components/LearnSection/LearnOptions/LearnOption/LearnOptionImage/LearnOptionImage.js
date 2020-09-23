@@ -1,7 +1,11 @@
 import React from 'react';
 
+import './LearnOptionImage.sass';
+
 const LearnOptionImage = () => (
-  <p>Learn Option Image</p>
+  <div className='LearnOptionImage'>
+    <img src='https://lh3.googleusercontent.com/48NPgP2LCznTbWf-zokEfpUCnjAM4N5z-cKgW07y3_qtCSuRsmqPMI7J9ADYJKrz3AN0lMe5jUkYkOh6myDOP6-sn80hZBy5DAUSaAPXBJgvOXW6Mik3EmN99icWfDPNcbd8hXZzBYZv5WC1bgneLy_Gvq5qSMghFkax8ZVKLeoU9jOj_8uv0V3msJ0DAE3LRWcRqJdv84sIJBSa9tK49G3ChHExPhFvx-mu0oJ7tsUT9tUIlEMh_Md871l5nitgkYJlroqKWTpzZUxCwnjvkHEQEGwZlcLvM8F62-XBiQ_r8KiDQ3AsohXn-8IC-2VBD6spUVJuH1RV9gJxy3nmuNZFZLC9kiYiehxJJPOisR4Ay-SietNIXDdR5mudw8xkw6-p91s6R_-BaGvCRm4ae_Sv_BvLGOCi0b7n032AmDVvMYjjvfhAXgEUfLF95p6ATyMMlBMIYGC4U2Fq2IIBEbBnvZJ7JgnRG34aLlz3_rhTEBWdj2zufBOFrh-USZAvLUoNyMSWmwSTon_tLQOS90OD8DozaVQ6yp1BXWtox1SwJyDtUU2BLde1qrWcpuNtABeqR79PnCG2BjcOzcgp73e0-nhnO7h2ya6OCVDTwvsJDwlM7eHTQbYdAxC8h_ncNGhsQXbqXDodqHJ7H3C1RI7xsislpHAIrlUPqm9uHaqKKYW3dSERRUZuvs4R9A=w890-h667-no?authuser=0' />
+  </div>
 );
 
 export default LearnOptionImage;
