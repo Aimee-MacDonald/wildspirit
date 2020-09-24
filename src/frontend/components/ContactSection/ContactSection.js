@@ -6,7 +6,7 @@ import ContactImage from './ContactImage/ContactImage';
 import ContactInputs from './ContactInputs/ContactInputs';
 import ContactMessageBox from './ContactMessageBox/ContactMessageBox';
 import ContactSendButton from './ContactSendButton/ContactSendButton';
-import SocialLinks from './SocialLinks/SocialLinks';
+import ContactSocialLinks from './ContactSocialLinks/ContactSocialLinks';
 
 const ContactSection = () => (
   <form id='ContactSection'>
@@ -14,7 +14,7 @@ const ContactSection = () => (
     <ContactInputs />
     <ContactMessageBox />
     <ContactSendButton />
-    <SocialLinks />
+    <ContactSocialLinks />
   </form>
 );
 
