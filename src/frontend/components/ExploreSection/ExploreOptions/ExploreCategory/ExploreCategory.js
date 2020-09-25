@@ -10,7 +10,7 @@ export default class ExploreCategory extends React.Component{
     super(props);
 
     this.state = {
-      open: false
+      open: true
     };
 
     this.toggleCategory = this.toggleCategory.bind(this);

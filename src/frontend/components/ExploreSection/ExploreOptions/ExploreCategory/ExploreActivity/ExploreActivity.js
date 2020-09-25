@@ -5,14 +5,36 @@ import './ExploreActivity.sass';
 import ActivityTitle from './ActivityTitle/ActivityTitle';
 import ActivityDescription from './ActivityDescription/ActivityDescription';
 
-const ExploreActivity = props => (
-  <div className={'ExploreActivity-' + (props.open ? 'open' : 'closed')}>
-    <ActivityTitle title={props.title} />
-    <ActivityDescription
-      open={props.open}
-      description={props.description}
-    />
-  </div>
-);
+export default class ExploreActivity extends React.Component{
+  constructor(props){
+    super(props);
 
-export default ExploreActivity;
+    this.state = {
+      open: true
+    }
+
+    this.toggleActivity = this.toggleActivity.bind(this);
+  }
+
+  render(){
+    return (
+      <div className={'ExploreActivity-' + (this.props.open ? 'open' : 'closed')}>
+        <ActivityTitle
+          title={this.props.title}
+          toggleActivity={this.toggleActivity}
+        />
+
+        <ActivityDescription
+          open={this.state.open}
+          description={this.props.description}
+        />
+      </div>
+    )
+  }
+
+  toggleActivity(){
+    this.setState(state => {
+      return{open: !state.open}
+    });
+  }
+}
