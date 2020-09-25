@@ -5,4 +5,17 @@
   display: flex
   flex-flow: nowrap column
   align-items: center
-  justify-content: space-around
+  justify-content: center
+  #contactContent
+    display: flex
+    flex-flow: nowrap column
+    align-items: center
+    #contactSmallContent
+      display: flex
+      flex-flow: nowrap column
+      align-items: center
+
+@media screen and (min-width: 750px)
+  #ContactSection
+    #contactContent
+      flex-flow: nowrap row

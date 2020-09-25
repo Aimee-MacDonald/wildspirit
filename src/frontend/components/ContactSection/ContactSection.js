@@ -11,10 +11,14 @@ import ContactSocialLinks from './ContactSocialLinks/ContactSocialLinks';
 const ContactSection = () => (
   <form id='ContactSection'>
     <ContactImage />
-    <ContactInputs />
-    <ContactMessageBox />
-    <ContactSendButton />
-    <ContactSocialLinks />
+    <div id='contactContent'>
+      <ContactMessageBox />
+      <div id='contactSmallContent'>
+        <ContactInputs />
+        <ContactSendButton />
+        <ContactSocialLinks />
+      </div>
+    </div>
   </form>
 );
 
