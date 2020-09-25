@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './ExploreOptions.sass';
+
 import ExploreCategory from './ExploreCategory/ExploreCategory';
 
 const exploreData = [{
@@ -74,7 +76,7 @@ const exploreData = [{
 }];
 
 const ExploreOptions = () => (
-  <div>
+  <div id='ExploreOptions'>
     {exploreData.map(cat => (
       <ExploreCategory
         key={cat.category}
