@@ -11,8 +11,9 @@ const ExploreCategory = props => (
     <div className='categoryActivities'>
       {props.activities && props.activities.map(activity => (
         <ExploreActivity
-          key={activity}
-          title={activity}
+          key={activity.name}
+          title={activity.name}
+          description={activity.description}
           open={true}
         />
       ))}

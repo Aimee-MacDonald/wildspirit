@@ -8,7 +8,10 @@ import ActivityDescription from './ActivityDescription/ActivityDescription';
 const ExploreActivity = props => (
   <div className={'ExploreActivity-' + (props.open ? 'open' : 'closed')}>
     <ActivityTitle title={props.title} />
-    <ActivityDescription open={props.open} />
+    <ActivityDescription
+      open={props.open}
+      description={props.description}
+    />
   </div>
 );
 

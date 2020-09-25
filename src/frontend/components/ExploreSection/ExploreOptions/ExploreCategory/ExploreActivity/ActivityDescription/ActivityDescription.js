@@ -4,7 +4,7 @@ import './ActivityDescription.sass';
 
 const ActivityDescription = props => (
   <div className={'ActivityDescription-' + (props.open ? 'open' : 'closed')}>
-    <p>Activity Description</p>
+    <p>{props.description}</p>
   </div>
 );
 
