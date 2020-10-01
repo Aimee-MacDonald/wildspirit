@@ -7,11 +7,15 @@ import AccommodationPhotos from './AccommodationPhotos/AccommodationPhotos';
 import AccommodationEnquiry from './AccommodationEnquiry/AccommodationEnquiry';
 
 const AccommodationOption = props => (
-  <div className='AccommodationOptionClosed'>
+  <div className={'AccommodationOption' + (props.open ? 'Open' : 'Closed')}
+       onMouseEnter={() => props.showDescription(props.index)}
+       onMouseLeave={() => props.hideDescription(props.index)}>
     <AccommodationDescription
-      open={true}
+      open={props.descriptionOpen}
       title={props.title}
       description={props.description}
+      growOption={() => props.growOption(props.index)}
+      shrinkOption={() => props.shrinkOption(props.index)}
     />
 
     <AccommodationPhotos open={false} />

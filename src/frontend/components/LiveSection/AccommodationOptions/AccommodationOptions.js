@@ -25,18 +25,102 @@ const accommodationData = [
     "title": "FOREST CAMPING",
     "description": "Pitch your own tent under the stars and enjoy the experience of our off-the-grid Campsite including composting toilets. Communal fire-pits for cooking are located near the rustic self-catering bush kitchen"
   }
-]
+];
 
-const AccommodationOptions = () => (
-  <div id='AccommodationOptions'>
-    {accommodationData.map(acc => (
-      <AccommodationOption
-        key={acc.title}
-        title={acc.title}
-        description={acc.description}
-      />
-    ))}
-  </div>
-);
+export default class AccommodationOptions extends React.Component{
+  constructor(props){
+    super(props);
 
-export default AccommodationOptions;
+    this.state = {
+      options: []
+    };
+    
+    this.growOption = this.growOption.bind(this);
+    this.shrinkOption = this.shrinkOption.bind(this);
+    this.showDescription = this.showDescription.bind(this);
+    this.hideDescription = this.hideDescription.bind(this);
+  }
+
+  render(){
+    return(
+      <div id='AccommodationOptions'>
+        {this.state.options.map(option => (
+          !option.hidden &&
+          <AccommodationOption
+            key={option.title}
+            index= {option.index}
+            title={option.title}
+            description={option.description}
+            hidden={option.hidden}
+            open={option.open}
+            descriptionOpen={option.descriptionOpen}
+            growOption={this.growOption}
+            shrinkOption={this.shrinkOption}
+            showDescription={this.showDescription}
+            hideDescription={this.hideDescription}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  componentDidMount(){
+    let options = [];
+
+    accommodationData.forEach((option, i) => {
+      options.push({
+        index: i,
+        title: option.title,
+        description: option.description,
+        hidden: false,
+        open: false,
+        descriptionOpen: false
+      });
+    });
+
+    this.setState(() => ({options: options}));
+  }
+
+  growOption(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options.forEach((option, i) => {
+        if(i === optionIndex){
+          newState.options[i].hidden = false;
+          newState.options[i].open = true;
+        } else {
+          newState.options[i].hidden = true;
+          newState.options[i].open = false;
+        }
+      });
+      return newState;
+    });
+  }
+
+  shrinkOption(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options.forEach((option, i) => {
+        option.hidden = false;
+        option.open = false;
+      });
+      return newState;
+    });
+  }
+
+  showDescription(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options[optionIndex].descriptionOpen = true;
+      return newState;
+    });
+  }
+
+  hideDescription(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options[optionIndex].descriptionOpen = false;
+      return newState;
+    });
+  }
+}
