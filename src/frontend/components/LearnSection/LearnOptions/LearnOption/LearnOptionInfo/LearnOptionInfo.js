@@ -8,7 +8,7 @@ const LearnOptionInfo = props => (
     <p>{props.subtitle}</p>
     <p>{props.description}</p>
     <p>Share Links</p>
-    <button>Book</button>
+    <button onClick={props.showEnquiry}>Book</button>
   </div>
 );
 

@@ -24,19 +24,65 @@ const learnOptionsData = [{
   "description": "Join us for an unforgettable night of live music and festivities at wild spirit."
 }];
 
-const LearnOptions = () => (
-  <div id='LearnOptions'>
-    {learnOptionsData.map(lod => (
-      <LearnOption
-        key={lod.title}
-        imgURL={lod.imgURL}
-        imgAlt={lod.imgAlt}
-        title={lod.title}
-        subtitle={lod.subtitle}
-        description={lod.description}
-      />
-    ))}
-  </div>
-);
+export default class LearnOptions extends React.Component{
+  constructor(props){
+    super(props);
 
-export default LearnOptions;
+    this.state = {
+      options: []
+    };
+  }
+
+  render(){
+    return(
+      <div id='LearnOptions'>
+        {this.state.options.map((option, index) => (
+          <LearnOption
+            key={option.title}
+            imgURL={option.imgURL}
+            imgAlt={option.imgAlt}
+            title={option.title}
+            subtitle={option.subtitle}
+            description={option.description}
+            enquiryOpen={option.enquiryOpen}
+            showEnquiry={() => {this.showEnquiry(index)}}
+            hideEnquiry={() => {this.hideEnquiry(index)}}
+          />
+        ))}
+      </div>
+    );
+  }
+
+  componentDidMount(){
+    let options = [];
+
+    learnOptionsData.forEach(option => {
+      options.push({
+        imgURL: option.imgURL,
+        imgAlt: option.imgAlt,
+        title: option.title,
+        subtitle: option.subtitle,
+        description: option.description,
+        enquiryOpen: false
+      });
+    });
+
+    this.setState(() => ({options: options}));
+  }
+
+  showEnquiry(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options[optionIndex].enquiryOpen = true;
+      return newState;
+    });
+  }
+
+  hideEnquiry(optionIndex){
+    this.setState(prevState => {
+      let newState = prevState;
+      newState.options[optionIndex].enquiryOpen = false;
+      return newState;
+    });
+  }
+}
