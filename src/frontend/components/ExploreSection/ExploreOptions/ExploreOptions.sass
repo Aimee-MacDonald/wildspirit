@@ -1,9 +1,19 @@
+@import '../../../vars'
+
 #ExploreOptions
   display: flex
   flex-flow: nowrap column
+  width: 100%
+  .exploreCategory
+    background-color: $medium-green
+    text-align: center
+    padding: 1rem
+    font-family: 'Montserrat-Regular'
 
 @media screen and (min-width: 750px)
   #ExploreOptions
-    flex-flow: nowrap row
-    justify-content: center
-    background-color: purple
+    flex-flow: wrap row
+    justify-content: space-between
+    width: 80%
+    .exploreCategory
+      padding: 1rem 3rem

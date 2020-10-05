@@ -2,10 +2,10 @@ import React from 'react';
 
 import './ExploreOptions.sass';
 
-import ExploreCategory from './ExploreCategory/ExploreCategory';
+import ExploreDetails from './ExploreDetails/ExploreDetails';
 
 const exploreData = [{
-  "category": "Hiking Trails",
+  "name": "Hiking Trails",
   "activities": [{
     "name": "Harkerville Forest",
     "description": "activity description"
@@ -23,7 +23,7 @@ const exploreData = [{
     "description": "activity description"
   }]
 }, {
-  "category": "Beaches",
+  "name": "Beaches",
   "activities": [{
     "name": "Nature's Valley Beach",
     "description": "activity description"
@@ -38,7 +38,7 @@ const exploreData = [{
     "description": "activity description"
   }]
 }, {
-  "category": "Water Activities",
+  "name": "Water Activities",
   "activities": [{
     "name": "Sea Kayaking Robberg",
     "description": "activity description"
@@ -50,7 +50,7 @@ const exploreData = [{
     "description": "activity description"
   }]
 }, {
-  "category": "Animal Activities",
+  "name": "Animal Activities",
   "activities": [{
     "name": "Monkey Land",
     "description": "activity description"
@@ -65,7 +65,7 @@ const exploreData = [{
     "description": "activity description"
   }]
 }, {
-  "category": "Adrenaline Activities",
+  "name": "Adrenaline Activities",
   "activities": [{
     "name": "Skydive Plett",
     "description": "activity description"
@@ -75,17 +75,50 @@ const exploreData = [{
   }]
 }];
 
-const ExploreOptions = () => (
-  <div id='ExploreOptions'>
-    {exploreData.map(cat => (
-      <ExploreCategory
-        key={cat.category}
-        title={cat.category}
-        activities={cat.activities}
-        open={true}
-      />
-    ))}
-  </div>
-);
+export default class ExploreOptions extends React.Component{
+  constructor(props){
+    super(props);
 
-export default ExploreOptions;
+    this.state = {
+      categories: [],
+      selectedCategory: -1,
+      selectedActivity: -1
+    }
+
+    this.selectActivity = this.selectActivity.bind(this);
+  }
+
+  render(){
+    return (
+      <div id='ExploreOptions'>
+        {this.state.categories.map((category, index) => (
+          <p
+            className={'exploreCategory'}
+            style={{order: index}}
+            key={'category'+index}
+            onClick={() => this.selectCategory(index)}
+          >{category.name}</p>
+        ))}
+
+        {this.state.selectedCategory !== -1 && <ExploreDetails
+          categories={this.state.categories}
+          selectedCategory={this.state.selectedCategory}
+          selectedActivity={this.state.selectedActivity}
+          selectActivity={this.selectActivity}
+        />}
+      </div>
+    );
+  }
+
+  componentDidMount(){
+    this.setState(() => ({categories: exploreData}));
+  }
+
+  selectCategory(categoryIndex){
+    this.setState(() => ({selectedCategory: categoryIndex, selectedActivity: -1}));
+  }
+
+  selectActivity(activityIndex){
+    this.setState(() => ({selectedActivity: activityIndex}))
+  }
+}
