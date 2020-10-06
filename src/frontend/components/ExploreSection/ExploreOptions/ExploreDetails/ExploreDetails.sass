@@ -1,7 +1,18 @@
+@import '../../../../vars'
+  
 #ExploreDetails
-  background-color: purple
   width: 100%
+  display: flex
+  flex-flow: nowrap column
+  .activityName
+    font-family: Montserrat-Regular
+  .activityDescription
+    font-family: Roboto-Bold
 
 @media screen and (min-width: 750px)
   #ExploreDetails
     order: 100 !important
+    flex-flow: wrap column
+    .activityDescription
+      height: 100%
+      order: 100 !important
