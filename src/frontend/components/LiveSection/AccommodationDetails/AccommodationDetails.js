@@ -12,6 +12,8 @@ const AccommodationDetails = props => (
       accommodationDetails={props.accommodationDetails}
       closeDetails={props.closeDetails}
       showPhotos={props.showPhotos}
+      showNextPhoto={props.showNextPhoto}
+      showPreviousPhoto={props.showPreviousPhoto}
       showEnquiry={props.showEnquiry}
       photosActive={props.photosActive}
       enquiryActive={props.enquiryActive}

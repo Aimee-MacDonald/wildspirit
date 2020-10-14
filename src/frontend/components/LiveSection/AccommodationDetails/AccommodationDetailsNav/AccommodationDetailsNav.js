@@ -15,6 +15,9 @@ const AccommodationDetailsNav = props => (
     {!props.enquiryActive &&
       <button onClick={props.showEnquiry}>Booking Enquiry</button>
     }
+
+    <button onClick={props.showNextPhoto}>Next</button>
+    <button onClick={props.showPreviousPhoto}>Prev</button>
   </div>
 );
 

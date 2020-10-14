@@ -22,48 +22,23 @@ const ACCOMMODATIONDATA = [
   }, {
     "title": "DOUBLE ROOMS",
     "description": "We have a range of private double and twin bedrooms, most of which have en-suite bathroom facilities and a view of the mountains and forests. Ideal for couples or friends travelling together",
-    "images": [
-      {
-        "srcLink": "",
-        "altText": ""
-      }
-    ]
+    "images": []
   }, {
     "title": "TWIN ROOMS",
     "description": "We have a range of private double and twin bedrooms, most of which have en-suite bathroom facilities and a view of the mountains and forests. Ideal for couples or friends travelling togethe",
-    "images": [
-      {
-        "srcLink": "",
-        "altText": ""
-      }
-    ]
+    "images": []
   }, {
     "title": "FAMILY ROOMS",
     "description": "Our private en-suite family rooms can comfortably sleep between 4 to 8 people. Ideal for families or a group of friend",
-    "images": [
-      {
-        "srcLink": "",
-        "altText": ""
-      }
-    ]
+    "images": []
   }, {
     "title": "SAFARI TENTS",
     "description": "Our pre-pitched 3x3m canvas Safari tents are located in the forest garden and provide ideal budget accommodation for up to two people sharing. We offer double or twin bed options with shared bathroom facilities in the main Farmhouse",
-    "images": [
-      {
-        "srcLink": "",
-        "altText": ""
-      }
-    ]
+    "images": []
   }, {
     "title": "FOREST CAMPING",
     "description": "Pitch your own tent under the stars and enjoy the experience of our off-the-grid Campsite including composting toilets. Communal fire-pits for cooking are located near the rustic self-catering bush kitchen",
-    "images": [
-      {
-        "srcLink": "",
-        "altText": ""
-      }
-    ]
+    "images": []
   }
 ];
 
@@ -85,6 +60,8 @@ export default class LiveSection extends React.Component{
     this.closeDetails = this.closeDetails.bind(this);
     this.showPhotos = this.showPhotos.bind(this);
     this.showEnquiry = this.showEnquiry.bind(this);
+    this.showNextPhoto = this.showNextPhoto.bind(this);
+    this.showPreviousPhoto = this.showPreviousPhoto.bind(this);
   }
 
   render(){
@@ -110,6 +87,8 @@ export default class LiveSection extends React.Component{
             showPhotos={this.showPhotos}
             showEnquiry={this.showEnquiry}
             selectedPhoto={this.state.selectedPhoto}
+            showNextPhoto={this.showNextPhoto}
+            showPreviousPhoto={this.showPreviousPhoto}
           />
         }
       </div>
@@ -148,5 +127,26 @@ export default class LiveSection extends React.Component{
       photosActive: false,
       enquiryActive: true
     }));
+  }
+
+  showNextPhoto(){
+    this.setState(prevState => {
+      let imageIndex = prevState.selectedPhoto + 1;
+      const indexMax = prevState.accommodationOptions[prevState.selectedOption].images.length;
+      if(imageIndex > indexMax - 1)
+        imageIndex -= indexMax
+        
+      return {selectedPhoto: imageIndex};
+    });
+  }
+
+  showPreviousPhoto(){
+    this.setState(prevState => {
+      let imageIndex = prevState.selectedPhoto - 1;
+      if(imageIndex < 0)
+        imageIndex += prevState.accommodationOptions[prevState.selectedOption].images.length
+      
+      return {selectedPhoto: imageIndex}
+    });
   }
 }
