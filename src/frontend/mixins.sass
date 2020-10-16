@@ -1,0 +1,36 @@
+@import './vars'
+
+@mixin button_light
+  font-size: 14pt
+  padding: 0.5rem 2rem
+  background-color: $light-green
+  border: none
+  border-radius: 0.3rem
+  margin-top: 1rem
+  transition: 0.2s
+  box-shadow: 0 0 0 0.2rem $medium-green
+  font-family: Montserrat-Regular
+  &:hover
+    transform: translateY(-0.3rem)
+    background-color: $medium-green
+    box-shadow: 0 0.3rem 1rem 0.2rem $dark-green
+    cursor: pointer
+    color: $light-green
+
+@mixin button_dark
+  font-size: 14pt
+  padding: 0.5rem 2rem
+  background-color: $medium-green
+  border: none
+  border-radius: 0.3rem
+  margin-top: 1rem
+  transition: 0.2s
+  box-shadow: 0 0 0 0.2rem $light-green
+  font-family: Montserrat-Regular
+  color: $light-green
+  &:hover
+    transform: translateY(-0.3rem)
+    background-color: $light-green
+    box-shadow: 0 0.3rem 1rem 0.2rem $dark-green
+    cursor: pointer
+    color: $medium-green

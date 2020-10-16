@@ -1,4 +1,5 @@
 @import '../../../vars'
+@import '../../../mixins'
   
 #AccommodationOptions
   display: flex
@@ -18,20 +19,7 @@
       font-family: Roboto-Bold
       font-size: 14pt
     button
-      font-size: 14pt
-      padding: 0.5rem 2rem
-      background-color: $light-green
-      border: none
-      border-radius: 0.3rem
-      margin-top: 1rem
-      transition: 0.2s
-      box-shadow: 0 0 0 0.2rem $medium-green
-      &:hover
-        transform: translateY(-0.3rem)
-        background-color: $medium-green
-        box-shadow: 0 0.3rem 1rem 0.2rem $dark-green
-        cursor: pointer
-        color: $light-green
+      @include button_light
 
 @media screen and (min-width: 750px)
   #AccommodationOptions

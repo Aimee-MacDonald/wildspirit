@@ -1,7 +1,11 @@
+@import '../../../../../mixins'
+
 .LearnOptionEnquiry
   margin: 1rem
   display: flex
   flex-flow: nowrap column
+  button
+    @include button_dark
   
 @media screen and (min-width: 750px)
   .LearnOptionEnquiry

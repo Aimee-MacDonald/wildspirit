@@ -1,4 +1,5 @@
 @import '../../../../vars'
+@import '../../../../mixins'
 
 #AccommodationDetailsNav
   background-color: $light-green
@@ -14,6 +15,8 @@
     font-family: Roboto-Bold
     font-size: 14pt
     text-align: center
+  button
+    @include button_light
 
 @media screen and (min-width: 750px)
   #AccommodationDetailsNav
