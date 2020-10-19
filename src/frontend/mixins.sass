@@ -34,3 +34,20 @@
     box-shadow: 0 0.3rem 1rem 0.2rem $dark-green
     cursor: pointer
     color: $medium-green
+
+@mixin breakpoint($size)
+  @if $size == mobile_only
+    @media screen and (max-width: 599px)
+      @content
+  @else if $size == tablet_portrait
+    @media screen and (min-width: 600px)
+      @content
+  @else if $size == tablet_landscape
+    @media screen and (min-width: 900px)
+      @content
+  @else if $size == desktop
+    @media screen and (min-width: 1200px)
+      @content
+  @else if $size == wide_desktop
+    @media screen and (min-width: 1800px)
+      @content

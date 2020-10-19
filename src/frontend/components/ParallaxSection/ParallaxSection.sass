@@ -1,10 +1,10 @@
+@import '../../mixins'
+
 #ParallaxSection
   height: 40vh
   position: relative
   display: flex
   justify-content: center
   align-items: center
-
-@media screen and (min-width: 750px)
-  #ParallaxSection
+  @include breakpoint(tablet_portrait)
     height: 60vh

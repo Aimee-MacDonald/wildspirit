@@ -1,11 +1,10 @@
 @import '../../../vars'
+@import '../../../mixins'
   
 #ParallaxText
   text-align: center
   font-family: 'Maian'
   color: $light-green
   font-size: 32pt
-
-@media screen and (min-width: 750px)
-  #ParallaxText
+  @include breakpoint(tablet_portrait)
     font-size: 48pt

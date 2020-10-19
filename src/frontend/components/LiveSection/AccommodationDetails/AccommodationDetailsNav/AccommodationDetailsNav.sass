@@ -6,6 +6,8 @@
   display: flex
   flex-flow: nowrap column
   align-items: center
+  @include breakpoint(tablet_portrait)
+    width: 30%
   h4
     font-family: Montserrat-Regular
     font-size: 20pt
@@ -17,7 +19,3 @@
     text-align: center
   button
     @include button_light
-
-@media screen and (min-width: 750px)
-  #AccommodationDetailsNav
-    width: 30%

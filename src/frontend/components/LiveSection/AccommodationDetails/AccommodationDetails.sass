@@ -1,12 +1,11 @@
 @import '../../../vars'
+@import '../../../mixins'
 
 #AccommodationDetails
   display: flex
   flex-flow: nowrap column
   background-color: $dark-green
-
-@media screen and (min-width: 750px)
-  #AccommodationDetails
+  @include breakpoint(tablet_portrait)
     width: 80%
     height: 35rem
     flex-flow: nowrap row

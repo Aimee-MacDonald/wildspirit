@@ -1,8 +1,8 @@
+@import '../../../../../mixins'
+  
 .LearnOptionImage
+  @include breakpoint(tablet_portrait)
+    width: 50%
   img
     width: 100%
     height: auto
-  
-@media screen and (min-width: 750px)
-  .LearnOptionImage
-    width: 50%

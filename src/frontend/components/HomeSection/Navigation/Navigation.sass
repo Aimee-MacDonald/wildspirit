@@ -1,7 +1,11 @@
 @import '../../../vars'
+@import '../../../mixins'
   
 #Navigation
   width: 100%
+  @include breakpoint(tablet_portrait)
+    width: auto
+    align-self: flex-end
   ul
     width: 100%
     display: flex
@@ -13,8 +17,3 @@
         color: $white
         font-family: 'Montserrat-Regular'
         font-size: 24pt
-
-@media screen and (min-width: 750px)
-  #Navigation
-    width: auto
-    align-self: flex-end

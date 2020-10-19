@@ -1,13 +1,12 @@
 @import '../../../../vars'
+@import '../../../../mixins'
   
 .LearnOption
   background-color: $medium-green
   margin-top: 1rem
   display: flex
   flex-flow: nowrap column
-
-@media screen and (min-width: 750px)
-  .LearnOption
+  @include breakpoint(tablet_portrait)
     flex-flow: nowrap row
     align-items: center
     max-width: 70rem

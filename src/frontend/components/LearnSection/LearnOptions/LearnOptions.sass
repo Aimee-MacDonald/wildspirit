@@ -1,8 +1,8 @@
+@import '../../../mixins'
+  
 #LearnOptions
   display: flex
   flex-flow: nowrap column
   padding: 1rem 1rem
-
-@media screen and (min-width: 750px)
-  #LearnOptions
+  @include breakpoint(tablet_portrait)
     align-items: center

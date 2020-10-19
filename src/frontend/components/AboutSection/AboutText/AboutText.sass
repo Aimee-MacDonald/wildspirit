@@ -1,12 +1,11 @@
 @import '../../../vars'
+@import '../../../mixins'
 
 #AboutText
   text-align: center
   font-family: Roboto-Bold
   color: $light-green
+  @include breakpoint(tablet_portrait)
+    width: 50%
   p
     margin: 1rem
-
-@media screen and (min-width: 750px)
-  #AboutText
-    width: 50%
