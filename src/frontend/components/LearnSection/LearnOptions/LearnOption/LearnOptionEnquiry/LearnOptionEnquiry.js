@@ -4,9 +4,15 @@ import './LearnOptionEnquiry.sass';
 
 const LearnOptionEnquiry = props => (
   <form className='LearnOptionEnquiry'>
-    <input></input>
-    <input></input>
-    <textarea></textarea>
+    <label for='LOEName'>Name:</label>
+    <input id='LOEName' required></input>
+
+    <label for='LOEEmail'>Email:</label>
+    <input id='LOEEmail' type='email' required></input>
+
+    <label for='LOEMessage'>Message:</label>
+    <textarea id='LOEMessage'></textarea>
+
     <button onClick={props.hideEnquiry}>Cancel</button>
     <button>Send</button>
   </form>
