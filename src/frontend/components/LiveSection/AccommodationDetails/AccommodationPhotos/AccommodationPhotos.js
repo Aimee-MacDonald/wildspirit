@@ -8,6 +8,7 @@ const AccommodationPhotos = props => (
   <div id='AccommodationPhotos'>
     {props.photos.map((photo, photoIndex) => (
       <img
+        key={'accommodationPhoto' + photoIndex}
         className={'accommodationPhoto' + (photoIndex === props.selectedPhoto ? 'Open' : 'Closed')}
         src={photo.srcLink}
         alt={photo.altText}
