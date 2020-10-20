@@ -18,8 +18,8 @@ const AccommodationDetailsNav = props => (
 
     {!props.enquiryActive &&
       <div>
-        <button onClick={props.showNextPhoto}>Next</button>
         <button onClick={props.showPreviousPhoto}>Prev</button>
+        <button onClick={props.showNextPhoto}>Next</button>
       </div>
     }
   </div>
