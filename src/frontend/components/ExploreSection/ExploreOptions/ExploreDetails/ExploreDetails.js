@@ -18,9 +18,12 @@ const ExploreDetails = props => (
     }
 
     {(props.selectedActivity !== -1) &&
-      <p className='activityDescription' style={{order: props.selectedActivity}}>
-        {props.categories[props.selectedCategory].activities[props.selectedActivity].description}
-      </p>
+      <div style={{order: props.selectedActivity}} className='activityDetails'>
+        <img src={props.categories[props.selectedCategory].activities[props.selectedActivity].image}></img>
+        <p>
+          {props.categories[props.selectedCategory].activities[props.selectedActivity].description}
+        </p>
+      </div>
     }
   </div>
 );

@@ -5,7 +5,7 @@
   display: flex
   flex-flow: nowrap column
   width: 100%
-  @include breakpoint(tablet_portrait)
+  @include breakpoint(tablet_landscape)
     flex-flow: wrap row
     justify-content: space-between
     width: 80%
@@ -14,5 +14,6 @@
     text-align: center
     padding: 1rem
     font-family: 'Montserrat-Regular'
-    @include breakpoint(tablet_portrait)
+    cursor: pointer
+    @include breakpoint(tablet_landscape)
       padding: 1rem 3rem

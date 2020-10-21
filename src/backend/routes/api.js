@@ -86,70 +86,88 @@ router.get('/activities', (req, res) => {
     "name": "Hiking Trails",
     "activities": [{
       "name": "Harkerville Forest",
-      "description": "activity description"
+      "description": "activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description ",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Salt River Hike",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Kalanderkloof Hike",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Otter Trail",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Robberg Nature Reserve",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }, {
     "name": "Beaches",
     "activities": [{
       "name": "Nature's Valley Beach",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Keurbooms Beach",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Central Beach",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Robberg Beach",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }, {
     "name": "Water Activities",
     "activities": [{
       "name": "Sea Kayaking Robberg",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Keurbooms River Canooing",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Groot River Lagoon Canooing",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }, {
     "name": "Animal Activities",
     "activities": [{
       "name": "Monkey Land",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Birds of Eden",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Tenikwa Wildlife Rehabilitation",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Elephant Sanctuary",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }, {
     "name": "Adrenaline Activities",
     "activities": [{
       "name": "Skydive Plett",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Bloukrans Bungy Jump",
-      "description": "activity description"
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }];
 
