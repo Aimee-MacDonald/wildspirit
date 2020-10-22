@@ -75,8 +75,10 @@ export default class LearnOptions extends React.Component{
     event.preventDefault();
 
     const formData = {
+      'event': event.target.LOEEvent.value,
       'name': event.target.LOEName.value,
-      'email': event.target.LOEEmail.value
+      'email': event.target.LOEEmail.value,
+      'message': event.target.LOEMessage.value
     };
 
     fetch('/api/learnEnquiry', {

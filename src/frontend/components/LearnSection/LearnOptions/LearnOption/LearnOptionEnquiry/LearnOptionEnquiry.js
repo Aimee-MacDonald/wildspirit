@@ -13,6 +13,8 @@ const LearnOptionEnquiry = props => (
     <label htmlFor='LOEMessage'>Message:</label>
     <textarea id='LOEMessage' name='LOEMessage'></textarea>
 
+    <input value={props.eventName} name={'LOEEvent'} hidden={true} readOnly={true}></input>
+
     <button onClick={props.hideEnquiry}>Cancel</button>
     <button>Send</button>
   </form>

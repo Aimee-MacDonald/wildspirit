@@ -188,35 +188,35 @@ router.post('/accommodationEnquiry', (req, res) => {
               <p>Enquiry Details:</p>
               <table>
                 <tr>
-                  <td>Accommodation Type</td>
+                  <td>Accommodation Type:</td>
                   <td>${enquiryData.accommodationType}</td>
                 </tr>
                 <tr>
-                  <td>Name</td>
+                  <td>Name:</td>
                   <td>${enquiryData.name}</td>
                 </tr>
                 <tr>
-                  <td>Email</td>
+                  <td>Email:</td>
                   <td>${enquiryData.email}</td>
                 </tr>
                 <tr>
-                  <td>Pax</td>
+                  <td>Pax:</td>
                   <td>${enquiryData.pax}</td>
                 </tr>
                 <tr>
-                  <td>Arrival</td>
+                  <td>Arrival:</td>
                   <td>${enquiryData.arrival}</td>
                 </tr>
                 <tr>
-                  <td>Departure</td>
+                  <td>Departure:</td>
                   <td>${enquiryData.departure}</td>
                 </tr>
                 <tr>
-                  <td>Flexible</td>
+                  <td>Flexible:</td>
                   <td>${enquiryData.flexible}</td>
                 </tr>
                 <tr>
-                  <td>Message</td>
+                  <td>Message:</td>
                   <td>${enquiryData.message}</td>
                 </tr>
               </table>`
@@ -234,10 +234,36 @@ router.post('/learnEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
 
-    console.log('Learn Enquiry Error');
-    console.log('Email Enquiry not implimented');
+    var mailoptions = {
+      'from': process.env.MAILUSER,
+      'to': process.env.MAILUSER,
+      'subject': 'WSW Event Enquiry',
+      'text': `WSW Event Enquiry`,
+      'html':`<p>${enquiryData.name} just made an enquiry via the website.</p>
+              <p>Enquiry Details:</p>
+              <table>
+                <tr>
+                  <td>Event:</td>
+                  <td>${enquiryData.event}</td>
+                </tr>
+                <tr>
+                  <td>Name:</td>
+                  <td>${enquiryData.name}</td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>${enquiryData.email}</td>
+                </tr>
+                <tr>
+                  <td>Message:</td>
+                  <td>${enquiryData.message}</td>
+                </tr>
+              </table>`
+    };
 
-    res.status(200).json({'text': 'Email Enquiry not Implemented'});
+    sendEmail(mailoptions);
+
+    res.status(200).json({'text': 'Success'});
   } else {
     res.status(400).json({'text': 'No form data'});
   }
