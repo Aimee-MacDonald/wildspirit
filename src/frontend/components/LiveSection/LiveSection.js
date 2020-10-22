@@ -135,7 +135,7 @@ export default class LiveSection extends React.Component{
       'message': event.target.ae_message.value
     }
 
-    fetch('/api/makeEnquiry', {
+    fetch('/api/accommodationEnquiry', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'enquiry': formData})

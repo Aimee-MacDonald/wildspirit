@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
+const nodemailer = require('nodemailer');
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -174,14 +175,56 @@ router.get('/activities', (req, res) => {
   res.status(200).json(respac);
 });
 
-router.post('/makeEnquiry', (req, res) => {
+router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
-    
-    console.log('Make Enquiry Error');
-    console.log('Email Enquiry not Implemented');
 
-    res.status(200).json({'text': 'Email Enquiry not Implemented'});
+    var mailoptions = {
+      'from': process.env.MAILUSER,
+      'to': process.env.MAILUSER,
+      'subject': 'WSW Accommodation Enquiry',
+      'text': `WSW Accommodation Enquiry`,
+      'html':`<p>${enquiryData.name} just made an enquiry via the website.</p>
+              <p>Enquiry Details:</p>
+              <table>
+                <tr>
+                  <td>Accommodation Type</td>
+                  <td>${enquiryData.accommodationType}</td>
+                </tr>
+                <tr>
+                  <td>Name</td>
+                  <td>${enquiryData.name}</td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>${enquiryData.email}</td>
+                </tr>
+                <tr>
+                  <td>Pax</td>
+                  <td>${enquiryData.pax}</td>
+                </tr>
+                <tr>
+                  <td>Arrival</td>
+                  <td>${enquiryData.arrival}</td>
+                </tr>
+                <tr>
+                  <td>Departure</td>
+                  <td>${enquiryData.departure}</td>
+                </tr>
+                <tr>
+                  <td>Flexible</td>
+                  <td>${enquiryData.flexible}</td>
+                </tr>
+                <tr>
+                  <td>Message</td>
+                  <td>${enquiryData.message}</td>
+                </tr>
+              </table>`
+    };
+
+    sendEmail(mailoptions);
+
+    res.status(200).json({'text': 'Success'});
   } else {
     res.status(400).json({'text': 'No form data'});
   }
@@ -212,5 +255,19 @@ router.post('/sendMessage', (req, res) => {
     res.status(400).json({'text': 'No form data'});
   }
 });
+
+function sendEmail(mailoptions){
+  var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.MAILUSER,
+      pass: process.env.MAILPASS
+    }
+  });
+
+  transporter.sendMail(mailoptions, (err, info) => {
+    if(err) throw err;
+  });
+}
 
 module.exports = router;
