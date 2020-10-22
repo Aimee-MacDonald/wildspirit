@@ -22,7 +22,7 @@ const LearnOption = props => (
     />}
 
     {props.enquiryOpen &&
-    <LearnOptionEnquiry hideEnquiry={props.hideEnquiry} />}
+    <LearnOptionEnquiry hideEnquiry={props.hideEnquiry} makeEnquiry={props.makeEnquiry} />}
   </div>
 );
 

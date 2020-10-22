@@ -187,4 +187,17 @@ router.post('/makeEnquiry', (req, res) => {
   }
 });
 
+router.post('/learnEnquiry', (req, res) => {
+  if(req.body.enquiry){
+    const enquiryData = req.body.enquiry;
+
+    console.log('Learn Enquiry Error');
+    console.log('Email Enquiry not implimented');
+
+    res.status(200).json({'text': 'Email Enquiry not Implemented'});
+  } else {
+    res.status(400).json({'text': 'No form data'});
+  }
+});
+
 module.exports = router;

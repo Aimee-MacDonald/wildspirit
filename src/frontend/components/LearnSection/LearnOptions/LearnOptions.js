@@ -27,6 +27,7 @@ export default class LearnOptions extends React.Component{
             enquiryOpen={option.enquiryOpen}
             showEnquiry={() => {this.showEnquiry(index)}}
             hideEnquiry={() => {this.hideEnquiry(index)}}
+            makeEnquiry={this.makeEnquiry}
           />
         ))}
       </div>
@@ -68,5 +69,23 @@ export default class LearnOptions extends React.Component{
       newState.options[optionIndex].enquiryOpen = false;
       return newState;
     });
+  }
+
+  makeEnquiry(event){
+    event.preventDefault();
+
+    const formData = {
+      'name': event.target.LOEName.value,
+      'email': event.target.LOEEmail.value
+    };
+
+    fetch('/api/learnEnquiry', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'enquiry': formData})
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
   }
 }

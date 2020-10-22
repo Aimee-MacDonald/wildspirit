@@ -3,15 +3,15 @@ import React from 'react';
 import './LearnOptionEnquiry.sass';
 
 const LearnOptionEnquiry = props => (
-  <form className='LearnOptionEnquiry'>
+  <form className='LearnOptionEnquiry' onSubmit={props.makeEnquiry}>
     <label htmlFor='LOEName'>Name:</label>
-    <input id='LOEName' required></input>
+    <input id='LOEName' name='LOEName' required></input>
 
     <label htmlFor='LOEEmail'>Email:</label>
-    <input id='LOEEmail' type='email' required></input>
+    <input id='LOEEmail' type='email' name='LOEEmail' required></input>
 
     <label htmlFor='LOEMessage'>Message:</label>
-    <textarea id='LOEMessage'></textarea>
+    <textarea id='LOEMessage' name='LOEMessage'></textarea>
 
     <button onClick={props.hideEnquiry}>Cancel</button>
     <button>Send</button>
