@@ -273,8 +273,31 @@ router.post('/sendMessage', (req, res) => {
   if(req.body.message){
     const messageData = req.body.message;
 
-    console.log('Send Message Error');
-    console.log('Email Message not Implemented');
+
+    var mailoptions = {
+      'from': process.env.MAILUSER,
+      'to': process.env.MAILUSER,
+      'subject': 'WSW Message',
+      'text': `WSW Message`,
+      'html':`<p>${messageData.name} just sent a message via the website.</p>
+              <p>Details:</p>
+              <table>
+                <tr>
+                  <td>Name:</td>
+                  <td>${messageData.name}</td>
+                </tr>
+                <tr>
+                  <td>Email:</td>
+                  <td>${messageData.email}</td>
+                </tr>
+                <tr>
+                  <td>Message:</td>
+                  <td>${messageData.message}</td>
+                </tr>
+              </table>`
+    };
+
+    sendEmail(mailoptions);
 
     res.status(200).json({'text': 'Email Message not Implemented'});
   } else {
