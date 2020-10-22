@@ -5,7 +5,7 @@ import './ContactMessageBox.sass';
 const ContactMessageBox = () => (
   <div id='ContactMessageBox'>
     <label htmlFor='contactMessage'>Message</label>
-    <textarea id='contactMessage' placeholder='Message' />
+    <textarea id='contactMessage' name='CIMessage' placeholder='Message' />
   </div>
 );
 

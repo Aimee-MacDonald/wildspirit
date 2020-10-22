@@ -200,4 +200,17 @@ router.post('/learnEnquiry', (req, res) => {
   }
 });
 
+router.post('/sendMessage', (req, res) => {
+  if(req.body.message){
+    const messageData = req.body.message;
+
+    console.log('Send Message Error');
+    console.log('Email Message not Implemented');
+
+    res.status(200).json({'text': 'Email Message not Implemented'});
+  } else {
+    res.status(400).json({'text': 'No form data'});
+  }
+});
+
 module.exports = router;
