@@ -27,7 +27,10 @@ const AccommodationDetails = props => (
     }
 
     {props.enquiryActive &&
-      <AccommodationEnquiry />
+      <AccommodationEnquiry
+        accommodationType={props.accommodationDetails.title}
+        makeEnquiry={props.makeEnquiry}
+      />
     }
   </div>
 );

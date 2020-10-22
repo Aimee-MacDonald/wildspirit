@@ -174,4 +174,17 @@ router.get('/activities', (req, res) => {
   res.status(200).json(respac);
 });
 
+router.post('/makeEnquiry', (req, res) => {
+  if(req.body.enquiry){
+    const enquiryData = req.body.enquiry;
+    
+    console.log('Make Enquiry Error');
+    console.log('Email Enquiry not Implemented');
+
+    res.status(200).json({'text': 'Email Enquiry not Implemented'});
+  } else {
+    res.status(400).json({'text': 'No form data'});
+  }
+});
+
 module.exports = router;

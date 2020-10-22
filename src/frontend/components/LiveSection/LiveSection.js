@@ -53,6 +53,7 @@ export default class LiveSection extends React.Component{
             selectedPhoto={this.state.selectedPhoto}
             showNextPhoto={this.showNextPhoto}
             showPreviousPhoto={this.showPreviousPhoto}
+            makeEnquiry={this.makeEnquiry}
           />
         }
       </div>
@@ -100,9 +101,9 @@ export default class LiveSection extends React.Component{
   showNextPhoto(){
     this.setState(prevState => {
       let imageIndex = prevState.selectedPhoto + 1;
-      const indexMax = prevState.accommodationOptions[prevState.selectedOption].images.length;
-      if(imageIndex > indexMax - 1)
-        imageIndex -= indexMax
+      const totalImages = prevState.accommodationOptions[prevState.selectedOption].images.length;
+      if(imageIndex > totalImages - 1)
+        imageIndex -= totalImages
         
       return {selectedPhoto: imageIndex};
     });
@@ -111,10 +112,36 @@ export default class LiveSection extends React.Component{
   showPreviousPhoto(){
     this.setState(prevState => {
       let imageIndex = prevState.selectedPhoto - 1;
+      const totalImages = prevState.accommodationOptions[prevState.selectedOption].images.length;
+
       if(imageIndex < 0)
-        imageIndex += prevState.accommodationOptions[prevState.selectedOption].images.length
+        imageIndex += totalImages;
       
       return {selectedPhoto: imageIndex}
     });
+  }
+
+  makeEnquiry(event){
+    event.preventDefault();
+
+    let formData = {
+      'accommodationType': event.target.accommodationType.value,
+      'name': event.target.ae_name.value,
+      'email': event.target.ae_email.value,
+      'pax': event.target.ae_pax.value,
+      'arrival': event.target.ae_arrival.value,
+      'departure': event.target.ae_departure.value,
+      'flexible': event.target.ae_flexible.checked,
+      'message': event.target.ae_message.value
+    }
+
+    fetch('/api/makeEnquiry', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'enquiry': formData})
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
   }
 }
