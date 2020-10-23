@@ -299,7 +299,7 @@ router.post('/sendMessage', (req, res) => {
 
     sendEmail(mailoptions);
 
-    res.status(200).json({'text': 'Email Message not Implemented'});
+    res.status(200).json({'text': 'Success'});
   } else {
     res.status(400).json({'text': 'No form data'});
   }
