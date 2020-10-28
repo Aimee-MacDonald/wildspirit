@@ -5,11 +5,15 @@
   background-color: $medium-green
   max-width: $section-max-width
   margin: auto
-  padding: 2rem 0
   display: flex
-  flex-flow: nowrap column-reverse
-  align-items: center
-  @include breakpoint(tablet_portrait)
-    padding-top: 8%
-    flex-flow: nowrap row
-    justify-content: space-around
+  flex-flow: nowrap row
+  justify-content: center
+  .ASContent
+    display: flex
+    flex-flow: nowrap column
+    align-items: center
+    @include breakpoint(tablet_portrait)
+      flex-flow: nowrap row
+      justify-content: space-between
+      width: 80%
+      margin-top: 10%

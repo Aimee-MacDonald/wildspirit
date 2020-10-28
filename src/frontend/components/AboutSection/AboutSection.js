@@ -7,8 +7,10 @@ import AboutText from './AboutText/AboutText';
 
 const AboutSection = () => (
   <div id='AboutSection'>
-    <AboutImage />
-    <AboutText />
+    <div className='ASContent'>
+      <AboutImage />
+      <AboutText />
+    </div>
   </div>
 );
 
