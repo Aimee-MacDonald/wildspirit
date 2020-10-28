@@ -84,6 +84,37 @@ router.get('/events', (req, res) => {
 
 router.get('/activities', (req, res) => {
   const respac = [{
+    "name": "Onsite",
+    "activities": [{
+      "name": "Breakfast",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Dinner",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Self Catering Kitchens",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Shuttles",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Free WiFi",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Yoga Barn",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Mountain Bikes",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }]
+  }, {
     "name": "Hiking Trails",
     "activities": [{
       "name": "Harkerville Forest",
@@ -136,7 +167,7 @@ router.get('/activities', (req, res) => {
       "description": "activity description",
       "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
-      "name": "Groot River Lagoon Canooing",
+      "name": "River Canyoning",
       "description": "activity description",
       "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
@@ -158,6 +189,22 @@ router.get('/activities', (req, res) => {
       "name": "Elephant Sanctuary",
       "description": "activity description",
       "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Jukani",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Whale Watching",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Snake Sanctuary",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Swim with seals",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
   }, {
     "name": "Adrenaline Activities",
@@ -167,6 +214,37 @@ router.get('/activities', (req, res) => {
       "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }, {
       "name": "Bloukrans Bungy Jump",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }]
+  }, {
+    "name": "Restaurants",
+    "activities": [{
+      "name": "Pepper mill",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Farmstall",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Bread & Brew",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Moss & Maple",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Thyme & Again",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Enrico's",
+      "description": "activity description",
+      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    }, {
+      "name": "Nature's Valley Pub",
       "description": "activity description",
       "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
     }]
