@@ -14,7 +14,10 @@
     align-items: center
     @include breakpoint(tablet_portrait)
       flex-flow: nowrap row
+      width: 80%
     #contactSmallContent
       display: flex
       flex-flow: nowrap column
       align-items: center
+      @include breakpoint(tablet_portrait)
+        width: 50%
