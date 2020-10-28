@@ -1,10 +1,13 @@
 @import '../../../vars'
+@import '../../../mixins'
   
 #ExploreHeader
   text-align: center
   font-family: 'Montserrat-Regular'
   font-size: 26pt
-  padding: 1rem 0
+  padding: 4rem 0 2rem 0
+  @include breakpoint(tablet_portrait)
+    padding: 8rem 0 4rem 0
   em
     font-weight: bold
     color: $medium-green
