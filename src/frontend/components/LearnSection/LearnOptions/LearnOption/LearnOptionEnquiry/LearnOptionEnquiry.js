@@ -15,8 +15,11 @@ const LearnOptionEnquiry = props => (
 
     <input value={props.eventName} name={'LOEEvent'} hidden={true} readOnly={true}></input>
 
-    <button onClick={props.hideEnquiry}>Cancel</button>
-    <button>Send</button>
+    <div className='LOEButtons'>
+      <button onClick={props.hideEnquiry}>Cancel</button>
+      <button type="submit">Send</button>
+    </div>
+
   </form>
 );
 

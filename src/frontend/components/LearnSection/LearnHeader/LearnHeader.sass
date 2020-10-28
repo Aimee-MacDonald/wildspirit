@@ -1,10 +1,13 @@
 @import '../../../vars'
+@import '../../../mixins'
   
 #LearnHeader
   text-align: center
   font-family: 'Montserrat-Regular'
   font-size: 26pt
-  padding: 1rem 0
+  padding-top: 2rem
+  @include breakpoint(tablet_portrait)
+    padding: 8rem 0 4rem 0
   em
     font-weight: bold
     color: $medium-green
