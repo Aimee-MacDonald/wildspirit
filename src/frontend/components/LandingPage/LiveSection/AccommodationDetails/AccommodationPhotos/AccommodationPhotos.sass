@@ -1,0 +1,15 @@
+@import '../../../../../mixins'
+  
+#AccommodationPhotos
+  display: flex
+  flex-flow: nowrap row
+  overflow: hidden
+  @include breakpoint(tablet_portrait)
+    width: 70%
+  .accommodationPhotoOpen
+    max-width: 100%
+    max-height: 100%
+    width: auto
+    height: auto
+  .accommodationPhotoClosed
+    width: 0

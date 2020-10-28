@@ -1,0 +1,21 @@
+@import '../../../../../../mixins'
+
+.LearnOptionEnquiry
+  margin: 1rem
+  display: flex
+  flex-flow: nowrap column
+  font-family: 'Roboto-Bold'
+  @include breakpoint(tablet_portrait)
+    width: 50%
+    margin: 2rem
+  input, textarea
+    padding: 0.2rem
+    margin-bottom: 0.2rem
+    border-radius: 0.2rem
+  button
+    @include button_dark
+  .LOEButtons
+    display: flex
+    justify-content: space-between
+    button
+      width: 48%

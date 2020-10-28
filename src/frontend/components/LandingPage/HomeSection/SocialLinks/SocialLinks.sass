@@ -1,0 +1,34 @@
+@import '../../../../vars'
+
+#SocialLinks
+  display: flex
+  justify-content: space-between
+  width: 8rem
+  li
+    a
+      display: flex
+      justify-content: center
+      align-items: center
+      width: 2rem
+      height: 2rem
+      background-position: center center
+      background-size: cover
+      border-radius: 0.3rem
+      box-shadow: 0 0.5rem 1rem $dark-green
+      transition: 0.2s
+      &:hover
+        transform: translateY(-0.5rem)
+        box-shadow: 0 1rem 1rem $dark-green
+      .hiddenLabel
+        clip: rect(1px, 1px, 1px, 1px)
+        height: 1px
+        overflow: hidden
+        position: absolute
+        white-space: nowrap
+        width: 1px
+    #instagram
+      background-image: url('icons/instagram.jpg')
+    #twitter
+      background-image: url('icons/twitter.jpg')
+    #facebook
+      background-image: url('icons/facebook.jpg')

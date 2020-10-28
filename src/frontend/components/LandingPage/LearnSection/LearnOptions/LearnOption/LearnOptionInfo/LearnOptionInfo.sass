@@ -1,0 +1,21 @@
+@import '../../../../../../mixins'
+@import '../../../../../../vars'
+
+.LearnOptionInfo
+  margin: 1rem
+  @include breakpoint(tablet_portrait)
+    width: 50%
+    margin: 2rem
+  .learnInfoTitle
+    font-family: 'Montserrat-Regular'
+  .learnInfoDescription
+    font-family: 'Roboto-Bold'
+    margin: 1rem 0
+  .learnInfoControls
+    display: flex
+    flex-flow: nowrap row
+    width: 100%
+    justify-content: space-between
+    align-items: center
+  button
+    @include button_dark
