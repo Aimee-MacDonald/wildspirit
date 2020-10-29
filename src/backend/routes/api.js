@@ -6,6 +6,7 @@ const path = require('path');
 
 const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
+const Activity = require(path.join(__dirname, '../dbmodels/Activity.js'));
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -80,175 +81,55 @@ router.get('/events', (req, res) => {
   });
 });
 
-router.get('/activities', (req, res) => {
-  const respac = [{
-    "name": "Onsite",
-    "activities": [{
-      "name": "Breakfast",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Dinner",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Self Catering Kitchens",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Shuttles",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Free WiFi",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Yoga Barn",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Mountain Bikes",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Hiking Trails",
-    "activities": [{
-      "name": "Harkerville Forest",
-      "description": "activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description activity description ",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Salt River Hike",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Kalanderkloof Hike",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Otter Trail",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Robberg Nature Reserve",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Beaches",
-    "activities": [{
-      "name": "Nature's Valley Beach",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Keurbooms Beach",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Central Beach",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Robberg Beach",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Water Activities",
-    "activities": [{
-      "name": "Sea Kayaking Robberg",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Keurbooms River Canooing",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "River Canyoning",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Animal Activities",
-    "activities": [{
-      "name": "Monkey Land",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Birds of Eden",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Tenikwa Wildlife Rehabilitation",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Elephant Sanctuary",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Jukani",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Whale Watching",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Snake Sanctuary",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Swim with seals",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Adrenaline Activities",
-    "activities": [{
-      "name": "Skydive Plett",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Bloukrans Bungy Jump",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }, {
-    "name": "Restaurants",
-    "activities": [{
-      "name": "Pepper mill",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Farmstall",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Bread & Brew",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Moss & Maple",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Thyme & Again",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Enrico's",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }, {
-      "name": "Nature's Valley Pub",
-      "description": "activity description",
-      "image": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
-    }]
-  }];
+router.post('/activity', (req, res) => {
+  const newActivity = new Activity({
+    category: 'Hiking Trails',
+    name: "Salt River Hikes",
+    description: "activity description",
+    image: "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+  });
 
-  res.status(200).json(respac);
+  newActivity.save(err => {
+    if(err){
+      res.status(304).json('Not Modified');
+    } else {
+      res.status(201).json('Created');
+    }
+  });
+});
+
+router.get('/activities', (req, res) => {
+  Activity.find({}, (err, docs) => {
+    if(err){
+      res.status(500).json("Internal Server Error");
+    } else if(docs.length < 1){
+      res.status(404).json("Not Found");
+    } else {
+      let respac = [];
+
+      docs.forEach(activity => {
+        let inserted = false;
+
+        respac.forEach(category => {
+          if(category.name === activity.category){
+            category.activities.push(activity);
+            inserted = true;
+          }
+        });
+
+        if(!inserted){
+          const cat = {
+            name: activity.category,
+            activities: [activity]
+          };
+
+          respac.push(cat);
+        }
+      });
+      
+      res.status(200).json(respac);
+    }
+  });
 });
 
 router.post('/accommodationEnquiry', (req, res) => {
