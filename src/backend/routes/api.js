@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const path = require('path');
 
 const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
+const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -34,7 +35,7 @@ router.get('/accommodation', (req, res) => {
 });
 
 router.post('/accommodation', (req, res) => {
-  let newAccommodation = new Accommodation({
+  const newAccommodation = new Accommodation({
     title: 'Dorms',
     description: 'Our spacious, bunk-free dormitories sleep up to 8 people in comfortable single beds. Each dorm has en-suite bathroom facilities and a sun deck overlooking the mountains and indigenous forests of the Tsitsikamma National Park',
     images: []
@@ -49,28 +50,34 @@ router.post('/accommodation', (req, res) => {
   });
 });
 
-router.get('/events', (req, res) => {
-  const respac = [{
-    "imgURL": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg",
-    "imgAlt": "A happy group of friends planting trees together",
-    "title": "Reforestation",
-    "subtitle": "Recreating the indigenous forest",
-    "description": "As part of the Greenpop initiative, we are planting over 300 trees in an area of cleared alien vegetation. Bring all your friends and a picnic basket and come join us in making a real and lasting difference to our natural environment."
-  }, {
-    "imgURL": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604745/LearnOptions/Bush_camp_sign_20_mdesil.jpg",
-    "imgAlt": "A Gardener and his tools meditating with a horse",
-    "title": "Concious Gardening",
-    "subtitle": "Build the perfect garden and a mind to match it",
-    "description": "A healthy mind promotes a healthy environment. A healthy environment promotes a healthy mind. Come join us and start your own journey to a happier, healthier you and a beautiful garden to enjoy it in."
-  }, {
-    "imgURL": "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604744/LearnOptions/Bush_camp_sign_18_jkco8r.jpg",
-    "imgAlt": "A group of people watching a band playing live outside.",
-    "title": "Music on the Deck",
-    "subtitle": "Live music at Wild Spirit",
-    "description": "Join us for an unforgettable night of live music and festivities at wild spirit."
-  }];
+router.post('/event', (req, res) => {
+  const newEvent = new Event({
+    imgURL: "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg",
+    imgAlt: "A happy group of friends planting trees together",
+    title: "Reforestation",
+    subtitle: "Recreating the indigenous forest",
+    description: "As part of the Greenpop initiative, we are planting over 300 trees in an area of cleared alien vegetation. Bring all your friends and a picnic basket and come join us in making a real and lasting difference to our natural environment."
+  });
 
-  res.status(200).json(respac);
+  newEvent.save(err => {
+    if(err){
+      res.status(304).json('Not Modified');
+    } else {
+      res.status(201).json('Created');
+    }
+  });
+});
+
+router.get('/events', (req, res) => {
+  Event.find({}, (err, docs) => {
+    if(err){
+      res.status(500).json("Internal Server Error");
+    } else if(docs.length < 1){
+      res.status(404).json("Not Found");
+    } else {
+      res.status(200).json(docs);
+    }
+  });
 });
 
 router.get('/activities', (req, res) => {
