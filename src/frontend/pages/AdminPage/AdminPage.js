@@ -1,6 +1,7 @@
 import React from 'react';
 
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
+import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
 
 export default class AdminPage extends React.Component{
   constructor(props){
@@ -11,20 +12,7 @@ export default class AdminPage extends React.Component{
     return(
       <div>
         <APLiveSection addAccommodation={this.addAccommodation} />
-    
-        <h2>Parallax Section</h2>
-        <h3>Parallax Image</h3>
-        <h3>Parallax Text</h3>
-    
-        <h2>Learn Section</h2>
-        <h3>Add Card</h3>
-        <h3>Remove Card</h3>
-    
-        <h2>Explore Section</h2>
-        <h3>Add Category</h3>
-        <h3>Remove Category</h3>
-        <h3>Add Activity</h3>
-        <h3>Remove Activity</h3>
+        <APLearnSection addEvent={this.addEvent} />
       </div>
     );
   }
@@ -43,6 +31,25 @@ export default class AdminPage extends React.Component{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'accommodation': accPac})
+    })
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => console.log(error))
+  }
+
+  addEvent(event){
+    const evPac = {
+      imgURL: event.target.APLSImgURL.value,
+      imgAlt: event.target.APLSImgAlt.value,
+      title: event.target.APLSTitle.value,
+      subtitle: event.target.APLSSubtitle.value,
+      description: event.target.APLSDescription.value
+    };
+
+    fetch('/api/event', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'event': evPac})
     })
     .then(response => response.json())
     .then(result => console.log(result))

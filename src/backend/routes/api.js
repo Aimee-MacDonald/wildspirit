@@ -53,11 +53,11 @@ router.post('/accommodation', (req, res) => {
 
 router.post('/event', (req, res) => {
   const newEvent = new Event({
-    imgURL: "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg",
-    imgAlt: "A happy group of friends planting trees together",
-    title: "Reforestation",
-    subtitle: "Recreating the indigenous forest",
-    description: "As part of the Greenpop initiative, we are planting over 300 trees in an area of cleared alien vegetation. Bring all your friends and a picnic basket and come join us in making a real and lasting difference to our natural environment."
+    imgURL: req.body.event.imgURL,
+    imgAlt: req.body.event.imgAlt,
+    title: req.body.event.title,
+    subtitle: req.body.event.subtitle,
+    description: req.body.event.description
   });
 
   newEvent.save(err => {
