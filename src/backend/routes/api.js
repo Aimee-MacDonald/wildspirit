@@ -37,9 +37,9 @@ router.get('/accommodation', (req, res) => {
 
 router.post('/accommodation', (req, res) => {
   const newAccommodation = new Accommodation({
-    title: 'Dorms',
-    description: 'Our spacious, bunk-free dormitories sleep up to 8 people in comfortable single beds. Each dorm has en-suite bathroom facilities and a sun deck overlooking the mountains and indigenous forests of the Tsitsikamma National Park',
-    images: []
+    title: req.body.accommodation.title,
+    description: req.body.accommodation.description,
+    images: req.body.accommodation.images
   });
 
   newAccommodation.save(err => {

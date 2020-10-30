@@ -1,6 +1,7 @@
 node_modules
 .env
-dist/bundle.css
+dist/index.bundle.css
+dist/admin.bundle.css
 dist/index.bundle.js
 dist/admin.bundle.js
 dist/fonts
