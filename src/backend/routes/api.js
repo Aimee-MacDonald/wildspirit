@@ -83,10 +83,10 @@ router.get('/events', (req, res) => {
 
 router.post('/activity', (req, res) => {
   const newActivity = new Activity({
-    category: 'Hiking Trails',
-    name: "Salt River Hikes",
-    description: "activity description",
-    image: "https://res.cloudinary.com/dcmdpotqs/image/upload/v1602604754/LearnOptions/IMG-20200808-WA0026_jokxd5.jpg"
+    category: req.body.activity.category,
+    name: req.body.activity.name,
+    description: req.body.activity.description,
+    image: req.body.activity.image
   });
 
   newActivity.save(err => {
