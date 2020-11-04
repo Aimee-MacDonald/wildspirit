@@ -13,13 +13,15 @@ export default class APLiveSection extends React.Component{
     this.state = {
       accommodationOptions: []
     }
+
+    this.addOption = this.addOption.bind(this);
   }
 
   render(){
     return(
       <div>
         <APLSNav accommodationOptions={this.state.accommodationOptions} />
-        <APLSNew />
+        <APLSNew addOption={this.addOption} />
         <APLSEdit />
       </div>
     );
@@ -30,5 +32,21 @@ export default class APLiveSection extends React.Component{
       .then(res => res.json())
       .then(result => {this.setState(() => ({accommodationOptions: result}))})
       .catch(error => console.log(error))
+  }
+
+  addOption(event){
+    event.preventDefault();
+
+    const newOption = {
+      title: event.target.APLSNType.value,
+      discription: '',
+      images: []
+    }
+
+    this.setState(oldState => {
+      let newOptions = oldState.accommodationOptions;
+      newOptions.push(newOption);
+      return{accommodationOptions: newOptions}
+    });
   }
 }

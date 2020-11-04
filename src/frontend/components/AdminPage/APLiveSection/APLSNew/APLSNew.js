@@ -1,9 +1,11 @@
 import React from 'react';
 
-const APLSNew = () => (
-  <form>
-    <input />
-    <button>Add</button>
+const APLSNew = props => (
+  <form onSubmit={props.addOption}>
+    <label htmlFor='APLSNType'>New Accommodation Type: </label>
+    <input id='APLSNType' />
+
+    <button type='submit'>Add</button>
   </form>
 );
 
