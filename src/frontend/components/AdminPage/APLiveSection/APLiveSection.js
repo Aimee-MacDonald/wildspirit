@@ -11,18 +11,22 @@ export default class APLiveSection extends React.Component{
     super(props);
 
     this.state = {
-      accommodationOptions: []
+      accommodationOptions: [],
+      selectedOption: -1
     }
 
     this.addOption = this.addOption.bind(this);
+    this.selectOption = this.selectOption.bind(this);
   }
 
   render(){
     return(
       <div>
-        <APLSNav accommodationOptions={this.state.accommodationOptions} />
+        <APLSNav accommodationOptions={this.state.accommodationOptions} selectOption={this.selectOption} />
         <APLSNew addOption={this.addOption} />
-        <APLSEdit />
+        {this.state.selectedOption !== -1 &&
+          <APLSEdit />
+        }
       </div>
     );
   }
@@ -48,5 +52,10 @@ export default class APLiveSection extends React.Component{
       newOptions.push(newOption);
       return{accommodationOptions: newOptions}
     });
+  }
+
+  selectOption(selection){
+    const index = this.state.accommodationOptions.findIndex(v => v.title === selection);
+    this.setState(() => ({selectedOption: index}));
   }
 }

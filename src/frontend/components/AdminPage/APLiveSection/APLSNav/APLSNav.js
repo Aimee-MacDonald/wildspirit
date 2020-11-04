@@ -6,7 +6,7 @@ const APLSNav = props => (
       {props.accommodationOptions.length > 0 &&
         props.accommodationOptions.map(accommodationOption => (
           <li key={'APLSNOption-' + accommodationOption.title}>
-            <button>{accommodationOption.title}</button>
+            <button onClick={() => props.selectOption(accommodationOption.title)}>{accommodationOption.title}</button>
           </li>
         ))
       }
