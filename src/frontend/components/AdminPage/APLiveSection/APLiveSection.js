@@ -2,24 +2,33 @@ import React from 'react';
 
 import './APLiveSection.sass';
 
-const APLiveSection = props => (
-  <form id='APLiveSection' onSubmit={props.addAccommodation}>
-    <h2>Add Accommodation</h2>
+import APLSNav from './APLSNav/APLSNav';
+import APLSNew from './APLSNew/APLSNew';
+import APLSEdit from './APLSEdit/APLSEdit';
 
-    <label htmlFor='APLSType'>Accommodation Type</label>
-    <input id='APLSType' />
+export default class APLiveSection extends React.Component{
+  constructor(props){
+    super(props);
 
-    <label htmlFor='APLSDescription'>Accommodation Description</label>
-    <textarea id='APLSDescription' />
+    this.state = {
+      accommodationOptions: []
+    }
+  }
 
-    <label htmlFor='APLSImgURL'>Image URL</label>
-    <input id='APLSImgURL' />
+  render(){
+    return(
+      <div>
+        <APLSNav accommodationOptions={this.state.accommodationOptions} />
+        <APLSNew />
+        <APLSEdit />
+      </div>
+    );
+  }
 
-    <label htmlFor='APLSAltText'>Image ALT Text</label>
-    <input id='APLSAltText' />
-
-    <button type='submit'>Add</button>
-  </form>
-);
-
-export default APLiveSection;
+  componentDidMount(){
+    fetch('/api/accommodation')
+      .then(res => res.json())
+      .then(result => {this.setState(() => ({accommodationOptions: result}))})
+      .catch(error => console.log(error))
+  }
+}

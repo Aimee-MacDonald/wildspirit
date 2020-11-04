@@ -27,7 +27,7 @@ export default class AdminPage extends React.Component{
       <div id='AdminPage'>
         <APNav setSection={this.setSection} />
 
-        {this.state.activeSection.live && <APLiveSection addAccommodation={this.addAccommodation} />}
+        {this.state.activeSection.live && <APLiveSection />}
         {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
         {this.state.activeSection.explore && <APExploreSection addActivity={this.addActivity} />}
       </div>
@@ -44,26 +44,6 @@ export default class AdminPage extends React.Component{
     newSection[section] = true;
 
     this.setState(() => ({activeSection: newSection}))
-  }
-
-  addAccommodation(event){
-    const accPac = {
-      title: event.target.APLSType.value,
-      description: event.target.APLSDescription.value,
-      images: [{
-        srcLink: event.target.APLSImgURL.value,
-        altText: event.target.APLSAltText.value
-      }]
-    }
-    
-    fetch('/api/accommodation', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'accommodation': accPac})
-    })
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
   }
 
   addEvent(event){
