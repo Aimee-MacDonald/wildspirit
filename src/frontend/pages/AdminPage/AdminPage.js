@@ -1,5 +1,6 @@
 import React from 'react';
 
+import APNav from '../../components/AdminPage/APNav/APNav';
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
 import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
 import APExploreSection from '../../components/AdminPage/APExploreSection/APExploreSection';
@@ -7,16 +8,40 @@ import APExploreSection from '../../components/AdminPage/APExploreSection/APExpl
 export default class AdminPage extends React.Component{
   constructor(props){
     super(props);
+
+    this.state = {
+      activeSection: {
+        live: false,
+        learn: true,
+        explore: false
+      }
+    }
+
+    this.setSection = this.setSection.bind(this);
   }
 
   render(){
     return(
       <div>
-        <APLiveSection addAccommodation={this.addAccommodation} />
-        <APLearnSection addEvent={this.addEvent} />
-        <APExploreSection addActivity={this.addActivity} />
+        <APNav setSection={this.setSection} />
+
+        {this.state.activeSection.live && <APLiveSection addAccommodation={this.addAccommodation} />}
+        {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
+        {this.state.activeSection.explore && <APExploreSection addActivity={this.addActivity} />}
       </div>
     );
+  }
+
+  setSection(section){
+    let newSection = {
+      live: false,
+      learn: false,
+      explore: false
+    };
+
+    newSection[section] = true;
+
+    this.setState(() => ({activeSection: newSection}))
   }
 
   addAccommodation(event){
