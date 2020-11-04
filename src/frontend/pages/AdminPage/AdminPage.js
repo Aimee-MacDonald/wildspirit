@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './AdminPage.sass';
+
 import APNav from '../../components/AdminPage/APNav/APNav';
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
 import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
@@ -22,7 +24,7 @@ export default class AdminPage extends React.Component{
 
   render(){
     return(
-      <div>
+      <div id='AdminPage'>
         <APNav setSection={this.setSection} />
 
         {this.state.activeSection.live && <APLiveSection addAccommodation={this.addAccommodation} />}

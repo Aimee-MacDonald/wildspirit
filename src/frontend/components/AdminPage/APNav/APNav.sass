@@ -1,0 +1,17 @@
+@import '../../../mixins'
+@import '../../../vars'
+  
+#APNav
+  width: 15rem
+  background-color: $medium-green
+  ul
+    display: flex
+    flex-flow: nowrap column
+    align-items: center
+    li
+      width: 80%
+      button
+        @include button_dark
+        width: 100%
+        margin-top: 1.5rem
+        
