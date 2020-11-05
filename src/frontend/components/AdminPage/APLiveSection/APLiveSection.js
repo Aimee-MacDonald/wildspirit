@@ -20,6 +20,7 @@ export default class APLiveSection extends React.Component{
     this.addOption = this.addOption.bind(this);
     this.selectOption = this.selectOption.bind(this);
     this.updateTemp = this.updateTemp.bind(this);
+    this.saveOption = this.saveOption.bind(this);
   }
 
   render(){
@@ -32,6 +33,7 @@ export default class APLiveSection extends React.Component{
             title={this.state.temp1}
             description={this.state.temp2}
             updateTemp={this.updateTemp}
+            saveOption={this.saveOption}
           />
         }
       </div>
@@ -75,7 +77,7 @@ export default class APLiveSection extends React.Component{
 
   updateTemp(event){
     let tVal = event.target.value;
-    
+
     switch(event.target.id){
       case 'APLSETitle':
         this.setState(() => ({temp1: tVal}));
@@ -84,6 +86,25 @@ export default class APLiveSection extends React.Component{
       case 'APLSEDescription':
         this.setState(() => ({temp2: tVal}));
         break;
+    }
+  }
+
+  saveOption(event){
+    event.preventDefault();
+
+    this.setState(prevState => {
+      const newOptions = prevState.accommodationOptions;
+      newOptions[this.state.selectedOption].title = this.state.temp1;
+      newOptions[this.state.selectedOption].description = this.state.temp2;
+      return {accommodationOptions: newOptions};
+    });
+
+    const optionID = this.state.accommodationOptions[this.state.selectedOption]._id;
+    
+    if(optionID){
+      console.log('Update the DB Record');
+    } else {
+      console.log('Create a new DB Record');
     }
   }
 }
