@@ -45,7 +45,11 @@ export default class APLiveSection extends React.Component{
   componentDidMount(){
     fetch('/api/accommodation')
       .then(res => res.json())
-      .then(result => {this.setState(() => ({accommodationOptions: result}))})
+      .then(result => {
+        if(result !== 'Not Found'){
+          this.setState(() => ({accommodationOptions: result}))
+        }
+      })
       .catch(error => console.log(error))
   }
 

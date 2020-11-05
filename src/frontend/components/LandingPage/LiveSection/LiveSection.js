@@ -64,8 +64,11 @@ export default class LiveSection extends React.Component{
     fetch('/api/accommodation')
       .then(res => res.json())
       .then(result => {
-        this.setState(() => ({accommodationOptions: result}));
-      });
+        if(result !== 'Not Found'){
+          this.setState(() => ({accommodationOptions: result}))
+        }
+      })
+      .catch(error => console.log(error))
   }
 
   activateOption(optionIndex){

@@ -4,7 +4,7 @@ import './AccommodationOptions.sass';
 
 const AccommodationOptions = props => (
   <div id='AccommodationOptions'>
-    {props.accommodationOptions.map((option, index) => (
+    {props.accommodationOptions.length > 0 && props.accommodationOptions.map((option, index) => (
       <div className={'accommodationOption'} key={'accommodationOption'+index} onMouseEnter={()=>{props.activateOption(index)}}>
         <p>{option.title}</p>
         {props.activatedOption === index &&
