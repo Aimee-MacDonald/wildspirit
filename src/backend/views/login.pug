@@ -1,0 +1,14 @@
+doctype html
+html(lang="en")
+  head(id="head")
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    meta(http-equiv="X-UA-Compatible", content="ie=edge")
+    <link rel="stylesheet" href="index.bundle.css">
+    title Wild Spirit | Admin Login
+
+  body
+    form(action='/requestLogin', method='POST')
+      label(for='loginEmail') Enter your email address:
+      input(id='loginEmail', name='email')
+      button(type='submit') Send

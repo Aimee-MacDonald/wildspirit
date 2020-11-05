@@ -266,7 +266,6 @@ router.post('/sendMessage', (req, res) => {
   if(req.body.message){
     const messageData = req.body.message;
 
-
     var mailoptions = {
       'from': process.env.MAILUSER,
       'to': process.env.MAILUSER,
@@ -296,6 +295,11 @@ router.post('/sendMessage', (req, res) => {
   } else {
     res.status(400).json({'text': 'No form data'});
   }
+});
+
+router.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
 });
 
 function sendEmail(mailoptions){
