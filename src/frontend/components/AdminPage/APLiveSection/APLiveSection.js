@@ -21,6 +21,7 @@ export default class APLiveSection extends React.Component{
     this.selectOption = this.selectOption.bind(this);
     this.updateTemp = this.updateTemp.bind(this);
     this.saveOption = this.saveOption.bind(this);
+    this.addImage = this.addImage.bind(this);
   }
 
   render(){
@@ -34,6 +35,7 @@ export default class APLiveSection extends React.Component{
             description={this.state.temp2}
             updateTemp={this.updateTemp}
             saveOption={this.saveOption}
+            addImage={this.addImage}
           />
         }
       </div>
@@ -130,5 +132,27 @@ export default class APLiveSection extends React.Component{
         .then(result => console.log(result))
         .catch(error => console.log(error))
     }
+  }
+
+  addImage(event){
+    event.preventDefault();
+    const imgPac = {
+      srcLink: event.target.APLSEImgURL.value,
+      altText: event.target.APLSEAltText.value
+    };
+
+    this.setState(prevState => {
+      var newData = prevState.accommodationOptions;
+      newData[this.state.selectedOption].images.push(imgPac);
+      return {accommodationOptions: newData};
+    });
+
+    fetch('/api/addAccommodationImage', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'accommodationID': this.state.accommodationOptions[this.state.selectedOption]._id, 'imageData': imgPac})
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
   }
 }

@@ -12,10 +12,14 @@ const APLSEdit = props => (
       <button type='submit'>Save</button>
     </form>
 
-    <form>
-      <input />
-      <input />
-      <button>Add</button>
+    <form onSubmit={props.addImage}>
+      <label htmlFor='APLSEImgURL'>Image URL</label>
+      <input id='APLSEImgURL' />
+
+      <label htmlFor='APLSEAltText'>Image Description</label>
+      <input id='APLSEAltText' />
+
+      <button type='submit'>Add</button>
     </form>
   </div>
 );

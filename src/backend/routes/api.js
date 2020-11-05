@@ -70,6 +70,23 @@ router.post('/editAccommodation', (req, res) => {
   });
 });
 
+router.post('/addAccommodationImage', (req, res) => {
+  Accommodation.findById(req.body.accommodationID, (err, doc) => {
+    if(err){
+      res.status(500).json('Database Error');
+    } else {
+      doc.images.push(req.body.imageData);
+      doc.save(err => {
+        if(err){
+          res.status(500).json('Database Error');
+        } else {
+          res.status(201).json('Created');
+        }
+      });
+    }
+  });
+});
+
 router.post('/event', (req, res) => {
   const newEvent = new Event({
     imgURL: req.body.event.imgURL,
