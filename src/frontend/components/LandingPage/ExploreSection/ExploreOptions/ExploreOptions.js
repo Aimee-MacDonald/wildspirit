@@ -20,7 +20,7 @@ export default class ExploreOptions extends React.Component{
   render(){
     return (
       <div id='ExploreOptions'>
-        {this.state.categories.map((category, index) => (
+        {this.state.categories.length > 0 && this.state.categories.map((category, index) => (
           <p
             className={'exploreCategory'}
             style={{order: index}}
@@ -43,8 +43,11 @@ export default class ExploreOptions extends React.Component{
     fetch('/api/activities')
       .then(res => res.json())
       .then(result => {
-        this.setState(() => ({categories: result}));
+        if(result !== 'Not Found'){
+          this.setState(() => ({categories: result}));
+        }
       })
+      .catch(error => console.log(error))
   }
 
   selectCategory(categoryIndex){

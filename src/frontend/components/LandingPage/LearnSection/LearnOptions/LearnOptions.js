@@ -38,20 +38,22 @@ export default class LearnOptions extends React.Component{
     fetch('/api/events')
       .then(res => res.json())
       .then(result => {
-        let options = [];
+        if(result !== 'Not Found'){
+          let options = [];
         
-        result.forEach(option => {
-          options.push({
-            imgURL: option.imgURL,
-            imgAlt: option.imgAlt,
-            title: option.title,
-            subtitle: option.subtitle,
-            description: option.description,
-            enquiryOpen: false
+          result.forEach(option => {
+            options.push({
+              imgURL: option.imgURL,
+              imgAlt: option.imgAlt,
+              title: option.title,
+              subtitle: option.subtitle,
+              description: option.description,
+              enquiryOpen: false
+            });
           });
-        });
 
-        this.setState(() => ({options: options}));
+          this.setState(() => ({options: options}));
+        }
       });
   }
 
