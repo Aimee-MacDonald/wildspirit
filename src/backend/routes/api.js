@@ -35,7 +35,7 @@ router.get('/accommodation', (req, res) => {
   });
 });
 
-router.post('/accommodation', (req, res) => {
+router.post('/newAccommodation', (req, res) => {
   const newAccommodation = new Accommodation({
     title: req.body.accommodation.title,
     description: req.body.accommodation.description,
@@ -47,6 +47,25 @@ router.post('/accommodation', (req, res) => {
       res.status(304).json('Not Modified');
     } else {
       res.status(201).json('Created');
+    }
+  });
+});
+
+router.post('/editAccommodation', (req, res) => {
+  Accommodation.findById(req.body.accommodation.id, (err, doc) => {
+    if(err){
+      res.status(500).json('Database Error');
+    } else {
+      doc.title = req.body.accommodation.title;
+      doc.description = req.body.accommodation.description
+
+      doc.save(err => {
+        if(err){
+          res.status(500).json('Database Error');
+        } else {
+          res.status(200).json('Updated');
+        }
+      })
     }
   });
 });

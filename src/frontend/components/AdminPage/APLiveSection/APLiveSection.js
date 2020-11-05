@@ -102,9 +102,33 @@ export default class APLiveSection extends React.Component{
     const optionID = this.state.accommodationOptions[this.state.selectedOption]._id;
     
     if(optionID){
-      console.log('Update the DB Record');
+      const accommodationData = {
+        id: optionID,
+        title: this.state.temp1,
+        description: this.state.temp2
+      };
+
+      fetch('/api/editAccommodation', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({'accommodation': accommodationData})
+      }).then(res => res.json())
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
     } else {
-      console.log('Create a new DB Record');
+      const accommodationData = {
+        title: this.state.temp1,
+        description: this.state.temp2,
+        images: []
+      };
+
+      fetch('/api/newAccommodation', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({'accommodation': accommodationData})
+      }).then(res => res.json())
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
     }
   }
 }
