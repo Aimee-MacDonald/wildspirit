@@ -12,11 +12,14 @@ export default class APLiveSection extends React.Component{
 
     this.state = {
       accommodationOptions: [],
-      selectedOption: -1
+      selectedOption: -1,
+      temp1: '',
+      temp2: ''
     }
 
     this.addOption = this.addOption.bind(this);
     this.selectOption = this.selectOption.bind(this);
+    this.updateTemp = this.updateTemp.bind(this);
   }
 
   render(){
@@ -25,7 +28,11 @@ export default class APLiveSection extends React.Component{
         <APLSNav accommodationOptions={this.state.accommodationOptions} selectOption={this.selectOption} />
         <APLSNew addOption={this.addOption} />
         {this.state.selectedOption !== -1 &&
-          <APLSEdit />
+          <APLSEdit
+            title={this.state.temp1}
+            description={this.state.temp2}
+            updateTemp={this.updateTemp}
+          />
         }
       </div>
     );
@@ -56,6 +63,27 @@ export default class APLiveSection extends React.Component{
 
   selectOption(selection){
     const index = this.state.accommodationOptions.findIndex(v => v.title === selection);
-    this.setState(() => ({selectedOption: index}));
+    const t1 = this.state.accommodationOptions[index].title;
+    const t2 = this.state.accommodationOptions[index].description;
+
+    this.setState(() => ({
+      selectedOption: index,
+      temp1: t1,
+      temp2: t2
+    }));
+  }
+
+  updateTemp(event){
+    let tVal = event.target.value;
+    
+    switch(event.target.id){
+      case 'APLSETitle':
+        this.setState(() => ({temp1: tVal}));
+        break;
+
+      case 'APLSEDescription':
+        this.setState(() => ({temp2: tVal}));
+        break;
+    }
   }
 }

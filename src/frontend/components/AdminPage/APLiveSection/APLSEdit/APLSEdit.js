@@ -1,10 +1,14 @@
 import React from 'react';
 
-const APLSEdit = () => (
+const APLSEdit = props => (
   <div>
     <form>
-      <input />
-      <textarea />
+      <label htmlFor='APLSETitle'>Title</label>
+      <input id='APLSETitle' value={props.title} onChange={props.updateTemp} />
+
+      <label htmlFor='APLSEDescription'>Description</label>
+      <textarea id='APLSEDescription' value={props.description} onChange={props.updateTemp} />
+
       <button>Save</button>
     </form>
 
