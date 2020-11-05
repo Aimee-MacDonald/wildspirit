@@ -26,7 +26,7 @@ export default class APLiveSection extends React.Component{
 
   render(){
     return(
-      <div>
+      <div id='APLiveSection'>
         <APLSNav accommodationOptions={this.state.accommodationOptions} selectOption={this.selectOption} />
         <APLSNew addOption={this.addOption} />
         {this.state.selectedOption !== -1 &&

@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './APLSNav.sass';
+
 const APLSNav = props => (
-  <nav>
+  <nav id='APLSNav'>
     <ul>
       {props.accommodationOptions.length > 0 &&
         props.accommodationOptions.map(accommodationOption => (

@@ -1,7 +1,9 @@
 import React from 'react';
 
+import './APLSEdit.sass';
+
 const APLSEdit = props => (
-  <div>
+  <div id='APLSEdit'>
     <form onSubmit={props.saveOption}>
       <label htmlFor='APLSETitle'>Title</label>
       <input id='APLSETitle' value={props.title} onChange={props.updateTemp} />
