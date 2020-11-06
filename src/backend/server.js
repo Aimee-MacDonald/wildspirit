@@ -95,6 +95,13 @@ app.get('/mailLogin', (req, res) => {
 
 app.get('/logout', (req, res) => {
   req.logout();
+
+  LoginRequest.deleteMany({}, err => {
+    if(err){
+      console.log('Unable to remove all Login Requests');
+    }
+  });
+
   res.redirect('/');
 });
 
