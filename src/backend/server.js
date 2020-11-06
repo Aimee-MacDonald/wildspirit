@@ -133,6 +133,8 @@ function sendEmail(mailoptions){
   transporter.sendMail(mailoptions, (err, info) => {
     if(err){
       console.log('Failed to send email.');
+      console.log(err);
+      sendEmail(mailoptions);
     }
   });
 }
