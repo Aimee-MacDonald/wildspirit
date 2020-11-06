@@ -51,7 +51,7 @@ app.get('/login', (req, res) => {
 
 app.post('/requestLogin', (req, res) => {
   if(req.body.email === process.env.MAILUSER){
-    const newLoginRequest = new LoginRequest({timestamp: Date.now()});
+    const newLoginRequest = new LoginRequest({timestamp: new Date().getTime()});
     newLoginRequest.save(err => {
       if(err){
         res.redirect('/login');
@@ -64,7 +64,7 @@ app.post('/requestLogin', (req, res) => {
           'html': `
                     <p>You just requested to login to the Wild Spirit website</p>
                     <p>Please click the link below to login</p>
-                    <a href=${process.env.BASEURL}/mailLogin?id=${newLoginRequest._id}>Login Link</a>
+                    <a href=${process.env.BASEURL}/mailLogin?id=${newLoginRequest._id}&ts=${newLoginRequest.timestamp}>Login Link</a>
                   `
         }
 
@@ -82,13 +82,19 @@ app.get('/mailLogin', (req, res) => {
     if(err){
       res.redirect('/login');
     } else {
-      req.login(req.query.id, err => {
-        if(err){
-          res.redirect('/login');
-        } else {
-          res.redirect('/admin');
-        }
-      });
+      const deltaMinutes = (new Date().getTime() - req.query.ts) / 60000;
+
+      if(deltaMinutes < 30){
+        req.login(req.query.id, err => {
+          if(err){
+            res.redirect('/login');
+          } else {
+            res.redirect('/admin');
+          }
+        });
+      } else {
+        res.redirect('/login');
+      }
     }
   });
 });
