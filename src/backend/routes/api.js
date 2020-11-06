@@ -297,11 +297,6 @@ router.post('/sendMessage', (req, res) => {
   }
 });
 
-router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/');
-});
-
 function sendEmail(mailoptions){
   var transporter = nodemailer.createTransport({
     service: 'gmail',

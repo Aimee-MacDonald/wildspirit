@@ -93,6 +93,11 @@ app.get('/mailLogin', (req, res) => {
   });
 });
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 passport.serializeUser(function(uid, done){
   done(null, uid);
 });
