@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
-const nodemailer = require('nodemailer');
+const pepipost = require('pepipost');
 
 const api = require(path.join(__dirname, "/routes/api"));
 
@@ -16,6 +16,8 @@ mongoose.connect(process.env.DBURL, {useNewUrlParser: true, useUnifiedTopology: 
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "/views"));
+
+pepipost.Configuration.apiKey = process.env.EMAILKEY;
 
 app.use(session({
   secret: process.env.SECRET,
@@ -50,26 +52,43 @@ app.get('/login', (req, res) => {
 });
 
 app.post('/requestLogin', (req, res) => {
-  if(req.body.email === process.env.MAILUSER){
+  if(req.body.email === process.env.EMAILTO){
     const newLoginRequest = new LoginRequest({timestamp: new Date().getTime()});
     newLoginRequest.save(err => {
       if(err){
         res.redirect('/login');
       } else {
-        const mailOptions = {
-          'from': process.env.MAILUSER,
-          'to': process.env.MAILUSER,
-          'subject': 'WSW Login Request',
-          'text': `WSW Login Request`,
-          'html': `
-                    <p>You just requested to login to the Wild Spirit website</p>
-                    <p>Please click the link below to login</p>
-                    <a href=${process.env.BASEURL}/mailLogin?id=${newLoginRequest._id}&ts=${newLoginRequest.timestamp}>Login Link</a>
-                  `
-        }
+        let newEmail = new pepipost.Send();
 
-        sendEmail(mailOptions);
-        res.status(200).send("<h1>Check your mail</h1>");
+        newEmail.from = new pepipost.From();
+        newEmail.from.email = process.env.EMAILFROM;
+        newEmail.from.name = 'Wild Spirit Website';
+        newEmail.subject = 'Admin Login Request';
+
+        newEmail.content = [];
+        newEmail.content[0] = new pepipost.Content();
+        newEmail.content[0].type = pepipost.TypeEnum.HTML;
+        newEmail.content[0].value = `
+          <p>You just requested to login to the Wild Spirit website</p>
+          <p>Please click the link below to login</p>
+          <a href=${process.env.BASEURL}/mailLogin?id=${newLoginRequest._id}&ts=${newLoginRequest.timestamp}>Login Link</a>
+        `;
+
+        newEmail.personalizations = [];
+        newEmail.personalizations[0] = new pepipost.Personalizations();
+        newEmail.personalizations[0].to = [];
+        newEmail.personalizations[0].to[0] = new pepipost.EmailStruct();
+        newEmail.personalizations[0].to[0].name = 'Wild Spirit Admin';
+        newEmail.personalizations[0].to[0].email = process.env.EMAILTO;
+
+        const emailController = pepipost.MailSendController;
+        const emailPromise = emailController.createGeneratethemailsendrequest(newEmail);
+
+        emailPromise.then(response => {
+          res.status(200).send("<h1>Check your mail</h1>");
+        }).catch(error => {
+          res.status(500).json("Internal Server Error");
+        });
       }
     })
   } else {
@@ -82,16 +101,21 @@ app.get('/mailLogin', (req, res) => {
     if(err){
       res.redirect('/login');
     } else {
-      const deltaMinutes = (new Date().getTime() - req.query.ts) / 60000;
+      
+      if(!!doc){
+        const deltaMinutes = (new Date().getTime() - req.query.ts) / 60000;
 
-      if(deltaMinutes < 30){
-        req.login(req.query.id, err => {
-          if(err){
-            res.redirect('/login');
-          } else {
-            res.redirect('/admin');
-          }
-        });
+        if(deltaMinutes < 30){
+          req.login(req.query.id, err => {
+            if(err){
+              res.redirect('/login');
+            } else {
+              res.redirect('/admin');
+            }
+          });
+        } else {
+          res.redirect('/login');
+        }
       } else {
         res.redirect('/login');
       }
@@ -120,21 +144,3 @@ passport.deserializeUser(function(uid, done){
 });
 
 app.listen(process.env.PORT, () => console.log(`Server Listening on Port: ${process.env.PORT}`));
-
-function sendEmail(mailoptions){
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.MAILUSER,
-      pass: process.env.MAILPASS
-    }
-  });
-
-  transporter.sendMail(mailoptions, (err, info) => {
-    if(err){
-      console.log('Failed to send email.');
-      console.log(err);
-      sendEmail(mailoptions);
-    }
-  });
-}

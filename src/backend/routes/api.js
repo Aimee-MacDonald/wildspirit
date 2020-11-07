@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const axios = require('axios');
-const nodemailer = require('nodemailer');
 const path = require('path');
+const pepipost = require('pepipost');
+
+pepipost.Configuration.apiKey = process.env.EMAILKEY;
 
 const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
@@ -171,53 +173,51 @@ router.get('/activities', (req, res) => {
 router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
-
-    var mailoptions = {
-      'from': process.env.MAILUSER,
-      'to': process.env.MAILUSER,
-      'subject': 'WSW Accommodation Enquiry',
-      'text': `WSW Accommodation Enquiry`,
-      'html':`<p>${enquiryData.name} just made an enquiry via the website.</p>
-              <p>Enquiry Details:</p>
-              <table>
-                <tr>
-                  <td>Accommodation Type:</td>
-                  <td>${enquiryData.accommodationType}</td>
-                </tr>
-                <tr>
-                  <td>Name:</td>
-                  <td>${enquiryData.name}</td>
-                </tr>
-                <tr>
-                  <td>Email:</td>
-                  <td>${enquiryData.email}</td>
-                </tr>
-                <tr>
-                  <td>Pax:</td>
-                  <td>${enquiryData.pax}</td>
-                </tr>
-                <tr>
-                  <td>Arrival:</td>
-                  <td>${enquiryData.arrival}</td>
-                </tr>
-                <tr>
-                  <td>Departure:</td>
-                  <td>${enquiryData.departure}</td>
-                </tr>
-                <tr>
-                  <td>Flexible:</td>
-                  <td>${enquiryData.flexible}</td>
-                </tr>
-                <tr>
-                  <td>Message:</td>
-                  <td>${enquiryData.message}</td>
-                </tr>
-              </table>`
+    const emailDetails = {
+      subject: 'Accomodation Enquiry',
+      content: `
+        <p>${enquiryData.name} just made an enquiry via the website.</p>
+        <p>Enquiry Details:</p>
+        <table>
+          <tr>
+            <td>Accommodation Type:</td>
+            <td>${enquiryData.accommodationType}</td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>${enquiryData.name}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>${enquiryData.email}</td>
+          </tr>
+          <tr>
+            <td>Pax:</td>
+            <td>${enquiryData.pax}</td>
+          </tr>
+          <tr>
+            <td>Arrival:</td>
+            <td>${enquiryData.arrival}</td>
+          </tr>
+          <tr>
+            <td>Departure:</td>
+            <td>${enquiryData.departure}</td>
+          </tr>
+          <tr>
+            <td>Flexible:</td>
+            <td>${enquiryData.flexible}</td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td>${enquiryData.message}</td>
+          </tr>
+        </table>
+      `
     };
 
-    sendEmail(mailoptions);
-
-    res.status(200).json({'text': 'Success'});
+    sendEmail(emailDetails)
+      .then(response => {res.status(200).json('Success')})
+      .catch(error => {res.status(500).json('Internal Server Error')})
   } else {
     res.status(400).json({'text': 'No form data'});
   }
@@ -227,36 +227,36 @@ router.post('/learnEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
 
-    var mailoptions = {
-      'from': process.env.MAILUSER,
-      'to': process.env.MAILUSER,
-      'subject': 'WSW Event Enquiry',
-      'text': `WSW Event Enquiry`,
-      'html':`<p>${enquiryData.name} just made an enquiry via the website.</p>
-              <p>Enquiry Details:</p>
-              <table>
-                <tr>
-                  <td>Event:</td>
-                  <td>${enquiryData.event}</td>
-                </tr>
-                <tr>
-                  <td>Name:</td>
-                  <td>${enquiryData.name}</td>
-                </tr>
-                <tr>
-                  <td>Email:</td>
-                  <td>${enquiryData.email}</td>
-                </tr>
-                <tr>
-                  <td>Message:</td>
-                  <td>${enquiryData.message}</td>
-                </tr>
-              </table>`
+    const emailDetails = {
+      subject: 'Event Enquiry',
+      content: `
+        <p>${enquiryData.name} just made an enquiry via the website.</p>
+        <p>Enquiry Details:</p>
+        <table>
+          <tr>
+            <td>Event:</td>
+            <td>${enquiryData.event}</td>
+          </tr>
+          <tr>
+            <td>Name:</td>
+            <td>${enquiryData.name}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>${enquiryData.email}</td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td>${enquiryData.message}</td>
+          </tr>
+        </table>
+      `
     };
 
-    sendEmail(mailoptions);
+    sendEmail(emailDetails)
+      .then(response => {res.status(200).json('Success')})
+      .catch(error => {res.status(500).json('Internal Server Error')})
 
-    res.status(200).json({'text': 'Success'});
   } else {
     res.status(400).json({'text': 'No form data'});
   }
@@ -266,49 +266,58 @@ router.post('/sendMessage', (req, res) => {
   if(req.body.message){
     const messageData = req.body.message;
 
-    var mailoptions = {
-      'from': process.env.MAILUSER,
-      'to': process.env.MAILUSER,
-      'subject': 'WSW Message',
-      'text': `WSW Message`,
-      'html':`<p>${messageData.name} just sent a message via the website.</p>
-              <p>Details:</p>
-              <table>
-                <tr>
-                  <td>Name:</td>
-                  <td>${messageData.name}</td>
-                </tr>
-                <tr>
-                  <td>Email:</td>
-                  <td>${messageData.email}</td>
-                </tr>
-                <tr>
-                  <td>Message:</td>
-                  <td>${messageData.message}</td>
-                </tr>
-              </table>`
+    const emailDetails = {
+      subject: 'General Enquiry',
+      content: `
+        <p>${messageData.name} just sent a message via the website.</p>
+        <p>Details:</p>
+        <table>
+          <tr>
+            <td>Name:</td>
+            <td>${messageData.name}</td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td>${messageData.email}</td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td>${messageData.message}</td>
+          </tr>
+        </table>
+      `
     };
 
-    sendEmail(mailoptions);
-
-    res.status(200).json({'text': 'Success'});
+    sendEmail(emailDetails)
+      .then(response => {res.status(200).json('Success')})
+      .catch(error => {res.status(500).json('Internal Server Error')})
   } else {
     res.status(400).json({'text': 'No form data'});
   }
 });
 
-function sendEmail(mailoptions){
-  var transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: process.env.MAILUSER,
-      pass: process.env.MAILPASS
-    }
-  });
+function sendEmail(emailDetails){
+  let newEmail = new pepipost.Send();
 
-  transporter.sendMail(mailoptions, (err, info) => {
-    if(err) throw err;
-  });
+  newEmail.from = new pepipost.From();
+  newEmail.from.email = process.env.EMAILFROM;
+  newEmail.from.name = 'Wild Spirit Website';
+  newEmail.subject = emailDetails.subject;
+
+  newEmail.content = [];
+  newEmail.content[0] = new pepipost.Content();
+  newEmail.content[0].type = pepipost.TypeEnum.HTML;
+  newEmail.content[0].value = emailDetails.content;
+
+  newEmail.personalizations = [];
+  newEmail.personalizations[0] = new pepipost.Personalizations();
+  newEmail.personalizations[0].to = [];
+  newEmail.personalizations[0].to[0] = new pepipost.EmailStruct();
+  newEmail.personalizations[0].to[0].name = 'Wild Spirit Admin';
+  newEmail.personalizations[0].to[0].email = process.env.EMAILTO;
+
+  const emailController = pepipost.MailSendController;
+  return emailController.createGeneratethemailsendrequest(newEmail);
 }
 
 module.exports = router;
