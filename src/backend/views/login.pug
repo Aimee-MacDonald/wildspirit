@@ -8,7 +8,7 @@ html(lang="en")
     title Wild Spirit | Admin Login
 
   body
-    form(action='/requestLogin', method='POST')
+    form(action='/auth/requestLogin', method='POST')
       label(for='loginEmail') Enter your email address:
       input(id='loginEmail', name='email')
       button(type='submit') Send
