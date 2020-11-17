@@ -68,7 +68,7 @@ router.get('/mailLogin', (req, res) => {
             if(err){
               res.redirect('/auth/login');
             } else {
-              res.redirect('/auth/admin');
+              res.redirect('/admin');
             }
           });
         } else {
