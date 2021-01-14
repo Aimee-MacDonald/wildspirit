@@ -6,6 +6,7 @@ import APNav from '../../components/AdminPage/APNav/APNav';
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
 import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
 import APExploreSection from '../../components/AdminPage/APExploreSection/APExploreSection';
+import APGallerySection from '../../components/AdminPage/APGallerySection/APGallerySection';
 
 export default class AdminPage extends React.Component{
   constructor(props){
@@ -14,8 +15,9 @@ export default class AdminPage extends React.Component{
     this.state = {
       activeSection: {
         live: false,
-        learn: true,
-        explore: false
+        learn: false,
+        explore: false,
+        gallery: true
       }
     }
 
@@ -30,6 +32,7 @@ export default class AdminPage extends React.Component{
         {this.state.activeSection.live && <APLiveSection />}
         {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
         {this.state.activeSection.explore && <APExploreSection addActivity={this.addActivity} />}
+        {this.state.activeSection.gallery && <APGallerySection addImage={this.addImage} />}
       </div>
     );
   }
@@ -38,7 +41,8 @@ export default class AdminPage extends React.Component{
     let newSection = {
       live: false,
       learn: false,
-      explore: false
+      explore: false,
+      gallery: false
     };
 
     newSection[section] = true;
@@ -81,5 +85,24 @@ export default class AdminPage extends React.Component{
     .then(response => response.json())
     .then(result => console.log(result))
     .catch(error => console.log(error))
+  }
+
+  addImage(e){
+    e.preventDefault();
+
+    const form = e.target;
+    const imgPac = {
+      name: form.name.value,
+      description: form.description.value,
+      url: form.url.value
+    };
+
+    fetch("/api/addImage", {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({'image': imgPac})
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
   }
 }

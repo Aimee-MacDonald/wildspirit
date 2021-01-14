@@ -277,6 +277,22 @@ router.get("/gallery", (req, res) => {
   });
 });
 
+router.post('/addImage', (req, res) => {
+  const newImage = new GalleryImage({
+    imgName: req.body.image.name,
+    imgURL: req.body.image.url,
+    imgAlt: req.body.image.description
+  });
+
+  newImage.save(error => {
+    if(error){
+      res.status(500).json("Internal Server Error");
+    } else {
+      res.status(200).json("OK");
+    }
+  });
+});
+
 router.post('/sendMessage', (req, res) => {
   if(req.body.message){
     const messageData = req.body.message;
