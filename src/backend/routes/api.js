@@ -39,73 +39,89 @@ router.get('/accommodation', (req, res) => {
 });
 
 router.post('/newAccommodation', (req, res) => {
-  const newAccommodation = new Accommodation({
-    title: req.body.accommodation.title,
-    description: req.body.accommodation.description,
-    images: req.body.accommodation.images
-  });
-
-  newAccommodation.save(err => {
-    if(err){
-      res.status(304).json('Not Modified');
-    } else {
-      res.status(201).json('Created');
-    }
-  });
+  if(req.isAuthenticated()){
+    const newAccommodation = new Accommodation({
+      title: req.body.accommodation.title,
+      description: req.body.accommodation.description,
+      images: req.body.accommodation.images
+    });
+  
+    newAccommodation.save(err => {
+      if(err){
+        res.status(304).json('Not Modified');
+      } else {
+        res.status(201).json('Created');
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.post('/editAccommodation', (req, res) => {
-  Accommodation.findById(req.body.accommodation.id, (err, doc) => {
-    if(err){
-      res.status(500).json('Database Error');
-    } else {
-      doc.title = req.body.accommodation.title;
-      doc.description = req.body.accommodation.description
-
-      doc.save(err => {
-        if(err){
-          res.status(500).json('Database Error');
-        } else {
-          res.status(200).json('Updated');
-        }
-      })
-    }
-  });
+  if(req.isAuthenticated()){
+    Accommodation.findById(req.body.accommodation.id, (err, doc) => {
+      if(err){
+        res.status(500).json('Database Error');
+      } else {
+        doc.title = req.body.accommodation.title;
+        doc.description = req.body.accommodation.description
+  
+        doc.save(err => {
+          if(err){
+            res.status(500).json('Database Error');
+          } else {
+            res.status(200).json('Updated');
+          }
+        })
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.post('/addAccommodationImage', (req, res) => {
-  Accommodation.findById(req.body.accommodationID, (err, doc) => {
-    if(err){
-      res.status(500).json('Database Error');
-    } else {
-      doc.images.push(req.body.imageData);
-      doc.save(err => {
-        if(err){
-          res.status(500).json('Database Error');
-        } else {
-          res.status(201).json('Created');
-        }
-      });
-    }
-  });
+  if(req.isAuthenticated()){
+    Accommodation.findById(req.body.accommodationID, (err, doc) => {
+      if(err){
+        res.status(500).json('Database Error');
+      } else {
+        doc.images.push(req.body.imageData);
+        doc.save(err => {
+          if(err){
+            res.status(500).json('Database Error');
+          } else {
+            res.status(201).json('Created');
+          }
+        });
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.post('/event', (req, res) => {
-  const newEvent = new Event({
-    imgURL: req.body.event.imgURL,
-    imgAlt: req.body.event.imgAlt,
-    title: req.body.event.title,
-    subtitle: req.body.event.subtitle,
-    description: req.body.event.description
-  });
-
-  newEvent.save(err => {
-    if(err){
-      res.status(304).json('Not Modified');
-    } else {
-      res.status(201).json('Created');
-    }
-  });
+  if(req.isAuthenticated()){
+    const newEvent = new Event({
+      imgURL: req.body.event.imgURL,
+      imgAlt: req.body.event.imgAlt,
+      title: req.body.event.title,
+      subtitle: req.body.event.subtitle,
+      description: req.body.event.description
+    });
+  
+    newEvent.save(err => {
+      if(err){
+        res.status(304).json('Not Modified');
+      } else {
+        res.status(201).json('Created');
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.get('/events', (req, res) => {
@@ -121,20 +137,24 @@ router.get('/events', (req, res) => {
 });
 
 router.post('/activity', (req, res) => {
-  const newActivity = new Activity({
-    category: req.body.activity.category,
-    name: req.body.activity.name,
-    description: req.body.activity.description,
-    image: req.body.activity.image
-  });
-
-  newActivity.save(err => {
-    if(err){
-      res.status(304).json('Not Modified');
-    } else {
-      res.status(201).json('Created');
-    }
-  });
+  if(req.isAuthenticated()){
+    const newActivity = new Activity({
+      category: req.body.activity.category,
+      name: req.body.activity.name,
+      description: req.body.activity.description,
+      image: req.body.activity.image
+    });
+  
+    newActivity.save(err => {
+      if(err){
+        res.status(304).json('Not Modified');
+      } else {
+        res.status(201).json('Created');
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.get('/activities', (req, res) => {
@@ -278,19 +298,23 @@ router.get("/gallery", (req, res) => {
 });
 
 router.post('/addImage', (req, res) => {
-  const newImage = new GalleryImage({
-    imgName: req.body.image.name,
-    imgURL: req.body.image.url,
-    imgAlt: req.body.image.description
-  });
-
-  newImage.save(error => {
-    if(error){
-      res.status(500).json("Internal Server Error");
-    } else {
-      res.status(200).json("OK");
-    }
-  });
+  if(req.isAuthenticated()){
+    const newImage = new GalleryImage({
+      imgName: req.body.image.name,
+      imgURL: req.body.image.url,
+      imgAlt: req.body.image.description
+    });
+  
+    newImage.save(error => {
+      if(error){
+        res.status(500).json("Internal Server Error");
+      } else {
+        res.status(200).json("OK");
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
 });
 
 router.post('/sendMessage', (req, res) => {
