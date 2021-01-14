@@ -9,6 +9,7 @@ pepipost.Configuration.apiKey = process.env.EMAILKEY;
 const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
 const Activity = require(path.join(__dirname, '../dbmodels/Activity.js'));
+const GalleryImage = require(path.join(__dirname, '../dbmodels/GalleryImage.js'));
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -260,6 +261,20 @@ router.post('/learnEnquiry', (req, res) => {
   } else {
     res.status(400).json({'text': 'No form data'});
   }
+});
+
+router.get("/gallery", (req, res) => {
+  GalleryImage.find({}, (err, docs) => {
+    if(err){
+      res.status(500).json("Internal Server Error");
+    } else if(docs.length < 1){
+      res.status(404).json("Not Found");
+    } else {
+      res.status(200).json({
+        images: docs
+      });
+    }
+  });
 });
 
 router.post('/sendMessage', (req, res) => {

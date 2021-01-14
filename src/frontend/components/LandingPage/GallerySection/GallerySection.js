@@ -27,11 +27,11 @@ export default class GallerySection extends React.Component{
   }
 
   componentDidMount(){
-    this.setState(() => ({images: [
-      {
-        imgName: "Image 1",
-        imgURL: "https://s27389.pcdn.co/wp-content/uploads/2018/01/AdobeStock_171462504-1024x576.jpeg"
-      }
-    ]}));
+    fetch('/api/gallery')
+      .then(res => res.json())
+      .then(result => {
+        this.setState(() => ({images: result.images}));
+      })
+      .catch(error => console.log(error));
   }
 }
