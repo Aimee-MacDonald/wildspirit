@@ -317,6 +317,21 @@ router.post('/addImage', (req, res) => {
   }
 });
 
+router.post('/removeImage', (req, res) => {
+  if(req.isAuthenticated()){
+    GalleryImage.deleteOne({'_id': req.body.imgID}, error => {
+      if(error){
+        res.status(409).json('Conflict');
+        console.log(error);
+      } else {
+        res.status(200).json('OK');
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
+})
+
 router.post('/sendMessage', (req, res) => {
   if(req.body.message){
     const messageData = req.body.message;
