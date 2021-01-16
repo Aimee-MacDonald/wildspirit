@@ -283,7 +283,7 @@ router.post('/learnEnquiry', (req, res) => {
   }
 });
 
-router.get("/gallery", (req, res) => {
+router.post("/gallery", (req, res) => {
   GalleryImage.find({}, (err, docs) => {
     if(err){
       res.status(500).json("Internal Server Error");
@@ -294,7 +294,7 @@ router.get("/gallery", (req, res) => {
         images: docs
       });
     }
-  });
+  }).skip(parseInt(req.body.page) * 6).limit(6);
 });
 
 router.post('/addImage', (req, res) => {
