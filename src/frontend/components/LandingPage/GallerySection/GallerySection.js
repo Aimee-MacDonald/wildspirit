@@ -7,7 +7,8 @@ export default class GallerySection extends React.Component{
     super(props);
 
     this.state = {
-      page: 0
+      page: 0,
+      galleryFull: false
     };
 
     this.loadMoreImages = this.loadMoreImages.bind(this);
@@ -25,7 +26,8 @@ export default class GallerySection extends React.Component{
             </li>
           ))}
         </ul>
-        <button onClick={this.loadMoreImages}>See More</button>
+
+        {!this.state.galleryFull && <button onClick={this.loadMoreImages}>See More</button>}
       </div>
     );
   }
@@ -48,13 +50,17 @@ export default class GallerySection extends React.Component{
     fetch('/api/gallery', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'page': page})
+      body: JSON.stringify({'skip': page, 'limit': 6})
     }).then(res => res.json())
       .then(result => {
-        this.setState(prevState => ({
-          page: page,
-          images: prevState.images.concat(result.images)
-        }));
+        if(result !== 'Not Found'){
+          this.setState(prevState => ({
+            page: page,
+            images: prevState.images.concat(result.images)
+          }));
+        } else {
+          this.setState(() => ({galleryFull: true}))
+        }
       })
       .catch(error => console.log(error));
   }
