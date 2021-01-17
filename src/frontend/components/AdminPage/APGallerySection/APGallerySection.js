@@ -35,12 +35,12 @@ export default class APGallerySection extends React.Component{
         </form>
 
         {this.state.images && <ul>
-          {this.state.images.map(image => (
-            <li>
+          {this.state.images.map((image, index) => (
+            <li key={`galleryImage_${index}`}>
               <button onClick={this.removeImage}>Remove</button>
               <img src={image.imgURL} alt={image.imgAlt} />
               <p>{image.imgName}</p>
-              <input value={image._id} hidden />
+              <input value={image._id} hidden readOnly />
             </li>
           ))}
         </ul>}
@@ -49,8 +49,11 @@ export default class APGallerySection extends React.Component{
   }
 
   componentDidMount(){
-    fetch('/api/gallery')
-      .then(res => res.json())
+    fetch('/api/gallery', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({skip: 0, limit: 0})
+    }).then(res => res.json())
       .then(result => {
         this.setState(() => ({images: result.images}))
       })

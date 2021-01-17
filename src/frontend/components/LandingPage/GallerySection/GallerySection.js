@@ -34,7 +34,7 @@ export default class GallerySection extends React.Component{
     fetch('/api/gallery', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'page': this.state.page})
+      body: JSON.stringify({'skip': this.state.page, 'limit': 6})
     }).then(res => res.json())
       .then(result => {
         this.setState(() => ({images: result.images}));

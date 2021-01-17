@@ -284,6 +284,9 @@ router.post('/learnEnquiry', (req, res) => {
 });
 
 router.post("/gallery", (req, res) => {
+  const pageSkip = req.body.skip || 0;
+  const pageLimit = req.body.limit || 0;
+
   GalleryImage.find({}, (err, docs) => {
     if(err){
       res.status(500).json("Internal Server Error");
@@ -294,7 +297,7 @@ router.post("/gallery", (req, res) => {
         images: docs
       });
     }
-  }).skip(parseInt(req.body.page) * 6).limit(6);
+  }).skip(parseInt(pageSkip) * pageLimit).limit(pageLimit);
 });
 
 router.post('/addImage', (req, res) => {
