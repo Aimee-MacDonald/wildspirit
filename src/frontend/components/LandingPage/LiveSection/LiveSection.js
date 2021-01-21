@@ -16,7 +16,7 @@ export default class LiveSection extends React.Component{
       selectedOption: -1,
       photosActive: false,
       enquiryActive: false,
-      selectedPhoto: 1
+      selectedPhoto: 0
     }
 
     this.activateOption = this.activateOption.bind(this);
