@@ -1,4 +1,5 @@
 import React from 'react';
+import {FacebookShareButton, FacebookIcon} from 'react-share';
 
 import './LearnOptionInfo.sass';
 
@@ -12,8 +13,13 @@ const LearnOptionInfo = props => (
     <p className='learnInfoDescription'>{props.description}</p>
 
     <div className='learnInfoControls'>
-      <button onClick={props.showEnquiry}>Book</button>
-      <div class="fb-share-button" data-href="https://wildspiritlodge.herokuapp.com/#LearnSection" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwildspiritlodge.herokuapp.com%2F%23LearnSection&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+      <button className='learnOptionBookButton' onClick={props.showEnquiry}>Book</button>
+      <FacebookShareButton
+        url={'https://wildspiritlodge.herokuapp.com/#LearnSection'}
+        quote={`${props.title}: ${props.subtitle}`}
+        hashtag='#wildspirit'>
+          <FacebookIcon size={36} />
+      </FacebookShareButton>
     </div>
   </div>
 );
