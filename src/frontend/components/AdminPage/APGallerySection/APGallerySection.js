@@ -6,7 +6,9 @@ export default class APGallerySection extends React.Component{
   constructor(props){
     super(props);
 
-    this.state = {};
+    this.state = {
+      images: []
+    };
 
     this.addImage = this.addImage.bind(this);
     this.removeImage = this.removeImage.bind(this);
@@ -16,22 +18,15 @@ export default class APGallerySection extends React.Component{
     return(
       <div id="APGallerySection">
         <form onSubmit={this.addImage}>
-          <div>
-            <label htmlFor="name">Image Name:</label>
-            <input id="name" placeholder="Image Name" />
-          </div>
+          <input type='file' name='image' required />
 
-          <div>
-            <label htmlFor="description">Image Description:</label>
-            <input id="description" placeholder="Image Description" />
-          </div>
+          <label htmlFor='name'>Image name:</label>
+          <input name='name' id='name' required />
 
-          <div>
-            <label htmlFor="url">Image URL:</label>
-            <input id="url" placeholder="Image URL" />
-          </div>
-          
-          <button type="submit">Add Image</button>
+          <label htmlFor='description'>Image description:</label>
+          <textarea name='description' id='description' required />
+
+          <button type='submit'>Upload</button>
         </form>
 
         {this.state.images && <ul>
@@ -41,6 +36,7 @@ export default class APGallerySection extends React.Component{
               <img src={image.imgURL} alt={image.imgAlt} />
               <p>{image.imgName}</p>
               <input value={image._id} hidden readOnly />
+              <input value={image.cloudID} hidden readOnly/>
             </li>
           ))}
         </ul>}
@@ -62,42 +58,29 @@ export default class APGallerySection extends React.Component{
 
   addImage(e){
     e.preventDefault();
-
-    const form = e.target;
-    const imgPac = {
-      name: form.name.value,
-      description: form.description.value,
-      url: form.url.value
-    };
-
-    fetch("/api/addImage", {
+    
+    fetch('/api/addImage', {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'image': imgPac})
+      body: new FormData(e.target)
     }).then(res => res.json())
       .then(result => {
-        this.setState(prevState => {
-          let images = prevState.images;
-          
-          images = images.concat({
-            imgAlt: imgPac.description,
-            imgName: imgPac.name,
-            imgURL: imgPac.url
-          });
-          
-          return {images: images};
-        });
+        if(this.state.images){
+          this.setState(prevState => ({images: prevState.images.concat(result)}));
+        } else {
+          this.setState(() => ({images: [result]}));
+        }
       })
       .catch(error => console.log(error))
   }
 
   removeImage(e){
     const imgID = e.target.parentElement.childNodes[3].value;
-    
+    const cloudID = e.target.parentElement.childNodes[4].value;
+
     fetch("/api/removeImage", {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'imgID': imgID})
+      body: JSON.stringify({'imgID': imgID, 'cloudID': cloudID})
     }).then(res => res.json())
       .then(result => this.setState(prevState => ({images: prevState.images.filter(image => (image._id != imgID))})))
       .catch(error => console.log(error))

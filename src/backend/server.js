@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const session = require("express-session");
 const pepipost = require('pepipost');
+const fileupload = require("express-fileupload");
+const cloudinary = require("cloudinary").v2;
 
 const apiRoute = require(path.join(__dirname, "/routes/api"));
 const authRoute = require(path.join(__dirname, "/routes/auth"));
@@ -35,6 +37,16 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(fileupload({
+  useTempFiles: true
+}));
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET
+});
 
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use("/api", apiRoute);

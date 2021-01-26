@@ -3,6 +3,7 @@ const router = express.Router();
 const axios = require('axios');
 const path = require('path');
 const pepipost = require('pepipost');
+const cloudinary = require("cloudinary").v2;
 
 pepipost.Configuration.apiKey = process.env.EMAILKEY;
 
@@ -302,17 +303,26 @@ router.post("/gallery", (req, res) => {
 
 router.post('/addImage', (req, res) => {
   if(req.isAuthenticated()){
-    const newImage = new GalleryImage({
-      imgName: req.body.image.name,
-      imgURL: req.body.image.url,
-      imgAlt: req.body.image.description
-    });
-  
-    newImage.save(error => {
+    const file = req.files.image;
+
+    cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
       if(error){
         res.status(500).json("Internal Server Error");
       } else {
-        res.status(200).json("OK");
+        const newImage = new GalleryImage({
+          imgName: req.body.name,
+          imgAlt: req.body.description,
+          imgURL: result.secure_url,
+          cloudID: result.public_id
+        });
+
+        newImage.save((error, result) => {
+          if(error){
+            res.status(500).json("Internal Server Error");
+          } else {
+            res.status(200).json(result);
+          }
+        });
       }
     });
   } else {
@@ -322,18 +332,23 @@ router.post('/addImage', (req, res) => {
 
 router.post('/removeImage', (req, res) => {
   if(req.isAuthenticated()){
-    GalleryImage.deleteOne({'_id': req.body.imgID}, error => {
+    cloudinary.api.delete_resources([req.body.cloudID], (error, result) => {
       if(error){
-        res.status(409).json('Conflict');
-        console.log(error);
+        res.status(500).json("Internal Server Error");
       } else {
-        res.status(200).json('OK');
+        GalleryImage.deleteOne({'_id': req.body.imgID}, error => {
+          if(error){
+            res.status(409).json('Conflict');
+          } else {
+            res.status(200).json('OK');
+          }
+        });
       }
     });
   } else {
     res.status(403).json('Forbidden');
   }
-})
+});
 
 router.post('/sendMessage', (req, res) => {
   if(req.body.message){
