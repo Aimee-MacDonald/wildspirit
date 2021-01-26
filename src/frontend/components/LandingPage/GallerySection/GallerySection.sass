@@ -1,4 +1,5 @@
 @import "../../../vars"
+@import "../../../mixins"
   
 #GallerySection
   display: flex
@@ -6,6 +7,19 @@
   align-items: center
   max-width: $section-max-width
   background-color: $light-green
+  padding: 0 0 2rem 0
+  p
+    text-align: center
+    font-family: 'Montserrat-Regular'
+    font-size: 26pt
+    padding: 4rem 0 2rem 0
+    @include breakpoint(tablet_portrait)
+      padding: 8rem 0 4rem 0
+    em
+      font-weight: bold
+      color: $medium-green
+      text-shadow: 0.2rem 0.2rem 0.2rem $dark-green
+      padding: 0.2rem
   ul
     margin: 0 4rem
     display: flex
@@ -17,6 +31,15 @@
       display: flex
       flex-flow: nowrap column
       align-items: center
+      background-color: $dark-green
+      border-radius: 1rem
+      p
+        margin: 0
+        padding: 0.8rem 0
+        font-size: 18pt
+        color: $light-green
       img
-        border-radius: 0.5rem
+        border-radius: 1rem
         width: 20rem
+  button
+    @include button_dark

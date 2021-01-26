@@ -17,7 +17,7 @@ export default class GallerySection extends React.Component{
   render(){
     return(
       <div id="GallerySection">
-        <h1>Gallery</h1>
+        <p>Gallery</p>
         <ul>
           {this.state.images && this.state.images.map((image, c) => (
             <li key={`galleryImage_${c}`}>
