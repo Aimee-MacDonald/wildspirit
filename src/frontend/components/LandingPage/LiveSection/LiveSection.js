@@ -59,6 +59,7 @@ export default class LiveSection extends React.Component{
             makeEnquiry={this.makeEnquiry}
             enquiringActive={this.state.enquiringActive}
             enquirySuccess={this.state.enquirySuccess}
+            photos={this.state.accommodationOptions[this.state.selectedOption].images}
           />
         }
       </div>

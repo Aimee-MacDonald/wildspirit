@@ -17,6 +17,8 @@ const AccommodationDetails = props => (
       showEnquiry={props.showEnquiry}
       photosActive={props.photosActive}
       enquiryActive={props.enquiryActive}
+      photos={props.photos}
+      selectedPhoto={props.selectedPhoto}
     />
 
     {props.photosActive &&

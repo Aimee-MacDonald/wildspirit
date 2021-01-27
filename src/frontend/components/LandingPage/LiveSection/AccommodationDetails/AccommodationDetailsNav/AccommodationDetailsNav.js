@@ -18,8 +18,14 @@ const AccommodationDetailsNav = props => (
 
     {!props.enquiryActive &&
       <div id='imageNav'>
-        <button onClick={props.showPreviousPhoto}>Prev</button>
-        <button onClick={props.showNextPhoto}>Next</button>
+        <button className='left' onClick={props.showPreviousPhoto}></button>
+        {props.photos.map((photo, index) => (
+          <span
+            key={`indicator_${index}`}
+            className={props.selectedPhoto === index ? 'active' : 'inactive'}
+          ></span>
+        ))}
+        <button className='right' onClick={props.showNextPhoto}></button>
       </div>
     }
   </div>
