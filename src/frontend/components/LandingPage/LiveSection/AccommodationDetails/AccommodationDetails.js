@@ -32,6 +32,27 @@ const AccommodationDetails = props => (
         makeEnquiry={props.makeEnquiry}
       />
     }
+
+    {props.enquiringActive &&
+      <div className='enquiring'>
+        <div className='spinner'><div></div></div>
+        <h1>Loading</h1>
+      </div>
+    }
+
+    {props.enquirySuccess === 1 &&
+      <div className='enquiryResponse'>
+        <h1>Success</h1>
+        <p>Thank you for your enquiry, we will respond to you as soon as possible.</p>
+      </div>
+    }
+
+    {props.enquirySuccess === -1 &&
+      <div className='enquiryResponse'>
+        <h1>Failed</h1>
+        <p>An error occured, please check your connection and try again.</p>
+      </div>
+    }
   </div>
 );
 

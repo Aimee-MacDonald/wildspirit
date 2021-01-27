@@ -15,8 +15,10 @@ export default class LiveSection extends React.Component{
       activatedOption: -1,
       selectedOption: -1,
       photosActive: false,
+      selectedPhoto: 0,
       enquiryActive: false,
-      selectedPhoto: 0
+      enquiringActive: false,
+      enquirySuccess: 0
     }
 
     this.activateOption = this.activateOption.bind(this);
@@ -24,6 +26,7 @@ export default class LiveSection extends React.Component{
     this.closeDetails = this.closeDetails.bind(this);
     this.showPhotos = this.showPhotos.bind(this);
     this.showEnquiry = this.showEnquiry.bind(this);
+    this.makeEnquiry = this.makeEnquiry.bind(this);
     this.showNextPhoto = this.showNextPhoto.bind(this);
     this.showPreviousPhoto = this.showPreviousPhoto.bind(this);
   }
@@ -54,6 +57,8 @@ export default class LiveSection extends React.Component{
             showNextPhoto={this.showNextPhoto}
             showPreviousPhoto={this.showPreviousPhoto}
             makeEnquiry={this.makeEnquiry}
+            enquiringActive={this.state.enquiringActive}
+            enquirySuccess={this.state.enquirySuccess}
           />
         }
       </div>
@@ -83,21 +88,27 @@ export default class LiveSection extends React.Component{
   closeDetails(){
     this.setState(()=>({
       activatedOption: -1,
-      selectedOption: -1
+      selectedOption: -1,
+      enquiringActive: false,
+      enquirySuccess: 0
     }));
   }
 
   showPhotos(){
     this.setState(()=>({
       photosActive: true,
-      enquiryActive: false
+      enquiryActive: false,
+      enquiringActive: false,
+      enquirySuccess: 0
     }));
   }
 
   showEnquiry(){
     this.setState(()=>({
       photosActive: false,
-      enquiryActive: true
+      enquiryActive: true,
+      enquiringActive: false,
+      enquirySuccess: 0
     }));
   }
 
@@ -127,6 +138,8 @@ export default class LiveSection extends React.Component{
   makeEnquiry(event){
     event.preventDefault();
 
+    this.setState(prevState => ({enquiryActive: false, enquiringActive: true}));
+
     let formData = {
       'accommodationType': event.target.accommodationType.value,
       'name': event.target.ae_name.value,
@@ -144,7 +157,13 @@ export default class LiveSection extends React.Component{
       body: JSON.stringify({'enquiry': formData})
     })
     .then(response => response.json())
-    .then(result => console.log(result))
+    .then(result => {
+      if(result === 'Success'){
+        this.setState(prevState => ({enquiringActive: false, enquirySuccess: 1}));
+      } else {
+        this.setState(prevState => ({enquiringActive: false, enquirySuccess: -1}));
+      }
+    })
     .catch(error => console.log(error))
   }
 }
