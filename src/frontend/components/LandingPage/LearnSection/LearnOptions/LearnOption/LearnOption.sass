@@ -1,18 +1,132 @@
-@import '../../../../../vars'
 @import '../../../../../mixins'
-  
-.LearnOption
-  background-color: $medium-green
-  margin-top: 1rem
+@import '../../../../../vars'
+
+#LearnOption
   display: flex
   flex-flow: nowrap column
+  background-color: $medium-green
+  margin-top: 2rem
+  width: 80%
   border-radius: 1rem
+  box-shadow: 0 0.4rem 0.8rem 0.2rem $dark-green
+  .imageArea
+    background-position: center center
+    background-size: cover
+    width: 100%
+    height: 100%
+    min-height: 20rem
+    border-top-left-radius: 1rem
+    border-top-right-radius: 1rem
+  .enquiryArea
+    display: flex
+    flex-flow: nowrap column
+    justify-content: center
+    padding: 0 2rem
+    .enquiryDetails
+      display: flex
+      flex-flow: nowrap column
+      h1
+        font-family: 'Montserrat-Regular'
+        text-decoration: underline
+      h2
+        font-family: 'Montserrat-Regular'
+        margin-top: 0.5rem
+      p
+        font-family: 'Roboto'
+        margin-top: 1rem
+      .enquiryButtons
+        display: flex
+        flex-flow: nowrap row
+        justify-content: space-between
+        align-items: center
+        margin-top: 1rem
+        .enquire
+          @include button_dark
+          margin-bottom: 1rem
+    .enquiryForm
+      display: flex
+      flex-flow: nowrap column
+      label
+        font-family: 'Roboto'
+        padding: 0.5rem
+      input
+        font-family: 'Roboto'
+        margin-bottom: 1rem
+        background-color: $light-green
+        border-radius: 0.2rem
+        padding: 0.5rem
+      textarea
+        font-family: 'Roboto'
+        background-color: $light-green
+        border-radius: 0.2rem
+      .LOEButtons
+        display: flex
+        flex-flow: nowrap row
+        justify-content: space-evenly
+        button
+          @include button_dark
+          padding: 0.2rem 0.4rem
+          margin-bottom: 1rem
+    .enquiryLoading
+      display: flex
+      flex-flow: nowrap column
+      justify-content: center
+      align-items: center
+      .spinner
+        width: 3rem
+        height: 3rem
+        border-radius: 50%
+        display: flex
+        justify-content: center
+        align-items: center
+        background: conic-gradient(from 0 at 50% 50%, $light-green, $medium-green)
+        animation: spin 0.8s infinite linear
+        div
+          background-color: $medium-green
+          width: 2rem
+          height: 2rem
+          border-radius: 50%
+      h1
+        font-family: 'Montserrat-Regular'
+        margin-top: 2rem
+    .enquirySuccess
+      display: flex
+      flex-flow: nowrap column
+      justify-content: center
+      align-items: center
+      h1
+        font-family: 'Montserrat-Regular'
+        text-decoration: underline
+      p
+        font-family: 'Roboto'
+        max-width: 15rem
+        text-align: center
+        margin-top: 2rem
+    .enquiryFail
+      display: flex
+      flex-flow: nowrap column
+      justify-content: center
+      align-items: center
+      h1
+        font-family: 'Montserrat-Regular'
+        text-decoration: underline
+      p
+        font-family: 'Roboto'
+        max-width: 15rem
+        text-align: center
+        margin-top: 2rem
   @include breakpoint(tablet_portrait)
     flex-flow: nowrap row
-    align-items: center
-    max-width: 70rem
-    width: 100%
-    max-height: 20rem
-    overflow: hidden
-    box-shadow: 0 0.5rem 1rem $dark-green
-    margin-bottom: 2rem
+    .imageArea
+      width: 50%
+      border-top-right-radius: 0
+      border-bottom-left-radius: 1rem
+    .enquiryArea
+      width: 50%
+
+@keyframes spin
+  from
+    transform: rotateZ(0deg)
+  
+  to
+    transform: rotateZ(360deg)

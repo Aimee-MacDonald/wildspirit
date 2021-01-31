@@ -9,25 +9,22 @@ export default class LearnOptions extends React.Component{
     super(props);
 
     this.state = {
-      options: []
+      events: []
     };
+
+    this.sendEnquiry = this.sendEnquiry.bind(this);
   }
 
   render(){
     return(
       <div id='LearnOptions'>
-        {this.state.options.map((option, index) => (
+        {this.state.events.map((ev, i) => (
           <LearnOption
-            key={option.title}
-            imgURL={option.imgURL}
-            imgAlt={option.imgAlt}
-            title={option.title}
-            subtitle={option.subtitle}
-            description={option.description}
-            enquiryOpen={option.enquiryOpen}
-            showEnquiry={() => {this.showEnquiry(index)}}
-            hideEnquiry={() => {this.hideEnquiry(index)}}
-            makeEnquiry={this.makeEnquiry}
+            key={`event_${i}`}
+            eventDetails={ev}
+            showEnquiryForm={() => this.showEnquiryForm(i)}
+            sendEnquiry={(e) => this.sendEnquiry(e, i)}
+            reset={(e) => this.reset(i)}
           />
         ))}
       </div>
@@ -37,59 +34,109 @@ export default class LearnOptions extends React.Component{
   componentDidMount(){
     fetch('/api/events')
       .then(res => res.json())
-      .then(result => {
-        if(result !== 'Not Found'){
-          let options = [];
-        
-          result.forEach(option => {
-            options.push({
-              imgURL: option.imgURL,
-              imgAlt: option.imgAlt,
-              title: option.title,
-              subtitle: option.subtitle,
-              description: option.description,
-              enquiryOpen: false
-            });
-          });
+      .then(result => this.setState(() => {
+        let events = result;
 
-          this.setState(() => ({options: options}));
-        }
-      });
+        events.forEach(ev => {
+          ev.enquiryDetails = true;
+          ev.enquiryForm = false;
+          ev.enquiryLoading = false;
+          ev.enquirySuccess = false;
+          ev.enquiryFail = false;
+        });
+
+        return {events}
+      }))
+      .catch(error => console.log(error))
   }
 
-  showEnquiry(optionIndex){
+  showEnquiryForm(index){
     this.setState(prevState => {
-      let newState = prevState;
-      newState.options[optionIndex].enquiryOpen = true;
-      return newState;
+      let events = prevState.events;
+      
+      events[index].enquiryDetails = false;
+      events[index].enquiryForm = true;
+      events[index].enquiryLoading = false;
+      events[index].enquirySuccess = false;
+      events[index].enquiryFail = false;
+
+      return {events};
     });
   }
 
-  hideEnquiry(optionIndex){
+  sendEnquiry(e, index){
+    e.preventDefault();
+
     this.setState(prevState => {
-      let newState = prevState;
-      newState.options[optionIndex].enquiryOpen = false;
-      return newState;
+      let events = prevState.events;
+      
+      events[index].enquiryDetails = false;
+      events[index].enquiryForm = false;
+      events[index].enquiryLoading = true;
+      events[index].enquirySuccess = false;
+      events[index].enquiryFail = false;
+
+      return {events};
     });
-  }
-
-  makeEnquiry(event){
-    event.preventDefault();
-
-    const formData = {
-      'event': event.target.LOEEvent.value,
-      'name': event.target.LOEName.value,
-      'email': event.target.LOEEmail.value,
-      'message': event.target.LOEMessage.value
-    };
-
+    
     fetch('/api/learnEnquiry', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'enquiry': formData})
-    })
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
+      body: JSON.stringify({'enquiry': new FormData(e.target)})
+    }).then(res => res.json())
+      .then(result => {
+        if(result === 'Success'){
+          this.setState(prevState => {
+            let events = prevState.events;
+            
+            events[index].enquiryDetails = false;
+            events[index].enquiryForm = false;
+            events[index].enquiryLoading = false;
+            events[index].enquirySuccess = true;
+            events[index].enquiryFail = false;
+      
+            return {events};
+          });
+        } else {
+          this.setState(prevState => {
+            let events = prevState.events;
+            
+            events[index].enquiryDetails = false;
+            events[index].enquiryForm = false;
+            events[index].enquiryLoading = false;
+            events[index].enquirySuccess = false;
+            events[index].enquiryFail = true;
+      
+            return {events};
+          });
+        }
+      })
+      .catch(error => {
+        this.setState(prevState => {
+          let events = prevState.events;
+          
+          events[index].enquiryDetails = false;
+          events[index].enquiryForm = false;
+          events[index].enquiryLoading = false;
+          events[index].enquirySuccess = false;
+          events[index].enquiryFail = true;
+    
+          return {events};
+        });
+      })
+  }
+
+  reset(index){
+    this.setState(prevState => {
+      let events = prevState.events;
+      
+      events[index].enquiryDetails = true;
+      events[index].enquiryForm = false;
+      events[index].enquiryLoading = false;
+      events[index].enquirySuccess = false;
+      events[index].enquiryFail = false;
+
+      return {events};
+    });
   }
 }

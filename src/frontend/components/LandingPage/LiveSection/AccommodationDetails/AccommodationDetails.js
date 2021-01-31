@@ -51,7 +51,7 @@ const AccommodationDetails = props => (
 
     {props.enquirySuccess === -1 &&
       <div className='enquiryResponse'>
-        <h1>Failed</h1>
+        <h1>Enquiry Failed</h1>
         <p>An error occured, please check your connection and try again.</p>
       </div>
     }
