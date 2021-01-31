@@ -12,7 +12,7 @@ const AccommodationOptions = props => (
         onMouseLeave={() => {props.activateOption(-1)}}
         style={{'backgroundImage': `url('${props.accommodationOptions[index].images[0].srcLink}')`}}>
 
-        <p>{option.title}</p>
+        <p className='title'>{option.title}</p>
         {props.activatedOption === index &&
           <div>
             <p className={'accommodationDescription'}>{option.description}</p>
