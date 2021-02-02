@@ -22,7 +22,6 @@ export default class LandingPage extends React.Component{
         <LiveSection />
         <ParallaxSection />
         <LearnSection />
-        <ExploreSection />
         <GallerySection />
         <ContactSection />
       </div>
