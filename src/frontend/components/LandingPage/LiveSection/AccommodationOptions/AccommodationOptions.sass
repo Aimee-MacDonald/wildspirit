@@ -1,61 +1,56 @@
-@import '../../../../vars'
 @import '../../../../mixins'
-  
+@import '../../../../vars'
+
 #AccommodationOptions
+  width: 100%
   display: flex
   flex-flow: nowrap column
-  width: 100%
-  margin-top: 1rem
-  @include breakpoint(tablet_portrait)
-    flex-flow: wrap row
-    justify-content: space-between
-    align-content: space-around
-    width: 80%
-    height: 37rem
-    margin-top: 2rem
   .accommodationOption
-    background-position: center center
-    background-size: cover
+    min-height: 8rem
+    margin: 0.2rem 0.4rem
     display: flex
     flex-flow: nowrap column
     justify-content: space-evenly
     align-items: center
-    font-family: Montserrat-Regular
-    font-size: 20pt
-    text-align: center
-    padding: 1rem
     position: relative
+    background-position: center center
+    background-size: cover
+    background-repeat: no-repeat
+    border: 2px solid $light-green
+    border-radius: 0.4rem
+    color: $light-green
     &:after
-      background-color: transparentize($light-green, 0.3)
-      content: ""
-      display: inline-block
+     content: ''
+     background-color: transparentize($medium-green, 0.4)
+     width: 100%
+     height: 100%
+     position: absolute
+     z-index: 1
+    .title
+      position: absolute
+      z-index: 2
+      font-family: 'Montserrat'
+      font-size: 24pt
+      text-decoration: underline
+    .activatedOption
+      position: absolute
+      z-index: 2
       width: 100%
       height: 100%
-      position: absolute
-      z-index: -1
-    .title
-      color: $dark-green
-      background-color: $light-green
-      box-shadow: 0 0 1rem 1rem $light-green
-      text-decoration: underline
-      font-weight: bold
-    @include breakpoint(tablet_portrait)
-      width: 27%
-      height: 15rem
-      border-radius: 0.5rem
-      box-shadow: 0 0.5rem 1rem $dark-green
-      transition: 0.2s
-      margin-top: 4rem
-      &:hover
-        transform: translateY(-0.5rem)
-        box-shadow: 0 1rem 1rem $dark-green
-        .title
-          color: $dark-green
-          background-color: transparent
-          box-shadow: none
-    .accommodationDescription
-      font-family: Roboto-Bold
-      font-size: 14pt
-    button
-      @include button_light
-      margin-top: 2.8rem
+      display: flex
+      flex-flow: nowrap column
+      justify-content: space-evenly
+      align-items: center
+      font-family: 'Roboto'
+      font-size: 16pt
+      button
+        @include button_dark
+        padding: 0.4rem 0.8rem
+  @include breakpoint(tablet_portrait)
+    flex-flow: wrap row
+    justify-content: space-between
+    width: 80%
+    .accommodationOption
+      min-width: 20rem
+      min-height: 15rem
+      border: 4px solid $light-green

@@ -12,9 +12,12 @@ const AccommodationOptions = props => (
         onMouseLeave={() => {props.activateOption(-1)}}
         style={{'backgroundImage': `url('${props.accommodationOptions[index].images[0].srcLink}')`}}>
 
-        <p className='title'>{option.title}</p>
+        {props.activatedOption !== index &&
+          <p className='title'>{option.title}</p>
+        }
+
         {props.activatedOption === index &&
-          <div>
+          <div className='activatedOption'>
             <p className={'accommodationDescription'}>{option.description}</p>
             <button onClick={()=>{props.selectOption(index)}}>View</button>
           </div>
