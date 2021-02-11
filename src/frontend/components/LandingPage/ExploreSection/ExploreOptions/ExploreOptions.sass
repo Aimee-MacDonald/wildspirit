@@ -1,21 +1,33 @@
-@import '../../../../vars'
 @import '../../../../mixins'
-
+@import '../../../../vars'
+  
 #ExploreOptions
   display: flex
   flex-flow: nowrap column
   width: 100%
-  @include breakpoint(tablet_landscape)
-    flex-flow: wrap row
-    justify-content: space-between
-    width: 80%
-    margin: 2rem 0 4rem 0
+  align-items: center
   .exploreCategory
-    background-color: $medium-green
-    text-align: center
-    padding: 1rem
-    font-family: 'Montserrat-Regular'
+    margin-bottom: 1rem
     cursor: pointer
-    @include breakpoint(tablet_landscape)
-      padding: 1rem 3rem
-      margin-top: 1rem
+    .categoryImage
+      background-color: lime
+      width: 16rem
+      height: 16rem
+      border-top-right-radius: 1rem
+      border-top-left-radius: 1rem
+    .categoryName
+      background-color: orangered
+      text-align: center
+      padding: 0.4rem
+      border-bottom-right-radius: 1rem
+      border-bottom-left-radius: 1rem
+  @include breakpoint(tablet_portrait)
+    flex-flow: wrap row
+    width: 80%
+    justify-content: space-between
+    .exploreCategory
+      margin-bottom: 2rem
+      .categoryImage
+        width: 18rem
+      .categoryName
+        padding: 0.8rem
