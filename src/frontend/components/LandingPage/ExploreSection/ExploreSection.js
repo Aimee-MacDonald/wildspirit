@@ -51,7 +51,8 @@ export default class ExploreSection extends React.Component{
         }
       ],
       detailsActive: false,
-      selectedCategory: 0
+      selectedCategory: 0,
+      selectedOption: 0
     }
 
     this.toggleDetails = this.toggleDetails.bind(this);
@@ -71,14 +72,20 @@ export default class ExploreSection extends React.Component{
 
         {this.state.detailsActive &&
           <ExploreDetails
+            options={this.state.categories[this.state.selectedCategory]}
             toggleDetails={this.toggleDetails}
+            selectedOption={this.state.selectedOption}
           />
         }
       </div>
     );
   }
 
-  toggleDetails(){
-    this.setState(prevState => ({detailsActive: !prevState.detailsActive}))
+  toggleDetails(index){
+    if(index){
+      this.setState(prevState => ({detailsActive: !prevState.detailsActive, selectedCategory: index, selectedOption: 0}))
+    } else {
+      this.setState(prevState => ({detailsActive: !prevState.detailsActive}))
+    }
   }
 }
