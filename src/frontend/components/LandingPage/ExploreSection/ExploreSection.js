@@ -5,51 +5,14 @@ import './ExploreSection.sass';
 import ExploreHeader from './ExploreHeader/ExploreHeader';
 import ExploreOptions from './ExploreOptions/ExploreOptions';
 import ExploreDetails from './ExploreDetails/ExploreDetails';
+import { json } from 'body-parser';
 
 export default class ExploreSection extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
-      categories: [
-        {
-          categoryName: 'Category 1',
-          options: [
-            {
-              optionName: 'Option 1',
-              optionDescription: 'Description 1',
-              optionPhoto: '#'
-            }
-          ]
-        }, {
-          categoryName: 'Category 2',
-          options: [
-            {
-              optionName: 'Option 1',
-              optionDescription: 'Description 1',
-              optionPhoto: '#'
-            }
-          ]
-        }, {
-          categoryName: 'Category 3',
-          options: [
-            {
-              optionName: 'Option 1',
-              optionDescription: 'Description 1',
-              optionPhoto: '#'
-            }
-          ]
-        }, {
-          categoryName: 'Category 4',
-          options: [
-            {
-              optionName: 'Option 1',
-              optionDescription: 'Description 1',
-              optionPhoto: '#'
-            }
-          ]
-        }
-      ],
+      categories: [],
       detailsActive: false,
       selectedCategory: 0,
       selectedOption: 0
@@ -79,6 +42,17 @@ export default class ExploreSection extends React.Component{
         }
       </div>
     );
+  }
+
+  componentDidMount(){
+    console.log('Fetching Categories');
+    
+    fetch('/api/exploreCategories')
+      .then(res => res.json())
+      .then(result => {
+        this.setState(() => ({categories: result}))
+      })
+      .catch(error => console.log(error))
   }
 
   toggleDetails(index){

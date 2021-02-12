@@ -137,13 +137,15 @@ router.get('/events', (req, res) => {
 });
 
 router.get('/exploreCategories', (req, res) => {
-  ExploreCategory.find(() => (error, docs) => {
+  ExploreCategory.find({}, (error, docs) => {
     if(error){
       res.status(500).json("Internal Server Error");
-    } else if(docs.length < 1){
-      res.status(404).json("Not Found");
     } else {
-      res.status(200).json(docs);
+      if(docs.length < 1){
+        res.status(404).json("Not Found");
+      } else {
+        res.status(200).json(docs);
+      }
     }
   });
 });
