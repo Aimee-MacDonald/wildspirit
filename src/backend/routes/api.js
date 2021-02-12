@@ -9,7 +9,7 @@ pepipost.Configuration.apiKey = process.env.EMAILKEY;
 
 const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
-const ExploreOption = require(path.join(__dirname, '../dbmodels/ExploreOption.js'));
+const ExploreCategory = require("../dbmodels/ExploreCategory");
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -136,8 +136,8 @@ router.get('/events', (req, res) => {
   });
 });
 
-router.get('/exploreOptions', (req, res) => {
-  ExploreOption.find(() => (error, docs) => {
+router.get('/exploreCategories', (req, res) => {
+  ExploreCategory.find(() => (error, docs) => {
     if(error){
       res.status(500).json("Internal Server Error");
     } else if(docs.length < 1){
