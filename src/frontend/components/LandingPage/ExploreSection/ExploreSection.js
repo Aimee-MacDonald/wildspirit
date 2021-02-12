@@ -51,8 +51,6 @@ export default class ExploreSection extends React.Component{
   }
 
   componentDidMount(){
-    console.log('Fetching Categories');
-    
     fetch('/api/exploreCategories')
       .then(res => res.json())
       .then(result => {
