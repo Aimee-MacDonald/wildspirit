@@ -21,8 +21,8 @@ const ExploreDetails = props => (
 
       <div className='controls'>
         <div className='buttons'>
-          <button>Left</button>
-          <button>Right</button>
+          <button><span className='left'></span></button>
+          <button><span className='right'></span></button>
         </div>
 
         <div>Indexing</div>

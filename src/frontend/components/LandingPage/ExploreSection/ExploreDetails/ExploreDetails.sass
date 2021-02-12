@@ -37,6 +37,20 @@
         display: flex
         flex-flow: nowrap row
         justify-content: space-between
+        button
+          background-color: transparent
+          border: none
+          cursor: pointer
+          span
+            border: 1rem solid $light-green
+            border-top-color: transparent
+            border-bottom-color: transparent
+          .left
+            border-left-color: transparent
+            margin-left: -50%
+          .right
+            border-right-color: transparent
+            margin-right: -50%
   @include breakpoint(tablet_portrait)
     width: 80%
     flex-flow: nowrap row
@@ -44,3 +58,10 @@
     .imageSlider
       width: 75%
       height: 35rem
+      .controls
+        .buttons
+          button
+            span
+              border: 2rem solid $light-green
+              border-top-color: transparent
+              border-bottom-color: transparent
