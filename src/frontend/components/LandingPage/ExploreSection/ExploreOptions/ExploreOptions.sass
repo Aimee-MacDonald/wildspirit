@@ -9,14 +9,22 @@
   .exploreCategory
     margin-bottom: 1rem
     cursor: pointer
+    border: 5px solid $medium-green
+    border-radius: 1.3rem
+    box-shadow: 0 1rem 1rem 0 $dark-green
     .categoryImage
-      background-color: lime
       width: 16rem
       height: 16rem
       border-top-right-radius: 1rem
       border-top-left-radius: 1rem
+      background-position: center center
+      background-size: cover
     .categoryName
-      background-color: orangered
+      background-color: $dark-green
+      color: $light-green
+      font-family: 'Montserrat'
+      font-weight: normal
+      text-decoration: underline
       text-align: center
       padding: 0.4rem
       border-bottom-right-radius: 1rem
@@ -31,3 +39,6 @@
         width: 18rem
       .categoryName
         padding: 0.8rem
+      &:hover
+        transform: translateY(-0.5rem)
+        box-shadow: 0 1.5rem 1rem 0 $dark-green
