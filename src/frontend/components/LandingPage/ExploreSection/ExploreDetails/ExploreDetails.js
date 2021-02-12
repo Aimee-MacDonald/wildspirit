@@ -13,10 +13,9 @@ const ExploreDetails = props => (
 
     <div className='imageSlider'>
       <div className='images'>
-        <p className='image open'>Image 1</p>
-        <p className='image'>Image 2</p>
-        <p className='image'>Image 3</p>
-        <p className='image'>Image 4</p>
+        {props.options.options.map((option, index) => (
+          <div className={`image${props.selectedOption === index ? ' open' : ''}`} style={{backgroundImage: `url(${option.imageURL})`}}></div>
+        ))}
       </div>
 
       <div className='controls'>

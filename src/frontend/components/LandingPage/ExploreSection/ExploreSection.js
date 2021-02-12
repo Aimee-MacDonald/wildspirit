@@ -28,6 +28,8 @@ export default class ExploreSection extends React.Component{
       <div id='ExploreSection'>
         <ExploreHeader />
 
+        {console.log(this.state)}
+
         {!this.state.detailsActive &&
           <ExploreOptions
             categories={this.state.categories}
@@ -54,7 +56,9 @@ export default class ExploreSection extends React.Component{
     fetch('/api/exploreCategories')
       .then(res => res.json())
       .then(result => {
-        this.setState(() => ({categories: result}))
+        if(result !== 'Not Found'){
+          this.setState(() => ({categories: result}))
+        }
       })
       .catch(error => console.log(error))
   }
