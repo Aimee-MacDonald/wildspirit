@@ -21,8 +21,8 @@ const ExploreDetails = props => (
 
       <div className='controls'>
         <div className='buttons'>
-          <button><span className='left'></span></button>
-          <button><span className='right'></span></button>
+          <button onClick={props.previousOption}><span className='left'></span></button>
+          <button onClick={props.nextOption}><span className='right'></span></button>
         </div>
 
         <div>Indexing</div>

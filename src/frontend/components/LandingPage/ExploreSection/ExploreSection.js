@@ -19,6 +19,8 @@ export default class ExploreSection extends React.Component{
     }
 
     this.toggleDetails = this.toggleDetails.bind(this);
+    this.previousOption = this.previousOption.bind(this);
+    this.nextOption = this.nextOption.bind(this);
   }
 
   render(){
@@ -38,6 +40,8 @@ export default class ExploreSection extends React.Component{
             options={this.state.categories[this.state.selectedCategory]}
             toggleDetails={this.toggleDetails}
             selectedOption={this.state.selectedOption}
+            nextOption={this.nextOption}
+            previousOption={this.previousOption}
           />
         }
       </div>
@@ -65,5 +69,37 @@ export default class ExploreSection extends React.Component{
     }
 
     this.setState(prevState => ({detailsActive: !prevState.detailsActive, selectedCategory: selectedCategory, selectedOption: 0}))
+  }
+
+  nextOption(){
+    this.setState(prevState => {
+      const maxOption = this.state.categories[this.state.selectedCategory].options.length - 1
+      let selectedOption = prevState.selectedOption;
+      selectedOption += 1;
+
+      if(selectedOption < 0){
+        selectedOption = maxOption;
+      } else if(selectedOption > maxOption){
+        selectedOption = 0;
+      }
+
+      return {selectedOption};
+    });
+  }
+
+  previousOption(){
+    this.setState(prevState => {
+      const maxOption = this.state.categories[this.state.selectedCategory].options.length - 1
+      let selectedOption = prevState.selectedOption;
+      selectedOption -= 1;
+
+      if(selectedOption < 0){
+        selectedOption = maxOption;
+      } else if(selectedOption > maxOption){
+        selectedOption = 0;
+      }
+
+      return {selectedOption};
+    });
   }
 }
