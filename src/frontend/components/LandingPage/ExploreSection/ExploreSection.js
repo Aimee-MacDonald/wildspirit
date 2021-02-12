@@ -82,10 +82,14 @@ export default class ExploreSection extends React.Component{
   }
 
   toggleDetails(index){
-    if(index){
-      this.setState(prevState => ({detailsActive: !prevState.detailsActive, selectedCategory: index, selectedOption: 0}))
+    let selectedCategory = 0;
+
+    if(typeof(index) === 'number'){
+      selectedCategory = index;
     } else {
-      this.setState(prevState => ({detailsActive: !prevState.detailsActive}))
+      selectedCategory = 0;
     }
+
+    this.setState(prevState => ({detailsActive: !prevState.detailsActive, selectedCategory: selectedCategory, selectedOption: 0}))
   }
 }
