@@ -150,6 +150,52 @@ router.get('/exploreCategories', (req, res) => {
   });
 });
 
+router.post('/addExploreCategory', (req, res) => {
+  if(req.isAuthenticated()){
+    const newExploreCategory = new ExploreCategory({
+      name: req.body.categoryName,
+      options: []
+    });
+
+    newExploreCategory.save(error => {
+      if(error){
+        res.status(500).json("Internal Server Error");
+      } else {
+        res.status(201).json('Created');
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
+});
+
+router.post('/addExploreOption', (req, res) => {
+  if(req.isAuthenticated()){
+    const file = req.files.image;
+
+    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+      if(err){
+        res.status(500).json("Internal Server Error");
+      } else {
+        ExploreCategory.findOneAndUpdate({name: req.body.category}, {$push: {options: {
+          name: req.body.name,
+          description: req.body.description,
+          imageURL: result.secure_url,
+          imageID: result.public_id
+        }}}, (error, response) => {
+          if(error){
+            res.status(500).json("Internal Server Error");
+          } else {
+            res.status(201).json('Created');
+          }
+        });
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
+})
+
 /*
 router.post('/activity', (req, res) => {
   if(req.isAuthenticated()){

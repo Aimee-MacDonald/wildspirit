@@ -14,7 +14,11 @@ const ExploreDetails = props => (
     <div className='imageSlider'>
       <div className='images'>
         {props.options.options.map((option, index) => (
-          <div className={`image${props.selectedOption === index ? ' open' : ''}`} style={{backgroundImage: `url(${option.imageURL})`}}></div>
+          <div
+            className={`image${props.selectedOption === index ? ' open' : ''}`}
+            style={{backgroundImage: `url(${option.imageURL})`}}
+            key={`explore_option_${index}`}>
+          </div>
         ))}
       </div>
 

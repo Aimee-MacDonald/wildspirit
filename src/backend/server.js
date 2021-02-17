@@ -18,6 +18,7 @@ const authRoute = require(path.join(__dirname, "/routes/auth"));
 // passport.session
 // app.router
 mongoose.connect(process.env.DBURL, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.set('useFindAndModify', false);
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "/views"));

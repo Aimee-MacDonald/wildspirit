@@ -5,7 +5,6 @@ import './ExploreSection.sass';
 import ExploreHeader from './ExploreHeader/ExploreHeader';
 import ExploreOptions from './ExploreOptions/ExploreOptions';
 import ExploreDetails from './ExploreDetails/ExploreDetails';
-import { json } from 'body-parser';
 
 export default class ExploreSection extends React.Component{
   constructor(props){
@@ -27,8 +26,6 @@ export default class ExploreSection extends React.Component{
     return(
       <div id='ExploreSection'>
         <ExploreHeader />
-
-        {console.log(this.state)}
 
         {!this.state.detailsActive &&
           <ExploreOptions
