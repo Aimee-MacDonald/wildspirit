@@ -181,7 +181,19 @@ router.post('/addExploreOption', (req, res) => {
           name: req.body.name,
           description: req.body.description,
           imageURL: result.secure_url,
-          imageID: result.public_id
+          imageID: result.public_id,
+          links: [
+            {
+              title: req.body.linkOneTitle,
+              URL: req.body.linkOneURL
+            }, {
+              title: req.body.linkTwoTitle,
+              URL: req.body.linkTwoURL
+            }, {
+              title: req.body.linkThreeTitle,
+              URL: req.body.linkThreeURL
+            }
+          ]
         }}}, (error, response) => {
           if(error){
             res.status(500).json("Internal Server Error");

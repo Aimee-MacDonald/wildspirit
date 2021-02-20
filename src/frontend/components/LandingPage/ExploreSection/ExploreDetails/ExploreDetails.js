@@ -4,11 +4,19 @@ import './ExploreDetails.sass';
 
 const ExploreDetails = props => (
   <div id='ExploreDetails'>
-    <div>
+    <div className='optionDetails'>
       <button onClick={props.toggleDetails}>Close</button>
       <h2>{props.options.name}</h2>
       <h3>{props.options.options[props.selectedOption].name}</h3>
       <p>{props.options.options[props.selectedOption].description}</p>
+      <ul>
+        {props.options.options[props.selectedOption].links.map(link => (
+          <li>
+            <label>{link.title}</label>
+            <a href={link.URL}>{link.URL}</a>
+          </li>
+        ))}
+      </ul>
     </div>
 
     <div className='imageSlider'>

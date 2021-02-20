@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './APExploreSection.sass';
+
 export default class extends React.Component{
   constructor(){
     super();
@@ -15,7 +17,7 @@ export default class extends React.Component{
 
   render(){
     return(
-      <div>
+      <div id='APExploreSection'>
         <ul>
           {this.state.categories.map((category, index) => (
             <li key={`category_${index}`}>
@@ -32,7 +34,7 @@ export default class extends React.Component{
         </form>
 
         {this.state.selectedCategory !== -1 &&
-          <form onSubmit={this.addOption}>
+          <form className='exploreOptions' onSubmit={this.addOption}>
             <label htmlFor='name'>Name</label>
             <input id='name' name='name' />
 
@@ -42,6 +44,24 @@ export default class extends React.Component{
             <label htmlFor='image'>Image</label>
             <input type='file' id='image' name='image' />
 
+            <label htmlFor='linkOneTitle'>Link 1 Title</label>
+            <input id='linkOneTitle' name='linkOneTitle' />
+      
+            <label htmlFor='linkOneURL'>Link 1 URL</label>
+            <input id='linkOneURL' name='linkOneURL' />
+
+            <label htmlFor='linkTwoTitle'>Link 2 Title</label>
+            <input id='linkTwoTitle' name='linkTwoTitle' />
+      
+            <label htmlFor='linkTwoURL'>Link 2 URL</label>
+            <input id='linkTwoURL' name='linkTwoURL' />
+
+            <label htmlFor='linkThreeTitle'>Link 3 Title</label>
+            <input id='linkThreeTitle' name='linkThreeTitle' />
+      
+            <label htmlFor='linkThreeURL'>Link 3 URL</label>
+            <input id='linkThreeURL' name='linkThreeURL' />
+            
             <input hidden readOnly name='category' value={this.state.categories[this.state.selectedCategory].name}></input>
 
             <button type='submit'>Add Option</button>
