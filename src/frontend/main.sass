@@ -1,4 +1,5 @@
 @import './vars'
+@import './mixins'
 
 @font-face
   font-family: 'Montserrat-Regular'
@@ -35,15 +36,16 @@ body
   width: 100vw
   overflow-x: hidden
 
-body::-webkit-scrollbar
-  width: 1.5rem
+@include breakpoint(tablet_portrait)
+  body::-webkit-scrollbar
+    width: 1.5rem
 
-body::-webkit-scrollbar-track
-  box-shadow: inset 0 0 1.5rem $dark-green
-  background-color: $light-green
+  body::-webkit-scrollbar-track
+    box-shadow: inset 0 0 1.5rem $dark-green
+    background-color: $light-green
 
-body::-webkit-scrollbar-thumb
-  background: $medium-green
-  background: linear-gradient(0deg, $light-green 0%, $light-green 40%, $medium-green 43%, $light-green 47%, $medium-green 50%, $light-green 53%, $medium-green 57%, $light-green 60%, $light-green 100%)
-  border-radius: 1rem
-  box-shadow: 0 0.2rem 2rem 1rem $medium-green
+  body::-webkit-scrollbar-thumb
+    background: $medium-green
+    background: linear-gradient(0deg, $light-green 0%, $light-green 40%, $medium-green 43%, $light-green 47%, $medium-green 50%, $light-green 53%, $medium-green 57%, $light-green 60%, $light-green 100%)
+    border-radius: 1rem
+    box-shadow: 0 0.2rem 2rem 1rem $medium-green
