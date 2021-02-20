@@ -10,7 +10,8 @@ const AccommodationOptions = props => (
         key={'accommodationOption'+index}
         onMouseEnter={() => {props.activateOption(index)}}
         onMouseLeave={() => {props.activateOption(-1)}}
-        style={{'backgroundImage': `url('${props.accommodationOptions[index].images[0].srcLink}')`}}>
+        style={{'backgroundImage': `url('${props.accommodationOptions[index].images[0].srcLink}')`}}
+        onClick={()=>{props.selectOption(index)}}>
 
         {props.activatedOption !== index &&
           <p className='title'>{option.title}</p>
