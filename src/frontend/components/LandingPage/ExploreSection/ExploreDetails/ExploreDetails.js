@@ -36,7 +36,11 @@ const ExploreDetails = props => (
           <button onClick={props.nextOption}><span className='right'></span></button>
         </div>
 
-        <div>Indexing</div>
+        <ul className='indexing'>
+          {props.options.options.map((option, index) => (
+            <li className={index === props.selectedOption ? 'active' : 'inactive'}></li>
+          ))}
+        </ul>
       </div>
     </div>
   </div>
