@@ -4,7 +4,7 @@ import './AccommodationDetailsNav.sass';
 
 const AccommodationDetailsNav = props => (
   <div id='AccommodationDetailsNav'>
-    <button onClick={props.closeDetails}>Close</button>
+    <button id='closeButton' onClick={props.closeDetails}>Close</button>
     <h4>{props.accommodationDetails.title}</h4>
     <p>{props.accommodationDetails.description}</p>
 
@@ -13,7 +13,7 @@ const AccommodationDetailsNav = props => (
     }
       
     {!props.enquiryActive &&
-      <button onClick={props.showEnquiry}>Booking Enquiry</button>
+      <button id='enquiryButton' onClick={props.showEnquiry}>Booking Enquiry</button>
     }
 
     {!props.enquiryActive &&
