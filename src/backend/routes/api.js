@@ -206,64 +206,7 @@ router.post('/addExploreOption', (req, res) => {
   } else {
     res.status(403).json('Forbidden');
   }
-})
-
-/*
-router.post('/activity', (req, res) => {
-  if(req.isAuthenticated()){
-    const newActivity = new Activity({
-      category: req.body.activity.category,
-      name: req.body.activity.name,
-      description: req.body.activity.description,
-      image: req.body.activity.image
-    });
-  
-    newActivity.save(err => {
-      if(err){
-        res.status(304).json('Not Modified');
-      } else {
-        res.status(201).json('Created');
-      }
-    });
-  } else {
-    res.status(403).json('Forbidden');
-  }
 });
-
-router.get('/activities', (req, res) => {
-  Activity.find({}, (err, docs) => {
-    if(err){
-      res.status(500).json("Internal Server Error");
-    } else if(docs.length < 1){
-      res.status(404).json("Not Found");
-    } else {
-      let respac = [];
-
-      docs.forEach(activity => {
-        let inserted = false;
-
-        respac.forEach(category => {
-          if(category.name === activity.category){
-            category.activities.push(activity);
-            inserted = true;
-          }
-        });
-
-        if(!inserted){
-          const cat = {
-            name: activity.category,
-            activities: [activity]
-          };
-
-          respac.push(cat);
-        }
-      });
-      
-      res.status(200).json(respac);
-    }
-  });
-});
-*/
 
 router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
@@ -356,74 +299,6 @@ router.post('/learnEnquiry', (req, res) => {
     res.status(400).json({'text': 'No form data'});
   }
 });
-
-/*
-router.post("/gallery", (req, res) => {
-  const pageSkip = req.body.skip || 0;
-  const pageLimit = req.body.limit || 0;
-
-  GalleryImage.find({}, (err, docs) => {
-    if(err){
-      res.status(500).json("Internal Server Error");
-    } else if(docs.length < 1){
-      res.status(404).json("Not Found");
-    } else {
-      res.status(200).json({
-        images: docs
-      });
-    }
-  }).skip(parseInt(pageSkip) * pageLimit).limit(pageLimit);
-});
-
-router.post('/addImage', (req, res) => {
-  if(req.isAuthenticated()){
-    const file = req.files.image;
-
-    cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
-      if(error){
-        res.status(500).json("Internal Server Error");
-      } else {
-        const newImage = new GalleryImage({
-          imgName: req.body.name,
-          imgAlt: req.body.description,
-          imgURL: result.secure_url,
-          cloudID: result.public_id
-        });
-
-        newImage.save((error, result) => {
-          if(error){
-            res.status(500).json("Internal Server Error");
-          } else {
-            res.status(200).json(result);
-          }
-        });
-      }
-    });
-  } else {
-    res.status(403).json('Forbidden');
-  }
-});
-
-router.post('/removeImage', (req, res) => {
-  if(req.isAuthenticated()){
-    cloudinary.api.delete_resources([req.body.cloudID], (error, result) => {
-      if(error){
-        res.status(500).json("Internal Server Error");
-      } else {
-        GalleryImage.deleteOne({'_id': req.body.imgID}, error => {
-          if(error){
-            res.status(409).json('Conflict');
-          } else {
-            res.status(200).json('OK');
-          }
-        });
-      }
-    });
-  } else {
-    res.status(403).json('Forbidden');
-  }
-});
-*/
 
 router.post('/sendMessage', (req, res) => {
   if(req.body.message){
