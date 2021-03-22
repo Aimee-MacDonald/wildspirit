@@ -7,6 +7,7 @@ import ParallaxSection from '../../components/LandingPage/ParallaxSection/Parall
 import LearnSection from '../../components/LandingPage/LearnSection/LearnSection';
 import ExploreSection from '../../components/LandingPage/ExploreSection/ExploreSection';
 import ContactSection from '../../components/LandingPage/ContactSection/ContactSection';
+import Footer from '../../components/LandingPage/Footer/Footer';
 
 export default class LandingPage extends React.Component{
   constructor(props){
@@ -23,6 +24,7 @@ export default class LandingPage extends React.Component{
         <LearnSection />
         <ExploreSection />
         <ContactSection />
+        <Footer />
       </div>
     );
   }
