@@ -6,7 +6,6 @@ import APNav from '../../components/AdminPage/APNav/APNav';
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
 import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
 import APExploreSection from '../../components/AdminPage/APExploreSection/APExploreSection';
-import APGallerySection from '../../components/AdminPage/APGallerySection/APGallerySection';
 
 export default class AdminPage extends React.Component{
   constructor(props){
@@ -16,8 +15,7 @@ export default class AdminPage extends React.Component{
       activeSection: {
         live: false,
         learn: false,
-        explore: false,
-        gallery: true
+        explore: false
       }
     }
 
@@ -32,7 +30,6 @@ export default class AdminPage extends React.Component{
         {this.state.activeSection.live && <APLiveSection />}
         {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
         {this.state.activeSection.explore && <APExploreSection addActivity={this.addActivity} />}
-        {this.state.activeSection.gallery && <APGallerySection />}
       </div>
     );
   }
@@ -41,8 +38,7 @@ export default class AdminPage extends React.Component{
     let newSection = {
       live: false,
       learn: false,
-      explore: false,
-      gallery: false
+      explore: false
     };
 
     newSection[section] = true;
