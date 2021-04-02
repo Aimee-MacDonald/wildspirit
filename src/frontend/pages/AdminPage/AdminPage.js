@@ -29,7 +29,7 @@ export default class AdminPage extends React.Component{
 
         {this.state.activeSection.live && <APLiveSection />}
         {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
-        {this.state.activeSection.explore && <APExploreSection addActivity={this.addActivity} />}
+        {this.state.activeSection.explore && <APExploreSection />}
       </div>
     );
   }
@@ -59,24 +59,6 @@ export default class AdminPage extends React.Component{
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({'event': evPac})
-    })
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
-  }
-
-  addActivity(event){
-    const actPac = {
-      category: event.target.APESCategory.value,
-      name: event.target.APESName.value,
-      description: event.target.APESDescription.value,
-      image: event.target.APESImage.value
-    };
-    
-    fetch('api/activity', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'activity': actPac})
     })
     .then(response => response.json())
     .then(result => console.log(result))
