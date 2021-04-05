@@ -19,7 +19,7 @@ const LearnOption = props => (
             <button className='enquire' onClick={props.showEnquiryForm}>Enquire</button>
 
             <FacebookShareButton
-              url={'https://wildspiritlodge.herokuapp.com/#LearnSection'}
+              url={'http://www.wildspiritlodge.co.za/#LearnSection'}
               quote={`${props.eventDetails.title}: ${props.eventDetails.subtitle}`}
               hashtag='#wildspirit'>
               <FacebookIcon size={36} />
