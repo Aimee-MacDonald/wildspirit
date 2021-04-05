@@ -104,19 +104,28 @@ router.post('/addAccommodationImage', (req, res) => {
 
 router.post('/event', (req, res) => {
   if(req.isAuthenticated()){
-    const newEvent = new Event({
-      imgURL: req.body.event.imgURL,
-      imgAlt: req.body.event.imgAlt,
-      title: req.body.event.title,
-      subtitle: req.body.event.subtitle,
-      description: req.body.event.description
-    });
-  
-    newEvent.save(err => {
+    const file = req.files.APLSImg;
+
+    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
       if(err){
-        res.status(304).json('Not Modified');
+        res.status(500).json("Internal Server Error");
       } else {
-        res.status(201).json('Created');
+        const newEvent = new Event({
+          imgURL: result.secure_url,
+          imageID: result.public_id,
+          imgAlt: req.body.APLSImgAlt,
+          title: req.body.APLSTitle,
+          subtitle: req.body.APLSSubtitle,
+          description: req.body.APLSDescription
+        });
+
+        newEvent.save(error => {
+          if(error){
+            res.status(500).json('Database Error');
+          } else {
+            res.status(201).json('Created');
+          }
+        });
       }
     });
   } else {

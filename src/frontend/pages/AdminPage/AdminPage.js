@@ -46,22 +46,14 @@ export default class AdminPage extends React.Component{
     this.setState(() => ({activeSection: newSection}))
   }
 
-  addEvent(event){
-    const evPac = {
-      imgURL: event.target.APLSImgURL.value,
-      imgAlt: event.target.APLSImgAlt.value,
-      title: event.target.APLSTitle.value,
-      subtitle: event.target.APLSSubtitle.value,
-      description: event.target.APLSDescription.value
-    };
+  addEvent(e){
+    e.preventDefault();
 
     fetch('/api/event', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'event': evPac})
-    })
-    .then(response => response.json())
-    .then(result => console.log(result))
-    .catch(error => console.log(error))
+      method: 'post',
+      body: new FormData(e.target)
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
   }
 }
