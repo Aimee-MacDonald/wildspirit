@@ -9,7 +9,7 @@ const AccommodationDetailsNav = props => (
     <p>{props.accommodationDetails.description}</p>
 
     {!props.photosActive &&
-      <button onClick={props.showPhotos}>Photos</button>
+      <button id='photosButton' onClick={props.showPhotos}>Photos</button>
     }
       
     {!props.enquiryActive &&
