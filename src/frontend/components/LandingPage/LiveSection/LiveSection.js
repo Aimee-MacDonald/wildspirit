@@ -100,7 +100,8 @@ export default class LiveSection extends React.Component{
       photosActive: true,
       enquiryActive: false,
       enquiringActive: false,
-      enquirySuccess: 0
+      enquirySuccess: 0,
+      selectedPhoto: 0
     }));
   }
 
