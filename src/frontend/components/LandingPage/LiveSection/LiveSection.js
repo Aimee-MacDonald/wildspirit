@@ -18,7 +18,8 @@ export default class LiveSection extends React.Component{
       selectedPhoto: 0,
       enquiryActive: false,
       enquiringActive: false,
-      enquirySuccess: 0
+      enquirySuccess: 0,
+      costEstimation: 0
     }
 
     this.activateOption = this.activateOption.bind(this);
@@ -29,6 +30,7 @@ export default class LiveSection extends React.Component{
     this.makeEnquiry = this.makeEnquiry.bind(this);
     this.showNextPhoto = this.showNextPhoto.bind(this);
     this.showPreviousPhoto = this.showPreviousPhoto.bind(this);
+    this.calculateCost = this.calculateCost.bind(this);
   }
 
   render(){
@@ -60,6 +62,8 @@ export default class LiveSection extends React.Component{
             enquiringActive={this.state.enquiringActive}
             enquirySuccess={this.state.enquirySuccess}
             photos={this.state.accommodationOptions[this.state.selectedOption].images}
+            costEstimation={this.state.costEstimation}
+            calculateCost={this.calculateCost}
           />
         }
       </div>
@@ -167,5 +171,59 @@ export default class LiveSection extends React.Component{
       }
     })
     .catch(error => console.log(error))
+  }
+
+  calculateCost(e){
+    let enquiryForm = e.target.parentNode.parentNode;
+    if(enquiryForm.tagName === 'DIV'){
+      enquiryForm = enquiryForm.parentNode;
+    }
+
+    let accommodationType = this.state.accommodationOptions[this.state.selectedOption].title;
+    const numGuests = enquiryForm.childNodes[3].childNodes[1].value || 1;
+      
+    const arrivalDate = new Date(enquiryForm.childNodes[4].childNodes[0].childNodes[1].value);
+    const departureDate = new Date(enquiryForm.childNodes[4].childNodes[1].childNodes[1].value);
+    const days = (departureDate - arrivalDate) / (1000 * 3600 *24) || 1;
+
+    let totalCost = 0;
+    let numRooms = 0;
+    
+    switch(accommodationType){
+      case 'Dorms':
+        totalCost = numGuests * 220;
+        break;
+
+      case 'Double Rooms':
+        numRooms = Math.round(numGuests / 2);
+        totalCost = numRooms * 620;
+        break;
+
+      case 'Twin Rooms':
+        numRooms = Math.round(numGuests / 2);
+        totalCost = numRooms * 620;
+        break;
+
+      case 'Family Rooms':
+        numRooms = Math.ceil(numGuests / 4);
+        const baseRate = numRooms * 750;
+        const additionalGuests = numGuests - (numRooms * 2) < 0 ? 0 : numGuests - (numRooms * 2);
+        const additionalRate = additionalGuests * 200;
+        totalCost = baseRate + additionalRate;
+        break;
+
+      case 'Safari Tents':
+        numRooms = Math.round(numGuests / 2);
+        totalCost = numRooms * 420;
+        break;
+
+      case 'Forest Camping':
+        totalCost = numGuests * 140;
+        break;
+    }
+
+    totalCost = totalCost * days;
+
+    this.setState(prevState => ({costEstimation: totalCost}))
   }
 }

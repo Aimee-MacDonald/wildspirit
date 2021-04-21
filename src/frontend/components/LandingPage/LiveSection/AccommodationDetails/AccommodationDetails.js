@@ -32,6 +32,8 @@ const AccommodationDetails = props => (
       <AccommodationEnquiry
         accommodationType={props.accommodationDetails.title}
         makeEnquiry={props.makeEnquiry}
+        estimation={props.costEstimation}
+        calculateCost={props.calculateCost}
       />
     }
 

@@ -23,24 +23,44 @@ const AccommodationEnquiry = props => (
 
     <div className='ae_item'>
       <label htmlFor='ae_pax'>Number of People:</label>
-      <input id='ae_pax' name='ae_pax' required={true}></input>
+      <input
+        id='ae_pax'
+        name='ae_pax'
+        required={true}
+        onChange={props.calculateCost}
+      ></input>
     </div>
 
     <div id='datePickers'>
       <div className='ae_item'>
         <label htmlFor='ae_arrival'>Arrival</label>
-        <input id='ae_arrival' type='date' name='ae_arrival' required={true}></input>
+        <input
+          id='ae_arrival'
+          type='date'
+          name='ae_arrival'
+          required={true}
+          onChange={props.calculateCost}
+        ></input>
       </div>
 
       <div className='ae_item'>
         <label htmlFor='ae_departure'>Departure</label>
-        <input id='ae_departure' type='date' name='ae_departure' required={true}></input>
+        <input
+          id='ae_departure'
+          type='date'
+          name='ae_departure'
+          required={true}
+          onChange={props.calculateCost}
+        ></input>
       </div>
     </div>
 
     <div className='ae_row'>
-      <label htmlFor='ae_flexible'>Flexible?</label>
-      <input id='ae_flexible' type='checkbox' name='ae_flexible'></input>
+      <div>
+        <input id='ae_flexible' type='checkbox' name='ae_flexible'></input>
+        <label htmlFor='ae_flexible'>Flexible?</label>
+      </div>
+      <p>{`Estimated Total: R${props.estimation}`}</p>
     </div>
 
     <div className='ae_item'>
