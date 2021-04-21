@@ -1,26 +1,57 @@
 import React from 'react';
 
+import EventCreator from './EventCreator/EventCreator';
+import EventRemover from './EventRemover/EventRemover';
+
 import './APLearnSection.sass';
 
-const APLearnSection = props => (
-  <form id='APLearnSection' onSubmit={props.addEvent}>
-    <label htmlFor='APLSImg'>Image URL</label>
-    <input type='file' id='APLSImg' name='APLSImg' />
+export default class APLearnSection extends React.Component{
+  constructor(props){
+    super(props);
 
-    <label htmlFor='APLSImgAlt'>Image Alt</label>
-    <input id='APLSImgAlt' name='APLSImgAlt' />
+    this.state = {
+      events: []
+    };
+  }
 
-    <label htmlFor='APLSTitle'>Title</label>
-    <input id='APLSTitle' name='APLSTitle' />
+  render(){
+    return(
+      <div id='APLearnSection'>
+        <EventCreator addEvent={this.addEvent} />
+        <EventRemover events={this.state.events} removeEvent={this.removeEvent} />
+      </div>
+    );
+  }
 
-    <label htmlFor='APLSSubtitle'>Subtitle</label>
-    <input id='APLSSubtitle' name='APLSSubtitle' />
+  componentDidMount(){
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(events => {
+        if(events !== 'Not Found'){
+          this.setState(() => ({events}))
+        }
+      })
+      .catch(error => console.log(error))
+  }
 
-    <label htmlFor='APLSDescription'>Description</label>
-    <textarea id='APLSDescription' name='APLSDescription' />
+  addEvent(e){
+    e.preventDefault();
 
-    <button type='submit'>Add</button>
-  </form>
-);
+    fetch('/api/event', {
+      method: 'post',
+      body: new FormData(e.target)
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+  }
 
-export default APLearnSection;
+  removeEvent(eventID){
+    fetch('/api/removeEvent', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({eventID})
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+  }
+}

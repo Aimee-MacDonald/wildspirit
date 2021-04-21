@@ -45,15 +45,4 @@ export default class AdminPage extends React.Component{
 
     this.setState(() => ({activeSection: newSection}))
   }
-
-  addEvent(e){
-    e.preventDefault();
-
-    fetch('/api/event', {
-      method: 'post',
-      body: new FormData(e.target)
-    }).then(res => res.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
-  }
 }

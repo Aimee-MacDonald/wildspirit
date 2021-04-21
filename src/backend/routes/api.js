@@ -145,6 +145,32 @@ router.get('/events', (req, res) => {
   });
 });
 
+router.post('/removeEvent', (req, res) => {
+  if(req.isAuthenticated()){
+    Event.findById(req.body.eventID, (err, doc) => {
+      if(err){
+        res.status(404).json("Not Found");
+      } else {
+        cloudinary.api.delete_resources(doc.imageID, err => {
+          if(err){
+            res.status(500).json("Internal Server Error");
+          } else {
+            Event.deleteOne({_id: req.body.eventID}, err => {
+              if(err){
+                res.status(500).json("Internal Server Error");
+              } else {
+                res.status(200).json('OK');
+              }
+            });
+          }
+        });
+      }
+    });
+  } else {
+    res.status(403).json('Forbidden');
+  }
+});
+
 router.get('/exploreCategories', (req, res) => {
   ExploreCategory.find({}, (error, docs) => {
     if(error){
