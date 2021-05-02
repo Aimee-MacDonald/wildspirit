@@ -78,11 +78,18 @@ export default class LearnOptions extends React.Component{
 
       return {events};
     });
+
+    const formData = {
+      event: e.target.LOEEvent.value,
+      name: e.target.LOEName.value,
+      email: e.target.LOEEmail.value,
+      message: e.target.LOEMessage.value
+    }
     
     fetch('/api/learnEnquiry', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'enquiry': new FormData(e.target)})
+      body: JSON.stringify({'enquiry': formData})
     }).then(res => res.json())
       .then(result => {
         if(result === 'Success'){

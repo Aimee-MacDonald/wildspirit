@@ -38,8 +38,8 @@ const LearnOption = props => (
 
           <label htmlFor='LOEMessage'>Message:</label>
           <textarea id='LOEMessage' name='LOEMessage'></textarea>
-
-          <input value={props.eventName} name={'LOEEvent'} hidden={true} readOnly={true}></input>
+          
+          <input value={props.eventDetails.title} hidden={true} name={'LOEEvent'} readOnly={true}></input>
 
           <div className='LOEButtons'>
             <button type='submit'>Send</button>
