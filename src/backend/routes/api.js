@@ -247,7 +247,7 @@ router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
     const emailDetails = {
-      subject: 'Accomodation Enquiry',
+      subject: `Accomodation Enquiry - ${enquiryData.name}`,
       content: `
         <p>${enquiryData.name} just made an enquiry via the website.</p>
         <p>Enquiry Details:</p>
@@ -285,6 +285,8 @@ router.post('/accommodationEnquiry', (req, res) => {
             <td>${enquiryData.message}</td>
           </tr>
         </table>
+
+        <p>This is an automated email, DO NOT REPLY</p>
       `
     };
 
@@ -301,7 +303,7 @@ router.post('/learnEnquiry', (req, res) => {
     const enquiryData = req.body.enquiry;
 
     const emailDetails = {
-      subject: 'Event Enquiry',
+      subject: `Event Enquiry - ${enquiryDetails.name}`,
       content: `
         <p>${enquiryData.name} just made an enquiry via the website.</p>
         <p>Enquiry Details:</p>
@@ -323,6 +325,8 @@ router.post('/learnEnquiry', (req, res) => {
             <td>${enquiryData.message}</td>
           </tr>
         </table>
+
+        <p>This is an automated email, DO NOT REPLY</p>
       `
     };
 
@@ -340,7 +344,7 @@ router.post('/sendMessage', (req, res) => {
     const messageData = req.body.message;
 
     const emailDetails = {
-      subject: 'General Enquiry',
+      subject: `General Enquiry - ${messageData.name}`,
       content: `
         <p>${messageData.name} just sent a message via the website.</p>
         <p>Details:</p>
@@ -358,6 +362,8 @@ router.post('/sendMessage', (req, res) => {
             <td>${messageData.message}</td>
           </tr>
         </table>
+
+        <p>This is an automated email, DO NOT REPLY</p>
       `
     };
 
