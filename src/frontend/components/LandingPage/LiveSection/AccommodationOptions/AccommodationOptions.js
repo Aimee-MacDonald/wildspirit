@@ -14,7 +14,10 @@ const AccommodationOptions = props => (
         onClick={()=>{props.selectOption(index)}}>
 
         {props.activatedOption !== index &&
-          <p className='title'>{option.title}</p>
+          <div className='title'>
+            <p>{option.title}</p>
+            <p>{`From R${option.entryPrice || 0}`}</p>
+          </div>
         }
 
         {props.activatedOption === index &&
