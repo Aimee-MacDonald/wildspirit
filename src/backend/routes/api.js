@@ -104,30 +104,88 @@ router.post('/addAccommodationImage', (req, res) => {
 
 router.post('/event', (req, res) => {
   if(req.isAuthenticated()){
-    const file = req.files.APLSImg;
+    if(req.body._id === 'new'){
+      const file = req.files.APLSImg;
 
-    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-      if(err){
-        res.status(500).json("Internal Server Error");
-      } else {
-        const newEvent = new Event({
-          imgURL: result.secure_url,
-          imageID: result.public_id,
-          imgAlt: req.body.APLSImgAlt,
-          title: req.body.APLSTitle,
-          subtitle: req.body.APLSSubtitle,
-          description: req.body.APLSDescription
-        });
+      cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+        if(err){
+          res.status(500).json("Internal Server Error");
+        } else {
+          const newEvent = new Event({
+            imgURL: result.secure_url,
+            imageID: result.public_id,
+            imgAlt: req.body.APLSImgAlt,
+            title: req.body.APLSTitle,
+            subtitle: req.body.APLSSubtitle,
+            description: req.body.APLSDescription
+          });
 
-        newEvent.save(error => {
-          if(error){
-            res.status(500).json('Database Error');
+          newEvent.save(error => {
+            if(error){
+              res.status(500).json('Database Error');
+            } else {
+              res.status(201).json('Created');
+            }
+          });
+        }
+      });
+    } else {
+      if(!!req.files){
+        const file = req.files.APLSImg
+
+        Event.findById(req.body._id, (err, doc) => {
+          if(err){
+            res.status(404).json('Not Found')
           } else {
-            res.status(201).json('Created');
+            cloudinary.api.delete_resources(doc.imageID, error => {
+              if(error){
+                res.status(500).json('Internal Server Error')
+              } else {
+                cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
+                  if(err){
+                    res.status(500).json('Internal Server Error')
+                  } else {
+                    doc.imgAlt = req.body.APLSImgAlt
+                    doc.title = req.body.APLSTitle
+                    doc.subtitle = req.body.APLSSubtitle
+                    doc.description = req.body.APLSDescription
+                    doc.imgURL = result.secure_url
+                    doc.imageID = result.public_id
+                    
+                    doc.save(error => {
+                      if(error){
+                        res.status(500).json('Database Error')
+                      } else {
+                        res.status(201).json('Updated')
+                      }
+                    })
+                  }
+                })
+              }
+            })
           }
-        });
+        })
+      } else {
+        Event.findById(req.body._id, (err, doc) => {
+          if(err){
+            res.status(500).json('Database Error')
+          } else {
+            doc.imgAlt = req.body.APLSImgAlt
+            doc.title = req.body.APLSTitle
+            doc.subtitle = req.body.APLSSubtitle
+            doc.description = req.body.APLSDescription
+  
+            doc.save(error => {
+              if(error){
+                res.status(500).json('Database Error')
+              } else {
+                res.status(201).json('Updated')
+              }
+            })
+          }
+        })
       }
-    });
+    }
   } else {
     res.status(403).json('Forbidden');
   }

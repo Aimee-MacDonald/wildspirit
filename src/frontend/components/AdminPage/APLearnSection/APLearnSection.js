@@ -1,57 +1,61 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
 
-import EventCreator from './EventCreator/EventCreator';
-import EventRemover from './EventRemover/EventRemover';
+import EventsList from './EventsList/EventsList'
+import EventEditor from './EventEditor/EventEditor'
 
-import './APLearnSection.sass';
+import './APLearnSection.sass'
 
-export default class APLearnSection extends React.Component{
-  constructor(props){
-    super(props);
+const APLearnSection = () => {
+  const [events, setEvents] = useState([])
+  const [selectedEvent, selectEvent] = useState()
 
-    this.state = {
-      events: []
-    };
-  }
-
-  render(){
-    return(
-      <div id='APLearnSection'>
-        <EventCreator addEvent={this.addEvent} />
-        <EventRemover events={this.state.events} removeEvent={this.removeEvent} />
-      </div>
-    );
-  }
-
-  componentDidMount(){
+  useEffect(() => {
     fetch('/api/events')
-      .then(res => res.json())
-      .then(events => {
-        if(events !== 'Not Found'){
-          this.setState(() => ({events}))
-        }
-      })
-      .catch(error => console.log(error))
+    .then(res => res.json())
+    .then(response => {
+      if(response !== 'Not Found'){
+        setEvents([
+          ...events,
+          ...response
+        ])
+      }
+    })
+    .catch(error => console.log(error))
+  }, [])
+
+  const createNewEvent = () => {
+    setEvents([
+      ...events,
+      {
+        _id: 'new',
+        description: '',
+        imageID: '',
+        imgAlt: '',
+        imgURL: '',
+        subtitle: '',
+        title: ''
+      }
+    ])
+    
+    selectEvent('new')
   }
 
-  addEvent(e){
-    e.preventDefault();
+  return(
+    <div id='APLearnSection'>
+      <h1>AP Learn Section</h1>
 
-    fetch('/api/event', {
-      method: 'post',
-      body: new FormData(e.target)
-    }).then(res => res.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
-  }
+      <EventsList
+        events={events}
+        selectEvent={selectEvent}
+        createNewEvent={createNewEvent}
+      />
 
-  removeEvent(eventID){
-    fetch('/api/removeEvent', {
-      method: 'post',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({eventID})
-    }).then(res => res.json())
-      .then(result => console.log(result))
-      .catch(error => console.log(error))
-  }
+      {selectedEvent && <EventEditor
+        eventDetails={events.filter(event => event._id === selectedEvent)[0]}
+        setEventDetails={ev => setEvents(events.map(event => event._id === selectedEvent ? ev : event))}
+      />}
+    </div>
+  )
 }
+
+export default APLearnSection
