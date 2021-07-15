@@ -42,7 +42,7 @@ const APLearnSection = () => {
 
   return(
     <div id='APLearnSection'>
-      <h1>AP Learn Section</h1>
+      <h1>Learn Section</h1>
 
       <EventsList
         events={events}
