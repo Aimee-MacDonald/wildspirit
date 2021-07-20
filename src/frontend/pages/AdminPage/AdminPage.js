@@ -27,9 +27,9 @@ export default class AdminPage extends React.Component{
       <div id='AdminPage'>
         <APNav setSection={this.setSection} />
 
-        {this.state.activeSection.live && <APLiveSection />}
-        {this.state.activeSection.learn && <APLearnSection addEvent={this.addEvent} />}
-        {this.state.activeSection.explore && <APExploreSection />}
+        {this.state.activeSection.live && <APLiveSection/>}
+        {this.state.activeSection.learn && <APLearnSection/>}
+        {this.state.activeSection.explore && <APExploreSection/>}
       </div>
     );
   }
