@@ -5,6 +5,7 @@ import './APExploreSection.sass'
 import CategoriesList from './CategoriesList/CategoriesList'
 import OptionsList from './OptionsList/OptionsList'
 import OptionEditor from './OptionEditor/OptionEditor'
+import CategoryEditor from './CategoryEditor/CategoryEditor'
 
 const APExploreSection = () => {
   const [categories, setCategories] = useState([])
@@ -14,7 +15,14 @@ const APExploreSection = () => {
   useEffect(() => {
     fetch('/api/exploreCategories')
       .then(res => res.json())
-      .then(result => setCategories(result))
+      .then(result => {
+        if(result !== 'Not Found'){
+          setCategories([
+            ...categories,
+            ...result
+          ])
+        }
+      })
       .catch(error => console.log(error))
   }, [])
 
@@ -27,6 +35,13 @@ const APExploreSection = () => {
         selectCategory={selectCategory}
       />
 
+      {/*   filter categories by id   */}
+      {selectedCategory &&
+        <CategoryEditor
+          categoryDetails={categories}
+        />
+      }
+{/* 
       {selectedCategory &&
         <OptionsList
           options={
@@ -49,6 +64,7 @@ const APExploreSection = () => {
           }
         />
       }
+       */}
     </div>
   )
 }
