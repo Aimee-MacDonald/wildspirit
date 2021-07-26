@@ -4,7 +4,6 @@ import './APExploreSection.sass'
 
 import CategoriesList from './CategoriesList/CategoriesList'
 import CategoryEditor from './CategoryEditor/CategoryEditor'
-import OptionsList from './OptionsList/OptionsList'
 import OptionEditor from './OptionEditor/OptionEditor'
 
 const APExploreSection = () => {
