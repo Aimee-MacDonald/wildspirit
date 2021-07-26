@@ -306,63 +306,144 @@ router.get('/exploreCategories', (req, res) => {
   });
 });
 
-router.post('/addExploreCategory', (req, res) => {
+router.post('/exploreOption', (req, res) => {
   if(req.isAuthenticated()){
-    const newExploreCategory = new ExploreCategory({
-      name: req.body.categoryName,
-      options: []
-    });
+    if(req.body.optionName && req.body.optionDescription){
+      if(req.body.categoryID === 'new'){
+        if(req.body.categoryName && !!req.files){
+          const file = req.files.image
 
-    newExploreCategory.save(error => {
-      if(error){
-        res.status(500).json("Internal Server Error");
-      } else {
-        res.status(201).json('Created');
-      }
-    });
-  } else {
-    res.status(403).json('Forbidden');
-  }
-});
+          cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
+            if(error){
+              res.status(500).json("Internal Server Error")
+            } else {
+              const newExploreCategory = new ExploreCategory({
+                name: req.body.categoryName,
+                options: [{
+                  name: req.body.optionName,
+                  description: req.body.optionDescription,
+                  imageID: result.public_id,
+                  imageURL: result.secure_url,
+                  imageAlt: req.body.imgAlt,
+                  links: []
+                }]
+              })
 
-router.post('/addExploreOption', (req, res) => {
-  if(req.isAuthenticated()){
-    const file = req.files.image;
-
-    cloudinary.uploader.upload(file.tempFilePath, (err, result) => {
-      if(err){
-        res.status(500).json("Internal Server Error");
-      } else {
-        ExploreCategory.findOneAndUpdate({name: req.body.category}, {$push: {options: {
-          name: req.body.name,
-          description: req.body.description,
-          imageURL: result.secure_url,
-          imageID: result.public_id,
-          links: [
-            {
-              title: req.body.linkOneTitle,
-              URL: req.body.linkOneURL
-            }, {
-              title: req.body.linkTwoTitle,
-              URL: req.body.linkTwoURL
-            }, {
-              title: req.body.linkThreeTitle,
-              URL: req.body.linkThreeURL
+              newExploreCategory.save(error => {
+                if(error){
+                  res.status(500).json("Internal Server Error");
+                } else {
+                  res.status(201).json('Created');
+                }
+              })
             }
-          ]
-        }}}, (error, response) => {
-          if(error){
-            res.status(500).json("Internal Server Error");
-          } else {
-            res.status(201).json('Created');
-          }
-        });
+          })
+        } else {
+          res.status(400).json('Invalid Request Error')
+        }
+      } else {
+        if(req.body.categoryID){
+          ExploreCategory.findById(req.body.categoryID, (error, doc) => {
+            if(error){
+              res.status(500).json("Internal Server Error")
+            } else {
+              const optionExists = !!doc.options.filter(option => option.imageID === req.body.imageID)[0]
+
+              if(optionExists){
+                if(!!req.files){
+                  cloudinary.api.delete_resources(req.body.imageID, error => {
+                    if(error){
+                      res.status(500).json("Internal Server Error")
+                    } else {
+                      const file = req.files.image
+
+                      cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
+                        if(error){
+                          res.status(500).json("Internal Server Error")
+                        } else {
+                          doc.options = doc.options.map(option => option.imageID !== req.body.imageID ? option : {
+                            name: req.body.optionName,
+                            description: req.body.optionDescription,
+                            imageURL: result.secure_url,
+                            imageID: result.public_id,
+                            imageAlt: req.body.imgAlt,
+                            links: []
+                          })
+                          
+                          doc.save(error => {
+                            if(error){
+                              res.status(500).json("Internal Server Error")
+                            } else {
+                              res.status(201).json('Created')
+                            }
+                          })
+                        }
+                      })
+                    }
+                  })
+                } else {
+                  doc.options = doc.options.map(option => option.imageID !== req.body.imageID ? option : {
+                    name: req.body.optionName,
+                    description: req.body.optionDescription,
+                    imageID: option.imageID,
+                    imageURL: option.imageURL,
+                    imageAlt: req.body.imgAlt,
+                    links: []
+                  })
+
+                  doc.save(error => {
+                    if(error){
+                      res.status(500).json("Internal Server Error")
+                    } else {
+                      res.status(201).json('Created')
+                    }
+                  })
+                }
+              } else {
+                if(!!req.files){
+                  const file = req.files.image
+
+                  cloudinary.uploader.upload(file.tempFilePath, (error, result) => {
+                    if(error){
+                      res.status(500).json("Internal Server Error")
+                    } else {
+                      doc.options = [
+                        ...doc.options,
+                        {
+                          name: req.body.optionName,
+                          description: req.body.description,
+                          imageURL: result.secure_url,
+                          imageID: result.public_id,
+                          links: []
+                        }
+                      ]
+
+                      doc.save(error => {
+                        if(error){
+                          res.status(500).json("Internal Server Error")
+                        } else {
+                          res.status(201).json('Created')
+                        }
+                      })
+                    }
+                  })
+                } else {
+                  res.status(400).json('Invalid Request Error')
+                }
+              }
+            }
+          })
+        } else {
+          res.status(400).json('Invalid Request Error')
+        }
       }
-    });
+    } else {
+      res.status(400).json('Invalid Request Error')
+    }
   } else {
-    res.status(403).json('Forbidden');
+    res.status(403).json('Forbidden')
   }
-});
+})
 
 router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
