@@ -4,7 +4,7 @@ import './CategoryEditor.sass'
 
 import OptionsList from '../OptionsList/OptionsList'
 
-const CategoryEditor = ({categoryDetails, setCategoryDetails, selectOption, createNewOption}) => {
+const CategoryEditor = ({categoryDetails, setCategoryDetails, selectOption, createNewOption, deleteOption}) => {
   const setName = name => setCategoryDetails({...categoryDetails, name})
 
   return(
@@ -21,9 +21,11 @@ const CategoryEditor = ({categoryDetails, setCategoryDetails, selectOption, crea
       </div>
 
       <OptionsList
+        categoryID={categoryDetails._id}
         options={categoryDetails.options}
         selectOption={selectOption}
         createNewOption={createNewOption}
+        deleteOption={deleteOption}
       />
     </div>
   )

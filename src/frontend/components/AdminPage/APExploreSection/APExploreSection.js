@@ -51,6 +51,26 @@ const APExploreSection = () => {
     selectOption('new')
   }
 
+  const deleteOption = (categoryID, optionID) => {
+    fetch('/api/deleteExploreOption', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({categoryID, optionID})
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+  }
+
+  const deleteExploreCategory = categoryID => {
+    fetch('/api/deleteExploreCategory', {
+      method: 'post',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({categoryID})
+    }).then(res => res.json())
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+  }
+
   return(
     <div id='APExploreSection'>
       <h1>Explore Section</h1>
@@ -59,6 +79,7 @@ const APExploreSection = () => {
         categories={categories}
         selectCategory={selectCategory}
         createNewCategory={createNewCategory}
+        deleteExploreCategory={deleteExploreCategory}
       />
 
       {
@@ -68,6 +89,7 @@ const APExploreSection = () => {
             setCategoryDetails={cd => setCategories(categories.map(category => category._id === selectedCategory ? cd : category))}
             selectOption={selectOption}
             createNewOption={createNewOption}
+            deleteOption={deleteOption}
           />
       }
 

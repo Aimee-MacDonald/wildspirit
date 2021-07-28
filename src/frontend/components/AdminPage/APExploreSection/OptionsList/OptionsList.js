@@ -2,12 +2,12 @@ import React from 'react'
 
 import './OptionsList.sass'
 
-const OptionsList = ({options, selectOption, createNewOption}) => (
+const OptionsList = ({categoryID, options, selectOption, createNewOption, deleteOption}) => (
   <div id='OptionsList'>
     {options && options.map(option => (
       <div className='option' key={option.imageID} onClick={() => selectOption(option.imageID)}>
         <p>{option.name}</p>
-        <button>X</button>
+        <button onClick={() => deleteOption(categoryID, option.imageID)}>X</button>
       </div>
     ))}
 

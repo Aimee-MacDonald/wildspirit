@@ -445,6 +445,56 @@ router.post('/exploreOption', (req, res) => {
   }
 })
 
+router.post('/deleteExploreOption', (req, res) => {
+  if(req.isAuthenticated()){
+    ExploreCategory.findById(req.body.categoryID, (error, doc) => {
+      if(error){
+        res.status(500).json("Internal Server Error")
+      } else {
+        doc.options = doc.options.filter(option => option.imageID !== req.body.optionID)
+        
+        doc.save(error => {
+          if(error){
+            res.status(500).json("Internal Server Error")
+          } else {
+            res.status(201).json('Deleted')
+          }
+        })
+      }
+    })
+  } else {
+    res.status(403).json('Forbidden')
+  }
+})
+
+router.post('/deleteExploreCategory', (req, res) => {
+  if(req.isAuthenticated()){
+    ExploreCategory.findById(req.body.categoryID, (error, doc) => {
+      if(error){
+        res.status(500).json("Internal Server Error")
+      } else {
+        doc.options.forEach(option => {
+          cloudinary.api.delete_resources(option.imageID, error => {
+            if(error){
+              res.status(500).json("Internal Server Error")
+            }
+          })
+        })
+
+        ExploreCategory.deleteOne({_id: req.body.categoryID}, error => {
+          if(error){
+            res.status(500).json("Internal Server Error")
+          } else {
+            res.status(201).json('Deleted')
+          }
+        })
+      }
+    })
+  } else {
+    res.status(403).json('Forbidden')
+  }
+})
+
 router.post('/accommodationEnquiry', (req, res) => {
   if(req.body.enquiry){
     const enquiryData = req.body.enquiry;
