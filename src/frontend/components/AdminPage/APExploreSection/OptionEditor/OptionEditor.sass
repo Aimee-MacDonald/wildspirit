@@ -1,3 +1,24 @@
+@import '../../../../mixins'
+
 #OptionEditor
   display: flex
   flex-flow: nowrap column
+  label
+    margin-top: 0.8rem
+  input
+    background-color: $light-green
+    border: 2px solid $medium-green
+    border-radius: 0.2rem
+    padding: 0.4rem
+    margin-top: 0.4rem
+  textarea
+    background-color: $light-green
+    border: 2px solid $medium-green
+    border-radius: 0.2rem
+    padding: 0.4rem
+    height: 5rem
+  button
+    @include button_light
+    width: 15rem
+    align-self: center
+    margin-top: 1.6rem
