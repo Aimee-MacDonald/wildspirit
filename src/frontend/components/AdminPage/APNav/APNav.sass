@@ -4,14 +4,23 @@
 #APNav
   width: 15rem
   background-color: $medium-green
+  display: flex
+  flex-flow: nowrap column
+  align-items: center
+  justify-content: space-between
   ul
     display: flex
     flex-flow: nowrap column
     align-items: center
+    width: 100%
     li
       width: 80%
       button
         @include button_dark
         width: 100%
         margin-top: 1.5rem
-        
+  a
+    @include button_dark
+    width: 55%
+    text-align: center
+    margin-bottom: 1.5rem
