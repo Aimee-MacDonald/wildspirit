@@ -2,10 +2,16 @@
 @import '../../../../mixins'
   
 #ParallaxText
+  width: 80%
+  height: 100%
   text-align: center
   font-family: 'Maian'
   text-shadow: 0.2rem 0.2rem $dark-green
   color: $light-green
-  font-size: 32pt
+  font-size: 28pt
+  display: flex
+  justify-content: center
+  align-items: center
+
   @include breakpoint(tablet_portrait)
-    font-size: 48pt
+    font-size: 32pt

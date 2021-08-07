@@ -1,12 +1,22 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react'
 
-import './ParallaxText.sass';
+import './ParallaxText.sass'
 
-const ParallaxText = () => (
-  <div id='ParallaxText'>
-    <p>Don't fear change,</p>
-    <p>change fear</p>
-  </div>
-);
+const ParallaxText = () => {
+  const [quote, setQuote] = useState()
 
-export default ParallaxText;
+  useEffect(() => {
+    fetch('/api/randomQuote')
+      .then(res => res.json())
+      .then(result => setQuote(result.quoteText))
+      .catch(error => console.log(error))
+  }, [])
+
+  return(
+    <div id='ParallaxText'>
+      <p>{quote}</p>
+    </div>
+  )
+}
+
+export default ParallaxText

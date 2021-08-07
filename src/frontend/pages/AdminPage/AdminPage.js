@@ -4,6 +4,7 @@ import './AdminPage.sass';
 
 import APNav from '../../components/AdminPage/APNav/APNav';
 import APLiveSection from '../../components/AdminPage/APLiveSection/APLiveSection';
+import APQuotesSection from '../../components/AdminPage/APQuotesSection/APQuotesSection';
 import APLearnSection from '../../components/AdminPage/APLearnSection/APLearnSection';
 import APExploreSection from '../../components/AdminPage/APExploreSection/APExploreSection';
 
@@ -14,6 +15,7 @@ export default class AdminPage extends React.Component{
     this.state = {
       activeSection: {
         live: false,
+        quotes: false,
         learn: false,
         explore: false
       }
@@ -28,6 +30,7 @@ export default class AdminPage extends React.Component{
         <APNav setSection={this.setSection} />
 
         {this.state.activeSection.live && <APLiveSection/>}
+        {this.state.activeSection.quotes && <APQuotesSection/>}
         {this.state.activeSection.learn && <APLearnSection/>}
         {this.state.activeSection.explore && <APExploreSection/>}
       </div>
