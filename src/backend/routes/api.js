@@ -45,6 +45,7 @@ router.post('/accommodation', (req, res) => {
       const newAccommodation = new Accommodation({
         title: req.body.title,
         description: req.body.description,
+        price: req.body.price,
         images: []
       })
 
@@ -62,6 +63,7 @@ router.post('/accommodation', (req, res) => {
         } else {
           doc.title = req.body.title
           doc.description = req.body.description
+          doc.price = req.body.price
 
           doc.save(err => {
             if(err){

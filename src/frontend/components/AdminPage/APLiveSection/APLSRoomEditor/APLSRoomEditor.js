@@ -4,6 +4,7 @@ import './APLSRoomEditor.sass'
 
 const APLSRoomEditor = ({roomDetails, setRoomDetails}) => {
   const setTitle = title => setRoomDetails({...roomDetails, title})
+  const setPrice = price => setRoomDetails({...roomDetails, price})
   const setDescription = description => setRoomDetails({...roomDetails, description})
 
   const save = e => {
@@ -44,6 +45,14 @@ const APLSRoomEditor = ({roomDetails, setRoomDetails}) => {
         name='title'
         value={roomDetails.title}
         onChange={e => setTitle(e.target.value)}
+      />
+
+      <label htmlFor='price'>Price</label>
+      <input
+        id='price'
+        name='price'
+        value={roomDetails.price}
+        onChange={e => setPrice(e.target.value)}
       />
 
       <label htmlFor='description'>Description</label>
