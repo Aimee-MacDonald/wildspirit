@@ -1,59 +1,23 @@
-@import '../../../../../vars'
 @import '../../../../../mixins'
-
+  
 #AccommodationDetailsNav
-  background-color: $light-green
+  background-color: $medium-green
   display: flex
   flex-flow: nowrap column
-  align-items: center
-  justify-content: space-around
-  @include breakpoint(tablet_portrait)
-    border-top-left-radius: 1rem
-    border-bottom-left-radius: 1rem
-    width: 30%
-  h4
-    font-family: Montserrat-Regular
-    font-size: 20pt
+  button
+    @include button_dark
+  .close
+    margin-left: 1rem
+  h2
+    padding: 1rem
+    font-family: Montserrat
     font-weight: normal
-    text-align: center
   p
-    font-family: Roboto-Bold
-    font-size: 14pt
-    text-align: center
-  #closeButton
-    @include button_light
-    padding: 0.2rem 0.4rem
-  #photosButton
-    @include button_light
-  #enquiryButton
-    @include button_light
-    padding: 0.2rem 0.4rem
-  #imageNav
-    display: flex
-    flex-flow: nowrap row
-    align-items: center
-    button
-      padding: 0
-      background-color: $light-green
-      border: 0.8rem solid $medium-green
-      border-top-color: transparent
-      border-bottom-color: transparent
-      cursor: pointer
-    .left
-      border-left-color: transparent
-      margin-right: 0.4rem
-    .right
-      border-right-color: transparent
-      margin-left: 0.4rem
-    span
-      width: 0.4rem
-      height: 0.4rem
-      border-radius: 50%
-      border: 0.2rem solid $medium-green
-      background-color: $light-green
-      margin: 0.2rem
-    .active
-      background-color: $medium-green
-      border: 0.2rem solid $dark-green
-      width: 0.6rem
-      height: 0.6rem
+    padding: 0.4rem
+    font-family: 'Roboto'
+  @include breakpoint(tablet_portrait)
+    width: 25rem
+    border-top-left-radius: 2rem
+    border-bottom-left-radius: 2rem
+    justify-content: space-between
+    padding: 1rem

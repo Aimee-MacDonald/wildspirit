@@ -1,3 +1,79 @@
+import React, {useState, useEffect} from 'react'
+
+import LiveSectionHeading from './LiveSectionHeading/LiveSectionHeading'
+import AccommodationOptions from './AccommodationOptions/AccommodationOptions'
+import AccommodationDetails from './AccommodationDetails/AccommodationDetails'
+
+const LiveSection = () => {
+  const [options, setOptions] = useState([])
+  const [selectedOption, setSelectedOption] = useState(-1)
+
+  useEffect(() => {
+    fetch('/api/accommodation')
+      .then(res => res.json())
+      .then(result => {
+        if(result !== 'Not Found'){
+          setOptions(result)
+        }
+      })
+      .catch(error => console.log(error))
+  }, [])
+
+  return (
+    <div>
+      <LiveSectionHeading/>
+
+      {selectedOption === -1 &&
+        <AccommodationOptions
+          options={options}
+          selectOption={setSelectedOption}
+        />
+      }
+
+      {selectedOption !== -1 &&
+        <AccommodationDetails
+          resetSelectedOption={() => setSelectedOption(-1)}
+          optionDetails={options[selectedOption]}
+        />
+      }
+    </div>
+  )
+}
+
+export default LiveSection
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 import React from 'react';
 
 import './LiveSection.sass';
@@ -141,37 +217,7 @@ export default class LiveSection extends React.Component{
     });
   }
 
-  makeEnquiry(event){
-    event.preventDefault();
-
-    this.setState(prevState => ({enquiryActive: false, enquiringActive: true}));
-
-    let formData = {
-      'accommodationType': event.target.accommodationType.value,
-      'name': event.target.ae_name.value,
-      'email': event.target.ae_email.value,
-      'pax': event.target.ae_pax.value,
-      'arrival': event.target.ae_arrival.value,
-      'departure': event.target.ae_departure.value,
-      'flexible': event.target.ae_flexible.checked,
-      'message': event.target.ae_message.value
-    }
-
-    fetch('/api/accommodationEnquiry', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({'enquiry': formData})
-    })
-    .then(response => response.json())
-    .then(result => {
-      if(result === 'Success'){
-        this.setState(prevState => ({enquiringActive: false, enquirySuccess: 1}));
-      } else {
-        this.setState(prevState => ({enquiringActive: false, enquirySuccess: -1}));
-      }
-    })
-    .catch(error => console.log(error))
-  }
+  
 
   calculateCost(e){
     let enquiryForm = e.target.parentNode.parentNode;
@@ -227,3 +273,4 @@ export default class LiveSection extends React.Component{
     this.setState(prevState => ({costEstimation: totalCost}))
   }
 }
+*/
