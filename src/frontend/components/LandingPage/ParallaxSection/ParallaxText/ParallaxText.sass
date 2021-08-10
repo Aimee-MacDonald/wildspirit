@@ -1,17 +1,17 @@
 @import '../../../../vars'
 @import '../../../../mixins'
-  
+
 #ParallaxText
-  width: 80%
+  background-color: transparentize($medium-green, 0.8)
+  width: 100%
   height: 100%
+  display: flex
+  justify-content: center
+  align-items: center
   text-align: center
   font-family: 'Maian'
   text-shadow: 0.2rem 0.2rem $dark-green
   color: $light-green
   font-size: 28pt
-  display: flex
-  justify-content: center
-  align-items: center
-
   @include breakpoint(tablet_portrait)
     font-size: 32pt

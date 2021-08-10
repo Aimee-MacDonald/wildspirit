@@ -1,15 +1,13 @@
-import React from 'react';
+import React from 'react'
 
-import './ParallaxSection.sass';
+import './ParallaxSection.sass'
 
-import ParallaxImage from './ParallaxImage/ParallaxImage';
-import ParallaxText from './ParallaxText/ParallaxText';
+import ParallaxText from './ParallaxText/ParallaxText'
 
 const ParallaxSection = () => (
   <div id='ParallaxSection'>
-    <ParallaxImage />
     <ParallaxText />
   </div>
-);
+)
 
-export default ParallaxSection;
+export default ParallaxSection
