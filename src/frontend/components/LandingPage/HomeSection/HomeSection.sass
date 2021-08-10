@@ -1,21 +1,26 @@
+@import '../../../mixins'
+
 #HomeSection
+  background-image: url('hero.jpg')
+  background-position: center center
+  background-size: cover
   width: 100vw
-  height: 110vh
-  position: relative
+  height: 100vh
   display: flex
   flex-flow: nowrap column
-  justify-content: space-around
+  justify-content: space-between
   align-items: center
-  #homeContent
-    position: absolute
-    z-index: 2
-    margin-top: -5rem
-    width: 80%
-    height: 80%
+  #homeWidgets
+    width: 100%
     display: flex
-    flex-flow: nowrap column
-    justify-content: space-between
+    flex-flow: nowrap row
+    justify-content: space-around
+    padding: 2rem
+  @include breakpoint(tablet_portrait)
+    width: 150vw
+    height: 120vh
+    transform: translateX(-25vw)
+    border-radius: 0 0 50% 50%
+    box-shadow: 0 0.5rem 0.5rem $dark-green
     #homeWidgets
-      display: flex
-      align-items: center
-      justify-content: space-between
+      padding: 26vh

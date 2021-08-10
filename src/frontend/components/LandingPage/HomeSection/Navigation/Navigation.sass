@@ -1,29 +1,23 @@
 @import '../../../../vars'
 @import '../../../../mixins'
-  
+
 #Navigation
   width: 100%
-  @include breakpoint(tablet_portrait)
-    width: 20rem
-    align-self: flex-end
+  font-family: 'Montserrat-Regular'
+  font-size: 24pt
+  margin-top: 1rem
   ul
-    width: 100%
     display: flex
     flex-flow: nowrap row
-    justify-content: space-around
-    @include breakpoint(tablet_portrait)
-      justify-content: space-between
+    justify-content: space-evenly
+    align-items: center
     li
-      text-align: center
       a
-        color: white
-        font-family: 'Montserrat-Regular'
-        font-size: 24pt
         text-decoration: none
-        @include breakpoint(tablet_portrait)
-          padding: 0.5rem 1rem
-          border-radius: 0.2rem
-        &:hover
-          color: $light-green
-          text-decoration: underline
-          font-weight: bold
+        color: $light-green
+  @include breakpoint(tablet_portrait)
+    ul
+      justify-content: flex-end
+      margin-right: 24rem
+      li
+        margin-right: 2rem
