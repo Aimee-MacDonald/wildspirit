@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './Footer.sass';
+import './Footer.sass'
 
 const Footer = () => (
   <div id='Footer'>
@@ -9,6 +9,6 @@ const Footer = () => (
     <p>Khoinania</p>
     <p>2021</p>
   </div>
-);
+)
 
-export default Footer;
+export default Footer
