@@ -2,7 +2,7 @@
 @import '../../../../../mixins'
   
 #AccommodationEnquiry
-  background-color: $light-green
+  background-color: $medium-green
   color: $dark-green
   display: flex
   flex-flow: nowrap column
@@ -14,14 +14,26 @@
     border-top-right-radius: 1rem
     border-bottom-right-radius: 1rem
   input
-    padding: 0.3rem
+    border-radius: 0.4rem
+    background-color: $light-green
+    @include breakpoint(tablet_portrait)
+      padding: 0.4rem
+  textarea
+    border-radius: 0.4rem
+    background-color: $light-green
+    @include breakpoint(tablet_portrait)
+      padding: 0.4rem
+      height: 5rem
   button
-    @include button_light
+    @include button_dark
   #datePickers
     display: flex
     flex-flow: nowrap row
     align-content: space-around
     width: 90%
+    .ae_item
+      display: flex
+      align-items: center
   .ae_item
     width: 90%
     display: flex

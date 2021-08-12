@@ -58,7 +58,6 @@ const AccommodationEnquiry = props => {
           id='ae_pax'
           name='ae_pax'
           required={true}
-          onChange={props.calculateCost}
         ></input>
       </div>
 
@@ -70,7 +69,6 @@ const AccommodationEnquiry = props => {
             type='date'
             name='ae_arrival'
             required={true}
-            onChange={props.calculateCost}
           ></input>
         </div>
 
@@ -81,7 +79,6 @@ const AccommodationEnquiry = props => {
             type='date'
             name='ae_departure'
             required={true}
-            onChange={props.calculateCost}
           ></input>
         </div>
       </div>
@@ -91,7 +88,6 @@ const AccommodationEnquiry = props => {
           <input id='ae_flexible' type='checkbox' name='ae_flexible'></input>
           <label htmlFor='ae_flexible'>Flexible?</label>
         </div>
-        <p>{`Estimated Total: R${props.estimation}`}</p>
       </div>
 
       <div className='ae_item'>
