@@ -9,7 +9,7 @@ const ParallaxText = () => {
     fetch('/api/randomQuote')
       .then(res => res.json())
       .then(result => setQuote(result.quoteText))
-      .catch(error => console.log(error))
+      .catch(error => setQuote(''))
   }, [])
 
   return(

@@ -18,7 +18,7 @@ export default class LearnOptions extends React.Component{
   render(){
     return(
       <div id='LearnOptions'>
-        {this.state.events.map((ev, i) => (
+        {this.state.events.length > 0 && this.state.events.map((ev, i) => (
           <LearnOption
             key={`event_${i}`}
             eventDetails={ev}
@@ -34,19 +34,21 @@ export default class LearnOptions extends React.Component{
   componentDidMount(){
     fetch('/api/events')
       .then(res => res.json())
-      .then(result => this.setState(() => {
-        let events = result;
+      .then(result => {
+        if(result !== 'Not Found'){
+          let events = result;
 
-        events.forEach(ev => {
-          ev.enquiryDetails = true;
-          ev.enquiryForm = false;
-          ev.enquiryLoading = false;
-          ev.enquirySuccess = false;
-          ev.enquiryFail = false;
-        });
-
-        return {events}
-      }))
+          events.forEach(ev => {
+            ev.enquiryDetails = true;
+            ev.enquiryForm = false;
+            ev.enquiryLoading = false;
+            ev.enquirySuccess = false;
+            ev.enquiryFail = false;
+          });
+  
+          return {events}  
+        }
+      })
       .catch(error => console.log(error))
   }
 
