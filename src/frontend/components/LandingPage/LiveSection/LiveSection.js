@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 
+import './LiveSection.sass'
+
 import LiveSectionHeading from './LiveSectionHeading/LiveSectionHeading'
 import AccommodationOptions from './AccommodationOptions/AccommodationOptions'
 import AccommodationDetails from './AccommodationDetails/AccommodationDetails'
