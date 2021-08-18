@@ -11,17 +11,7 @@ const APLiveSection = () => {
   const [selectedRoom, selectRoom] = useState()
 
   useEffect(() => {
-    fetch('/api/accommodation')
-      .then(res => res.json())
-      .then(result => {
-        if(result !== 'Not Found'){
-          setRooms([
-            ...rooms,
-            ...result
-          ])
-        }
-      })
-      .catch(error => console.log(error))
+    refreshRooms()
   }, [])
 
   const createNewRoom = () => {
@@ -38,6 +28,17 @@ const APLiveSection = () => {
     selectRoom('new')
   }
 
+  const refreshRooms = () => {
+    fetch('/api/accommodation')
+    .then(res => res.json())
+    .then(result => {
+      if(result !== 'Not Found'){
+        setRooms([ ...result ])
+      }
+    })
+    .catch(error => console.log(error))
+  }
+
   return(
     <div id='APLiveSection'>
       <h1>Live Section</h1>
@@ -51,11 +52,13 @@ const APLiveSection = () => {
       {selectedRoom && <APLSRoomEditor
         roomDetails={rooms.filter(room => room._id === selectedRoom)[0]}
         setRoomDetails={rd => setRooms(rooms.map(room => room._id === selectedRoom ? rd : room))}
+        refreshRooms={refreshRooms}
       />}
 
       {selectedRoom && <APLSRoomImages
         roomImages={rooms.filter(room => room._id === selectedRoom)[0].images}
         roomId={selectedRoom}
+        refreshRooms={refreshRooms}
       />}
     </div>
   )
