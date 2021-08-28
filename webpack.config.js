@@ -39,6 +39,15 @@ module.exports = {
         test: /\.(jpg)$/,
         loader: 'url-loader'
       }, {
+        test: /\.svg$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/'
+          }
+        }]
+      }, {
         test: /\.ttf$/,
         use: [{
           loader: 'file-loader',
