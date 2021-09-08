@@ -1,7 +1,6 @@
 import React from 'react'
 
 import './Navigation.sass'
-import './logo.svg'
 
 const Navigation = () => (
   <nav id='Navigation'>
