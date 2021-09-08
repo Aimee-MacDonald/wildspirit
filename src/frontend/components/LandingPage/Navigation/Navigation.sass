@@ -13,9 +13,6 @@
   display: flex
   flex-flow: nowrap column-reverse
   align-items: center
-  #logo
-    order: 1
-    height: 4rem
   ul
     width: 80%
     display: flex
@@ -28,10 +25,7 @@
         color: $dark-green
   @include breakpoint(tablet_portrait)
     flex-flow: nowrap row
-    justify-content: space-between
-    #logo
-      order: 0
-      margin-left: 2rem
+    justify-content: flex-end
     ul
       justify-content: flex-end
       margin-right: 2rem
