@@ -36,6 +36,7 @@ const AccommodationDetails = ({resetSelectedOption, optionDetails}) => {
         <AccommodationEnquiry
           enquiryStates={enquiryStates}
           setEnquiryStatus={setEnquiryStatus}
+          accommodationType={optionDetails.title}
         />
       }
 
