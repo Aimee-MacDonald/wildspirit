@@ -1,4 +1,54 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
+
+import './APLearnSection.sass'
+
+import Event from './Event/Event'
+
+const APLearnSection = () => {
+  const [ events, setEvents ] = useState([])
+
+  useEffect(() => {
+    fetch('/api/events')
+      .then(res => res.json())
+      .then(result => {if(result !== 'Not Found') setEvents(result)})
+      .catch(error => console.log(error))
+  }, [])
+
+  const createEvent = () => {
+    setEvents([...events, {
+      _id: 'new',
+      imgURL: '',
+      imageID: '',
+      imgAlt: '',
+      title: '',
+      subtitle: '',
+      description: ''
+    }])
+  }
+
+  return (
+    <div id='APLearnSection'>
+      {events.map(event => (
+        <Event
+          key={event._id}
+          details={event}
+        />
+      ))}
+
+      <button onClick={createEvent}>New Event</button>
+    </div>
+  )
+}
+
+export default APLearnSection
+
+
+
+
+
+
+
+/* import React, {useState, useEffect} from 'react'
 
 import EventsList from './EventsList/EventsList'
 import EventEditor from './EventEditor/EventEditor'
@@ -58,4 +108,4 @@ const APLearnSection = () => {
   )
 }
 
-export default APLearnSection
+export default APLearnSection */
