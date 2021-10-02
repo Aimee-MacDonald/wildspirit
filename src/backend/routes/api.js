@@ -610,7 +610,7 @@ router.post('/learnEnquiry', (req, res) => {
     const enquiryData = req.body.enquiry;
 
     const emailDetails = {
-      subject: `Event Enquiry - ${enquiryDetails.name}`,
+      subject: `Event Enquiry - ${enquiryData.name}`,
       content: `
         <p>${enquiryData.name} just made an enquiry via the website.</p>
         <p>Enquiry Details:</p>
