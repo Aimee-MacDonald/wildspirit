@@ -7,14 +7,14 @@ const cloudinary = require("cloudinary").v2;
 
 pepipost.Configuration.apiKey = process.env.EMAILKEY;
 
-const Accommodation = require(path.join(__dirname, '../dbmodels/Accommodation.js'));
-const Quote = require(path.join(__dirname, '../dbmodels/Quote.js'))
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
 const ExploreCategory = require("../dbmodels/ExploreCategory");
 
 const accommodationRoute = require(path.join(__dirname, 'api/accommodation'))
+const quotesRoute = require(path.join(__dirname, 'api/quotes'))
 
 router.use('/accommodation', accommodationRoute)
+router.use('/quotes', quotesRoute)
 
 router.get('/weather', (req, res) => {
   axios.get(process.env.WEATHERDATA)
@@ -30,58 +30,6 @@ router.get('/weather', (req, res) => {
       res.status(504).json(null);
     });
 });
-
-router.get('/randomQuote', (req, res) => {
-  Quote.find({}, (error, docs) => {
-    if(error){
-      res.status(500).json('Internal Server Error')
-    } else {
-      res.status(200).json(docs[Math.floor(Math.random() * docs.length)])
-    }
-  })
-})
-
-router.get('/quotes', (req, res) => {
-  Quote.find({}, (error, docs) => {
-    if(error){
-      res.status(500).json('Internal Server Error')
-    } else {
-      res.status(200).json(docs)
-    }
-  })
-})
-
-router.post('/quote', (req, res) => {
-  if(req.isAuthenticated()){
-    const newQuote = new Quote({
-      quoteText: req.body.quote
-    })
-
-    newQuote.save(error => {
-      if(error){
-        res.status(500).json('Internal Server Error')
-      } else {
-        res.status(201).json('Created')
-      }
-    })
-  } else {
-    res.status(403).json('Forbidden')
-  }
-})
-
-router.post('/deleteQuote', (req, res) => {
-  if(req.isAuthenticated()){
-    Quote.deleteOne({_id: req.body.quoteID}, error => {
-      if(error){
-        res.status(500).json('Internal Server Error')
-      } else {
-        res.status(201).json('Deleted');
-      }
-    })
-  } else {
-    res.status(403).json('Forbidden')
-  }
-})
 
 router.post('/event', (req, res) => {
   if(req.isAuthenticated()){

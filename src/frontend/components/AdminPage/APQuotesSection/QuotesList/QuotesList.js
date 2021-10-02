@@ -6,14 +6,14 @@ const QuotesList = () => {
   const [quotes, setQuotes] = useState([])
 
   useEffect(() => {
-    fetch('/api/quotes')
+    fetch('/api/quotes/getAll')
       .then(res => res.json())
       .then(result => setQuotes(result))
       .catch(error => console.log(error))
   })
 
   const deleteQuote = quoteID => {
-    fetch('/api/deleteQuote', {
+    fetch('/api/quotes/delete', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({quoteID})

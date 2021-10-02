@@ -6,7 +6,7 @@ const ParallaxText = () => {
   const [quote, setQuote] = useState()
 
   useEffect(() => {
-    fetch('/api/randomQuote')
+    fetch('/api/quotes/getRandom')
       .then(res => res.json())
       .then(result => setQuote(result.quoteText))
       .catch(error => setQuote(''))

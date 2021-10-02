@@ -6,7 +6,7 @@ const QuoteEditor = () => {
   const save = e => {
     e.preventDefault()
 
-    fetch('/api/quote', {
+    fetch('/api/quotes/post', {
       method: 'post',
       body: new FormData(e.target)
     }).then(res => res.json())
