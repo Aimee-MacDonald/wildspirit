@@ -16,7 +16,7 @@ const APLSRoomImages = ({ roomImages, roomId, refreshRooms }) => {
     e.preventDefault()
     setPostingState(postingStates.indexOf('posting'))
     
-    fetch('/api/addAccommodationImage', {
+    fetch('/api/accommodation/addImage', {
       method: 'post',
       body: new FormData(e.target)
     }).then(res => res.json())
@@ -30,7 +30,7 @@ const APLSRoomImages = ({ roomImages, roomId, refreshRooms }) => {
   const removeImage = (RID, IID) => {
     setPostingState(postingStates.indexOf('posting'))
 
-    fetch('/api/removeAccommodationImage', {
+    fetch('/api/accommodation/removeImage', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({

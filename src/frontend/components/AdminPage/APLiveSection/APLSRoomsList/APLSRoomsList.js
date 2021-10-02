@@ -4,10 +4,10 @@ import './APLSRoomsList.sass'
 
 const APLSRoomsList = props => {
   const removeRoom = roomId => {
-    fetch('/api/removeAccommodation', {
+    fetch('/api/accommodation/remove', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({roomId})
+      body: JSON.stringify({ roomId })
     }).then(res => res.json())
       .then(result => console.log(result))
       .catch(error => console.log(error))
