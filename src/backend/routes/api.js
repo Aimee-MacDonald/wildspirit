@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const axios = require('axios');
 const path = require('path');
 const pepipost = require('pepipost');
 const cloudinary = require("cloudinary").v2;
@@ -10,26 +9,13 @@ pepipost.Configuration.apiKey = process.env.EMAILKEY;
 const Event = require(path.join(__dirname, '../dbmodels/Event.js'));
 const ExploreCategory = require("../dbmodels/ExploreCategory");
 
+const weatherRoute = require(path.join(__dirname, 'api/weather'))
 const accommodationRoute = require(path.join(__dirname, 'api/accommodation'))
 const quotesRoute = require(path.join(__dirname, 'api/quotes'))
 
+router.use('/weather', weatherRoute)
 router.use('/accommodation', accommodationRoute)
 router.use('/quotes', quotesRoute)
-
-router.get('/weather', (req, res) => {
-  axios.get(process.env.WEATHERDATA)
-    .then(response => {
-      const respac = {
-        "description": response.data.weather[0].description,
-        "temperature": Math.floor(response.data.main.temp - 273.15)
-      }
-
-      res.status(200).json(respac);
-    })
-    .catch(error => {
-      res.status(504).json(null);
-    });
-});
 
 router.post('/event', (req, res) => {
   if(req.isAuthenticated()){
