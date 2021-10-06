@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const path = require('path')
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require('cloudinary').v2
 
 const Accommodation = require(path.join(__dirname, '../../dbmodels/Accommodation'))
 
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
       })
     }
   } else {
-    res.status(403).json('Forbidden');
+    res.status(403).json('Forbidden')
   }
 })
 
@@ -137,7 +137,7 @@ router.post('/remove', (req, res) => {
         if(error){
           res.status(500).json('Internal Server Error')
         } else {
-          res.status(201).json('Deleted');
+          res.status(201).json('Deleted')
         }
       })
     }

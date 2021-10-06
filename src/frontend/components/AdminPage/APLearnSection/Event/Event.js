@@ -10,7 +10,7 @@ const Event = props => {
   const saveEvent = e => {
     e.preventDefault()
 
-    fetch('/api/event', {
+    fetch('/api/events/add', {
       method: 'post',
       body: new FormData(e.target)
     }).then(res => res.json())
@@ -19,7 +19,7 @@ const Event = props => {
   }
 
   const deleteEvent = eventID => {
-    fetch('/api/removeEvent', {
+    fetch('/api/events/remove', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({eventID})

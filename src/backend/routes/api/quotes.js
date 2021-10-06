@@ -48,7 +48,7 @@ router.post('/delete', (req, res) => {
       if(error){
         res.status(500).json('Internal Server Error')
       } else {
-        res.status(201).json('Deleted');
+        res.status(201).json('Deleted')
       }
     })
   } else {
