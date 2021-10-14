@@ -21,7 +21,7 @@ const OptionEditor = ({optionDetails, setOptionDetails, categoryDetails}) => {
 
     setPostingState(postingStates.indexOf('posting'))
     
-    fetch('/api/exploreOption', {
+    fetch('/api/explore/option', {
       method: 'post',
       body: new FormData(e.target)
     }).then(res => res.json())

@@ -12,7 +12,7 @@ const APExploreSection = () => {
   const [selectedOption, selectOption] = useState()
 
   useEffect(() => {
-    fetch('/api/exploreCategories')
+    fetch('/api/explore/categories')
       .then(res => res.json())
       .then(result => {if(result !== 'Not Found') setCategories(result)})
       .catch(error => console.log(error))
@@ -52,7 +52,7 @@ const APExploreSection = () => {
   }
 
   const deleteOption = (categoryID, optionID) => {
-    fetch('/api/deleteExploreOption', {
+    fetch('/api/explore/deleteOption', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({categoryID, optionID})
@@ -62,7 +62,7 @@ const APExploreSection = () => {
   }
 
   const deleteExploreCategory = categoryID => {
-    fetch('/api/deleteExploreCategory', {
+    fetch('/api/explore/deleteCategory', {
       method: 'post',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({categoryID})
