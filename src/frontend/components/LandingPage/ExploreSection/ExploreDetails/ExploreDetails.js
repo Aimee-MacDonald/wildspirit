@@ -38,7 +38,10 @@ const ExploreDetails = props => (
 
         <ul className='indexing'>
           {props.options.options.map((option, index) => (
-            <li className={index === props.selectedOption ? 'active' : 'inactive'}></li>
+            <li
+              key={index}
+              className={index === props.selectedOption ? 'active' : 'inactive'}
+            ></li>
           ))}
         </ul>
       </div>
