@@ -15,21 +15,6 @@ router.get('/', (req, res) => {
   })
 })
 
-router.get('/ION', (req, res) => {
-  Accommodation.find({}, (error, rooms) => {
-    if(error) {
-      res.status(500).json('Internal Server Error')
-    } else {
-      rooms.forEach(room => {
-        room.images = room.images.map((img, i) => ({...img, order: i}))
-        room.save(error => {if(error) res.status(500).json('Internal Server Error')})
-      })
-      
-      res.status(200).json('Success')
-    }
-  })
-})
-
 router.post('/', (req, res) => {
   if(req.isAuthenticated){
     if(req.body._id === 'new'){

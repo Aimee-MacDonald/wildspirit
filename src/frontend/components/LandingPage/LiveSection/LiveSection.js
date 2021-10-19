@@ -15,7 +15,7 @@ const LiveSection = () => {
       .then(res => res.json())
       .then(result => {
         if(result !== 'Not Found'){
-          setOptions(result)
+          setOptions(result.map(room => ({...room, images: room.images.sort((a, b) => a.order - b.order)})))
         }
       })
       .catch(error => console.log(error))
