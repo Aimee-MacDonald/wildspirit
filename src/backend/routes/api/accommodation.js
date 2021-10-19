@@ -21,7 +21,7 @@ router.get('/ION', (req, res) => {
       res.status(500).json('Internal Server Error')
     } else {
       rooms.forEach(room => {
-        room.images = room.images.map((img, i) => ({...img, order: rooms.length - (i + 1)}))
+        room.images = room.images.map((img, i) => ({...img, order: rooms.length - i}))
         room.save(error => {if(error) res.status(500).json('Internal Server Error')})
       })
       
