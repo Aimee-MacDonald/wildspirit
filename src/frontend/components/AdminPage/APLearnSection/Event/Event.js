@@ -31,7 +31,7 @@ const Event = props => {
   return (
     <form id='Event' onSubmit={saveEvent}>
       <div className='eventImage' role='img' aria-label={details.imgAlt} style={{backgroundImage: `url('${details.imgURL}')`}}>
-        <input type='file' id='APLSImg' name='APLSImg' required/>
+        <input type='file' id='APLSImg' name='APLSImg'/>
 
         <label htmlFor='APLSImgAlt'>Image Description</label>
         <input
@@ -74,6 +74,20 @@ const Event = props => {
           value={details.description}
           onChange={e => setDetails({ ...details, description: e.target.value })}
           required
+        />
+
+        <input
+          id='APLSLinkText'
+          name='APLSLinkText'
+          value={details.linkText}
+          onChange={e => setDetails({ ...details, linkText: e.target.value })}
+        />
+
+        <input
+          id='APLSLinkURL'
+          name='APLSLinkURL'
+          value={details.linkURL}
+          onChange={e => setDetails({ ...details, linkURL: e.target.value })}
         />
 
         <button type='button' onClick={() => deleteEvent(details._id)}>Delete</button>

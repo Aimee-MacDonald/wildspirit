@@ -32,7 +32,9 @@ router.post('/add', (req, res) => {
             imgAlt: req.body.APLSImgAlt,
             title: req.body.APLSTitle,
             subtitle: req.body.APLSSubtitle,
-            description: req.body.APLSDescription
+            description: req.body.APLSDescription,
+            linkText: req.body.APLSLinkText,
+            linkURL: req.body.APLSLinkURL
           })
 
           newEvent.save(error => {
@@ -64,6 +66,8 @@ router.post('/add', (req, res) => {
                     doc.title = req.body.APLSTitle
                     doc.subtitle = req.body.APLSSubtitle
                     doc.description = req.body.APLSDescription
+                    doc.linkText = req.body.APLSLinkText
+                    doc.linkURL = req.body.APLSLinkURL
                     doc.imgURL = result.secure_url
                     doc.imageID = result.public_id
                     
@@ -89,6 +93,8 @@ router.post('/add', (req, res) => {
             doc.title = req.body.APLSTitle
             doc.subtitle = req.body.APLSSubtitle
             doc.description = req.body.APLSDescription
+            doc.linkText = req.body.APLSLinkText
+            doc.linkURL = req.body.APLSLinkURL
   
             doc.save(error => {
               if(error){

@@ -14,6 +14,7 @@ const LearnOption = props => (
           <h1>{props.eventDetails.title}</h1>
           <h2>{props.eventDetails.subtitle}</h2>
           <p>{props.eventDetails.description}</p>
+          {props.eventDetails.linkURL && <a href={props.eventDetails.linkURL} target='_blank'>{props.eventDetails.linkText}</a>}
 
           <div className='enquiryButtons'>
             <button className='enquire' onClick={props.showEnquiryForm}>Enquire</button>

@@ -7,7 +7,9 @@ var schema = new Schema({
   imgAlt: {type: String, required: true},
   title: {type: String, required: true},
   subtitle: {type: String, required: true},
-  description: {type: String, required: true}
+  description: {type: String, required: true},
+  linkText: {type: String, required: false},
+  linkURL: {type: String, required: false}
 });
 
-module.exports = mongoose.model("event", schema);
+module.exports = mongoose.model("event", schema)
