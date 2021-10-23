@@ -74,7 +74,8 @@ router.post('/addImage', (req, res) => {
                 {
                   srcLink: result.secure_url,
                   imgID: result.public_id,
-                  altText: req.body.imgAlt
+                  altText: req.body.imgAlt,
+                  order: doc.images.length
                 }
               ]
 
