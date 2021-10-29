@@ -119,7 +119,7 @@ router.post('/learnEnquiry', (req, res) => {
 
 router.post('/sendMessage', (req, res) => {
   if(req.body.message){
-    const messageData = req.body.message;
+    const messageData = req.body
 
     const emailDetails = {
       subject: `General Enquiry - ${messageData.name}`,
