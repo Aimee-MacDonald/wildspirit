@@ -35,17 +35,19 @@ export default class LearnOptions extends React.Component{
     fetch('/api/events')
       .then(res => res.json())
       .then(result => this.setState(() => {
-        let events = result;
+        if(result !== 'Not Found') {
+          let events = result;
 
-        events.forEach(ev => {
-          ev.enquiryDetails = true;
-          ev.enquiryForm = false;
-          ev.enquiryLoading = false;
-          ev.enquirySuccess = false;
-          ev.enquiryFail = false;
-        });
-
-        return {events}
+          events.forEach(ev => {
+            ev.enquiryDetails = true;
+            ev.enquiryForm = false;
+            ev.enquiryLoading = false;
+            ev.enquirySuccess = false;
+            ev.enquiryFail = false;
+          });
+  
+          return {events}
+        }
       }))
       .catch(error => console.log(error))
   }
